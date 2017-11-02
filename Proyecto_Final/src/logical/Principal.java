@@ -1,6 +1,6 @@
 package logical;
 
-public class Test {
+public class Principal {
 
 	
 }
