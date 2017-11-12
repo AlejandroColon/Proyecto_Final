@@ -8,12 +8,12 @@ public abstract class InfoClinica {
 	private String sintomas;
 	private String diagnostico;
 	private String tratamiento;
-	private String enfermedad;// cuando Ale suba la clase enfermedad se va cambiar de String a Enfermedad
+	private Enfermedad enfermedad;// cuando Ale suba la clase enfermedad se va cambiar de String a Enfermedad
 
 	// ****************************CONSTRUCTOR************************
 
 	public InfoClinica(String codigo, String fecha, String sintomas, String diagnostico, String tratamiento,
-			String enfermedad) {
+			Enfermedad enfermedad) {
 		super();
 		this.codigo = codigo;
 		this.fecha = fecha;
@@ -65,13 +65,15 @@ public abstract class InfoClinica {
 		this.tratamiento = tratamiento;
 	}
 
-	public String getEnfermedad() {
+	public Enfermedad getEnfermedad() {
 		return enfermedad;
 	}
 
-	public void setEnfermedad(String enfermedad) {
+	public void setEnfermedad(Enfermedad enfermedad) {
 		this.enfermedad = enfermedad;
 	}
+
+	
 
 	// *****************************METODOS*******************************
 

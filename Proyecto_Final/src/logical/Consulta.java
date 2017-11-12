@@ -7,7 +7,7 @@ public class Consulta extends InfoClinica {
 	// ******************************CONSTRUCTOR******************************
 
 	public Consulta(String codigo, String fecha, String sintomas, String diagnostico, String tratamiento,
-			String enfermedad) {
+			Enfermedad enfermedad) {
 		super(codigo, fecha, sintomas, diagnostico, tratamiento, enfermedad);
 		
 	}

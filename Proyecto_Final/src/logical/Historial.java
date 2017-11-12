@@ -7,7 +7,7 @@ public class Historial extends InfoClinica {
 	// *******************************CONSTRUCTOR****************************
 
 	public Historial(String codigo, String fecha, String sintomas, String diagnostico, String tratamiento,
-			String enfermedad) {
+			Enfermedad enfermedad) {
 		super(codigo, fecha, sintomas, diagnostico, tratamiento, enfermedad);
 
 	}
