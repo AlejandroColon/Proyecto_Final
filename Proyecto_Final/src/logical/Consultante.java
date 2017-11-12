@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Consultante extends Persona {
 	
 	//**************************************ATRIBUTOS DE LA CLASE************************************************
-	private ArrayList<String> misVacunas;//Luego de subir, cambiar a clase Vacuna
-	private ArrayList<String> miHistorial;//Luego de subir, cambiar a clase Historial.
+	private ArrayList<Vacuna> misVacunas;
+	private ArrayList<Historial> miHistorial;
 	
 	//**************************************CONSTRUCTOR DE LA CLASE**********************************************
 	public Consultante(String cedula, String nombre, String apellido, int edad, String telefono, String direccion,
@@ -17,19 +17,19 @@ public class Consultante extends Persona {
 	}
 	
 	//*********************************************SETS Y GETS***************************************************
-	public ArrayList<String> getMisVacunas() {
+	public ArrayList<Vacuna> getMisVacunas() {
 		return misVacunas;
 	}
 
-	public void setMisVacunas(ArrayList<String> misVacunas) {
+	public void setMisVacunas(ArrayList<Vacuna> misVacunas) {
 		this.misVacunas = misVacunas;
 	}
 
-	public ArrayList<String> getMiHistorial() {
+	public ArrayList<Historial> getMiHistorial() {
 		return miHistorial;
 	}
 
-	public void setMiHistorial(ArrayList<String> miHistorial) {
+	public void setMiHistorial(ArrayList<Historial> miHistorial) {
 		this.miHistorial = miHistorial;
 	}
 	
