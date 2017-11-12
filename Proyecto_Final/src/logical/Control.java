@@ -5,13 +5,13 @@ public abstract class Control {
 	//***********************Atributos********************************
 	protected String codigo;
 	protected String nombre;
-	protected String descricion;
+	protected String descripcion;
 	//************************Constructor****************************
-	public Control(String codigo, String nombre, String descricion) {
+	public Control(String codigo, String nombre, String descripcion) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
-		this.descricion = descricion;
+		this.descripcion = descripcion;
 	}
 	//*****************************Sets y Gets*********************
 	public String getCodigo() {
@@ -27,10 +27,10 @@ public abstract class Control {
 		this.nombre = nombre;
 	}
 	public String getDescricion() {
-		return descricion;
+		return descripcion;
 	}
 	public void setDescricion(String descricion) {
-		this.descricion = descricion;
+		this.descripcion = descricion;
 	}
 	//*******************************Metodos************************
 	

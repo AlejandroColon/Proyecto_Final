@@ -5,8 +5,8 @@ public class Enfermedad extends Control {
 	//**************************Atributos*******************
 	
 	//*****************************Constructor********************
-	public Enfermedad(String codigo, String nombre, String descricion) {
-		super(codigo, nombre, descricion);
+	public Enfermedad(String codigo, String nombre, String descripcion) {
+		super(codigo, nombre, descripcion);
 		// TODO Auto-generated constructor stub
 	}
 	//******************************Sets y Gets*******************************

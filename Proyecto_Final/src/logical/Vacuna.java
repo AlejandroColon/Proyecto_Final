@@ -4,8 +4,8 @@ public class Vacuna extends Control {
 	// **************************Atributos*******************
 
 	// *****************************Constructor********************
-	public Vacuna(String codigo, String nombre, String descricion) {
-		super(codigo, nombre, descricion);
+	public Vacuna(String codigo, String nombre, String descripcion) {
+		super(codigo, nombre, descripcion);
 		// TODO Auto-generated constructor stub
 	}
 	// ******************************Sets y Gets*******************************
