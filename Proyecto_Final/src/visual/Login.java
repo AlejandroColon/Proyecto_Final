@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class Login extends JDialog {
 
@@ -42,6 +43,7 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/images/Omega-01-128.png")));
 		setTitle("Acceso al usuario");
 		setBounds(100, 100, 265, 333);
 		getContentPane().setLayout(new BorderLayout());
