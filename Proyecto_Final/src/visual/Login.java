@@ -17,14 +17,10 @@ public class Login extends JDialog {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -339133479221982755L;
-	/**
-	 * 
-	 */
-	
+	private static final long serialVersionUID = -339133479221982755L;	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JTextField txtContra;
+	private JTextField txtContrasena;
 
 	/**
 	 * Launch the application.
@@ -43,7 +39,7 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/images/Omega-01-128.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/images/icon.png")));
 		setTitle("Acceso al usuario");
 		setBounds(100, 100, 265, 333);
 		getContentPane().setLayout(new BorderLayout());
@@ -52,7 +48,7 @@ public class Login extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(46, 157, 56, 14);
+		lblUsuario.setBounds(46, 161, 56, 14);
 		contentPanel.add(lblUsuario);
 		
 		txtUsuario = new JTextField();
@@ -64,10 +60,10 @@ public class Login extends JDialog {
 		lblContrasea.setBounds(46, 201, 86, 14);
 		contentPanel.add(lblContrasea);
 		
-		txtContra = new JTextField();
-		txtContra.setBounds(46, 216, 157, 20);
-		contentPanel.add(txtContra);
-		txtContra.setColumns(10);
+		txtContrasena = new JTextField();
+		txtContrasena.setBounds(46, 216, 157, 20);
+		contentPanel.add(txtContrasena);
+		txtContrasena.setColumns(10);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(63, 21, 125, 125);
@@ -75,28 +71,32 @@ public class Login extends JDialog {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/Users-User-Male-2-icon.png")));
+		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/user.png")));
 		panel.add(lblNewLabel, BorderLayout.CENTER);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Iniciar sesion");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnIniciarSesion = new JButton("Iniciar sesion");
+				btnIniciarSesion.setActionCommand("OK");
+				buttonPane.add(btnIniciarSesion);
+				getRootPane().setDefaultButton(btnIniciarSesion);
 			}
 			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setActionCommand("Cancel");
+				buttonPane.add(btnCancelar);
 			}
 		}
 	}
 }
+
 /*
- *CREADO POR: 
- *				Oscar Rodriguez.
- *				12/11/2017 
+ * 
+ * Creado Por: Oscar Rodriguez.
+ * Fecha: 12/11/17
+ * Anotaciones:
+ * 
+ * 
  */

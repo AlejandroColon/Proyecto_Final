@@ -9,9 +9,9 @@ public class Consultante extends Persona {
 	private ArrayList<Historial> miHistorial;
 	
 	//**************************************CONSTRUCTOR DE LA CLASE**********************************************
-	public Consultante(String cedula, String nombre, String apellido, int edad, String telefono, String direccion,
+	public Consultante(String cedula, String nombre, int edad, String telefono, String direccion,
 			String sexo) {
-		super(cedula, nombre, apellido, edad, telefono, direccion, sexo);
+		super(cedula, nombre, edad, telefono, direccion, sexo);
 		misVacunas = new ArrayList<>();
 		miHistorial = new ArrayList<>();
 	}
@@ -38,8 +38,13 @@ public class Consultante extends Persona {
 }
 
 /*
- * CREADO POR:
- * 				Oscar Rodriguez.
- * 				12/11/2017
  * 
- * */
+ * Creado Por: Oscar Rodriguez.
+ * Fecha: 12/11/17
+ * Anotaciones:
+ * 
+ * 
+ * Modificado: Alejandro Colón
+ * Fecha:12/11/17
+ * Anotaciones: eliminacion del parametro apellido
+ */

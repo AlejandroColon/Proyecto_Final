@@ -8,9 +8,9 @@ public class Doctor extends Trabajador {
 	private int citasXdia;
 	
 	//***********************************CONSTRUCTOR DE LA CLASE************************************
-	public Doctor(String cedula, String nombre, String apellido, int edad, String telefono, String direccion,
+	public Doctor(String cedula, String nombre, int edad, String telefono, String direccion,
 			String sexo, String usuario, String password, String exequatur, String especialidad, int citasXdia) {
-		super(cedula, nombre, apellido, edad, telefono, direccion, sexo, usuario, password);
+		super(cedula, nombre, edad, telefono, direccion, sexo, usuario, password);
 		this.exequatur = exequatur;
 		this.especialidad = especialidad;
 		this.citasXdia = citasXdia;
@@ -44,7 +44,11 @@ public class Doctor extends Trabajador {
 
 /*
  * 
- * CREADO POR:
- * 				Oscar Rodriguez.
- * 				12/11/2017
- * */
+ * Creado Por: Oscar Rodriguez.
+ * Fecha: 12/11/17
+ * Anotaciones:
+ * 
+ * Modificado: Alejandro Colón
+ * Fecha:12/11/17
+ * Anotaciones: eliminacion del parametro apellido
+ */

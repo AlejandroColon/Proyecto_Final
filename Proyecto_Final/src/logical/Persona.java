@@ -6,7 +6,6 @@ public abstract class Persona {
 	
 	protected String cedula;
 	protected String nombre;
-	protected String apellido;
 	protected int edad;
 	protected String telefono;
 	protected String direccion;
@@ -14,11 +13,10 @@ public abstract class Persona {
 	
 	//************************************** CONSTRUCTOR DE LA CLASE********************************************
 	
-	public Persona(String cedula, String nombre,String apellido, int edad, String telefono, String direccion, String sexo) {
+	public Persona(String cedula, String nombre, int edad, String telefono, String direccion, String sexo) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
-		this.apellido = apellido;
 		this.edad = edad;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -59,21 +57,9 @@ public abstract class Persona {
 		this.direccion = direccion;
 	}
 
-
-	public String getApellido() {
-		return apellido;
-	}
-
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-
 	public String getSexo() {
 		return sexo;
 	}
-
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
@@ -84,8 +70,12 @@ public abstract class Persona {
 }
 
 /*
- * CREADO POR:
- * 				Oscar Rodriguez.
- * 				12/11/2017
  * 
+ * Creado Por: Oscar Rodriguez.
+ * Fecha: 12/11/17
+ * Anotaciones:
+ * 
+ * Modificado: Alejandro Colón
+ * Fecha:12/11/17
+ * Anotaciones: eliminacion del parametro apellido
  */

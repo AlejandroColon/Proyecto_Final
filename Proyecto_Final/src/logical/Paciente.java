@@ -9,9 +9,9 @@ public class Paciente extends Persona {
 	private ArrayList<String> miHistorial;// Luego de subir, cambiar a clase Historial.
 
 	// **************************************CONSTRUCTOR DE LA CLASE**********************************************
-	public Paciente(String cedula, String nombre, String apellido, int edad, String telefono, String direccion,
+	public Paciente(String cedula, String nombre, int edad, String telefono, String direccion,
 			String sexo) {
-		super(cedula, nombre, apellido, edad, telefono, direccion, sexo);
+		super(cedula, nombre, edad, telefono, direccion, sexo);
 		misVacunas = new ArrayList<>();
 		miHistorial = new ArrayList<>();
 	}
@@ -38,8 +38,12 @@ public class Paciente extends Persona {
 }
 
 /*
- * CREADO POR: 
- * 				Oscar Rodriguez. 
- * 				12/11/2017
  * 
+ * Creado Por: Oscar Rodriguez.
+ * Fecha: 12/11/17
+ * Anotaciones:
+ * 
+ * Modificado: Alejandro Colón
+ * Fecha:12/11/17
+ * Anotaciones: eliminacion del parametro apellido
  */

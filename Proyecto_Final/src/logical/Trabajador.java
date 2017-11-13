@@ -7,9 +7,9 @@ public abstract class Trabajador extends Persona {
 	protected String password;
 	
 	//********************************************CONSTRUCTOR DE LA CLASE****************************************
-	public Trabajador(String cedula, String nombre, String apellido, int edad, String telefono, String direccion,
+	public Trabajador(String cedula, String nombre, int edad, String telefono, String direccion,
 			String sexo, String usuario, String password) {
-		super(cedula, nombre, apellido, edad, telefono, direccion, sexo);
+		super(cedula, nombre, edad, telefono, direccion, sexo);
 		this.usuario = usuario;
 		this.password = password;
 	}
@@ -30,11 +30,16 @@ public abstract class Trabajador extends Persona {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	/*
-	 * CREADO POR:
-	 * 				Oscar Rodriguez.
-	 * 				12/11/2017
-	 * 
-	 */
 
 }
+
+/*
+ * 
+ * Creado Por: Oscar Rodriguez.
+ * Fecha: 12/11/17
+ * Anotaciones:
+ * 
+ * Modificado: Alejandro Colón
+ * Fecha:12/11/17
+ * Anotaciones: eliminacion del parametro apellido
+ */
