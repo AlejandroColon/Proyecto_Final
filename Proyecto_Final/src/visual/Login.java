@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JDialog {
 
@@ -79,6 +81,11 @@ public class Login extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnIniciarSesion = new JButton("Iniciar sesion");
+				btnIniciarSesion.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+					}
+				});
 				btnIniciarSesion.setActionCommand("OK");
 				buttonPane.add(btnIniciarSesion);
 				getRootPane().setDefaultButton(btnIniciarSesion);

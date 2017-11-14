@@ -1,5 +1,8 @@
 package logical;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
@@ -55,6 +58,16 @@ public class Clinica {
 	}
 
 	// ***************************************METODOS*******************************
+	public void salvarPersonas() throws IOException{
+		FileOutputStream f= new FileOutputStream("Personas.dat"); //Creando el archivo que almacenara las personas.
+		ObjectOutputStream per = new ObjectOutputStream(f);
+		
+		for(Persona gente: misPersonas) {    //aqui recorro el array de personas para copiarlas al archivo.
+			per.writeObject(gente);
+		}
+		
+		f.close();
+	}
 	public static Clinica getInstance() {
 		if (clinica == null) {
 			clinica = new Clinica();
@@ -89,5 +102,9 @@ public class Clinica {
  * Modificacion: Alejandro Colón
  * Fecha: 13/11/17
  * Anotaciones: codificacion de instancia "Singleton"
+ * 
+ * Modificacion: Oscar Rodriguez
+ * Fecha: 13/11/17
+ * Anotaciones: Se creo el metodo salvarPersonas() para crear un archivo
  * 
  * */
