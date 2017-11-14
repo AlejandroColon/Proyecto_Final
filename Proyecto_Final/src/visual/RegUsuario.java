@@ -23,7 +23,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -46,7 +45,7 @@ public class RegUsuario extends JDialog {
 	private JTextField txtUsuario;
 	private JPasswordField passContra;
 	private JPasswordField passConfContra;
-	private JComboBox cbxSexo;
+	private JComboBox<String> cbxSexo;
 	private JRadioButton rdbtnMedico;
 	private JRadioButton rdbtnAdministrativo;
 	private JSpinner spnCitasXDia;
@@ -122,8 +121,8 @@ public class RegUsuario extends JDialog {
 		lblSexo.setBounds(96, 68, 46, 14);
 		panel.add(lblSexo);
 		
-		cbxSexo = new JComboBox();
-		cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino", "Otro"}));
+		cbxSexo = new JComboBox<String>();
+		cbxSexo.setModel(new DefaultComboBoxModel<String> (new String[] {"<Seleccione>", "Masculino", "Femenino", "Otro"}));
 		cbxSexo.setBounds(96, 82, 106, 20);
 		panel.add(cbxSexo);
 		
@@ -249,7 +248,6 @@ public class RegUsuario extends JDialog {
 							try {
 								Clinica.getInstance().salvarPersonas();
 							} catch (IOException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 						}else {
