@@ -56,6 +56,7 @@ public class PrincipalDoctor extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JLabel lblHora = new JLabel("00:00 a.m.");
 		lblHora.setFont(new Font("Cambria Math", Font.PLAIN, 25));
@@ -66,8 +67,7 @@ public class PrincipalDoctor extends JDialog {
 			String[] columnNames = {"ID", "Fecha", "Doctor", "Persona"};
 			model = new DefaultTableModel();
 			model.setColumnIdentifiers(columnNames);
-		
-	}
+		}
 		
 		JLabel label = new JLabel("01/01/2017");
 		label.setBounds(332, 41, 78, 14);
