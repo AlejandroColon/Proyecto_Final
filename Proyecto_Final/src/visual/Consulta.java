@@ -8,14 +8,21 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.Toolkit;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Consulta extends JDialog {
 
@@ -32,11 +39,11 @@ public class Consulta extends JDialog {
 	private JTextField txtEdad;
 	private JTextField txtTipoSangre;
 	private JTextField txtCodigo;
-	private JTextField txtSintoma;
 	private JTextField txtDiagnostico;
-	private JTextField txtTratamiento;
 	JComboBox<String> cmbEnfermedad;
 	JComboBox<String> cmbAseguradora;
+	JTextArea txtSintomas;
+	JTextArea txtTratamiento;
 
 	/**
 	 * Launch the application.
@@ -99,7 +106,7 @@ public class Consulta extends JDialog {
 		panel.add(txtNombre);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(45, 56, 46, 14);
+		lblNombre.setBounds(45, 56, 65, 14);
 		panel.add(lblNombre);
 		
 		txtTelefono = new JTextField();
@@ -130,7 +137,7 @@ public class Consulta extends JDialog {
 		panel.add(txtNumAfiliado);
 		
 		JLabel lblTelfono = new JLabel("N\u00FAmero Afiliado:");
-		lblTelfono.setBounds(45, 126, 89, 14);
+		lblTelfono.setBounds(45, 126, 110, 14);
 		panel.add(lblTelfono);
 		
 		cmbAseguradora = new JComboBox<String>();
@@ -139,7 +146,7 @@ public class Consulta extends JDialog {
 		panel.add(cmbAseguradora);
 		
 		JLabel lblEdad = new JLabel("Edad:");
-		lblEdad.setBounds(217, 56, 46, 14);
+		lblEdad.setBounds(215, 56, 46, 14);
 		panel.add(lblEdad);
 		
 		txtEdad = new JTextField();
@@ -153,7 +160,7 @@ public class Consulta extends JDialog {
 		panel.add(txtTipoSangre);
 		
 		JLabel lblTipoDeSangre = new JLabel("Tipo de Sangre:");
-		lblTipoDeSangre.setBounds(276, 56, 84, 14);
+		lblTipoDeSangre.setBounds(273, 56, 100, 14);
 		panel.add(lblTipoDeSangre);
 		
 		JPanel panel_1 = new JPanel();
@@ -172,14 +179,8 @@ public class Consulta extends JDialog {
 		panel_1.add(lblCdigo);
 		
 		JCheckBox chckbxAgregarAHistoria = new JCheckBox("Agregar a Historia Cl\u00EDnica");
-		chckbxAgregarAHistoria.setBounds(248, 17, 145, 23);
+		chckbxAgregarAHistoria.setBounds(215, 17, 178, 23);
 		panel_1.add(chckbxAgregarAHistoria);
-		
-		txtSintoma = new JTextField();
-		txtSintoma.setHorizontalAlignment(SwingConstants.TRAILING);
-		txtSintoma.setColumns(10);
-		txtSintoma.setBounds(10, 70, 383, 66);
-		panel_1.add(txtSintoma);
 		
 		JLabel lblSntomas = new JLabel("S\u00EDntomas:");
 		lblSntomas.setBounds(10, 57, 72, 14);
@@ -194,26 +195,70 @@ public class Consulta extends JDialog {
 		lblDiagnstico.setBounds(10, 139, 72, 14);
 		panel_1.add(lblDiagnstico);
 		
-		txtTratamiento = new JTextField();
-		txtTratamiento.setColumns(10);
-		txtTratamiento.setBounds(10, 189, 383, 66);
-		panel_1.add(txtTratamiento);
-		
 		JLabel lblTratamiento = new JLabel("Tratamiento:");
 		lblTratamiento.setBounds(10, 176, 72, 14);
 		panel_1.add(lblTratamiento);
 		
 		JLabel lblEnfermedadBajoVigilancia = new JLabel("Enfermedad bajo Vigilancia:");
-		lblEnfermedadBajoVigilancia.setBounds(228, 139, 145, 14);
+		lblEnfermedadBajoVigilancia.setBounds(228, 139, 165, 14);
 		panel_1.add(lblEnfermedadBajoVigilancia);
 		
 		cmbEnfermedad = new JComboBox<String>();
-		cmbEnfermedad.setBounds(226, 152, 147, 20);
+		cmbEnfermedad.setModel(new DefaultComboBoxModel<String>(new String[] {"<Ninguna>"}));
+		cmbEnfermedad.setBounds(226, 152, 163, 20);
 		panel_1.add(cmbEnfermedad);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(10, 76, 379, 52);
+		panel_1.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPaneSintomas = new JScrollPane();
+		panel_2.add(scrollPaneSintomas, BorderLayout.CENTER);
+		scrollPaneSintomas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS); // Codigo para textArea
+		txtSintomas = new JTextArea();
+		txtSintomas.setLineWrap(true);
+		scrollPaneSintomas.setViewportView(txtSintomas);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(10, 192, 379, 64);
+		panel_1.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPaneTratamiento = new JScrollPane();
+		panel_3.add(scrollPaneTratamiento, BorderLayout.CENTER);
+		scrollPaneTratamiento.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS); // Codigo para textArea
+		txtTratamiento = new JTextArea();
+		txtTratamiento.setLineWrap(true);
+		scrollPaneTratamiento.setViewportView(txtTratamiento);
 		
 		
 		informacion.addTab("Historia Clinica", historia);		// Agregando los tabs a la ventana
+		historia.setLayout(null);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new TitledBorder(null, "Historia Cl\u00EDnica", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_4.setBounds(10, 28, 399, 404);
+		historia.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(Color.LIGHT_GRAY);
+		panel_5.setBounds(10, 25, 379, 336);
+		panel_4.add(panel_5);
+		
+		JButton btnVerHistoriaClnica = new JButton("Ver Historia Cl\u00EDnica");
+		btnVerHistoriaClnica.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnVerHistoriaClnica.setBounds(268, 372, 121, 23);
+		panel_4.add(btnVerHistoriaClnica);
 		informacion.addTab("Control de Vacunas", vacunas);
+		vacunas.setLayout(null);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new TitledBorder(null, "Vacunas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_6.setBounds(10, 53, 399, 364);
+		vacunas.add(panel_6);
+		panel_6.setLayout(null);
 		//informacion.addTab("Panel 4", panel_4);
 		//informacion.addTab("Panel 5", panel_5);
 		
@@ -229,6 +274,11 @@ public class Consulta extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						System.exit(0);
+					}
+				});
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}

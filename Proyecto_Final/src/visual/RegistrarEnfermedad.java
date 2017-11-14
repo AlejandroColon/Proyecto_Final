@@ -99,10 +99,7 @@ public class RegistrarEnfermedad extends JDialog {
 
 				JScrollPane scrollPane = new JScrollPane();
 				panel_1.add(scrollPane, BorderLayout.CENTER);
-				scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS); // Codigo
-																										// para
-																										// txtDescripcion
-																										// (textArea)
+				scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS); // Codigo para textArea
 				txtDescripcion = new JTextArea();
 				txtDescripcion.setLineWrap(true);
 				scrollPane.setViewportView(txtDescripcion);
@@ -122,7 +119,7 @@ public class RegistrarEnfermedad extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (txtCodigo.getText().equalsIgnoreCase("") && txtNombre.getText().equalsIgnoreCase("") && txtDescripcion.getText().equalsIgnoreCase("")) {
+						if (!txtCodigo.getText().equalsIgnoreCase("") && !txtNombre.getText().equalsIgnoreCase("") && !txtDescripcion.getText().equalsIgnoreCase("")) {
 							Enfermedad p = new Enfermedad(txtCodigo.getText(), txtNombre.getText(),
 									txtDescripcion.getText());
 							Clinica.getInstance().addEnfermedades(p);
@@ -153,7 +150,7 @@ public class RegistrarEnfermedad extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						txtNombre.setText("");
 						txtDescripcion.setText("");
-						setVisible(false);
+						System.exit(0);
 					}
 				});
 				btnCancelar.setActionCommand("Cancel");
