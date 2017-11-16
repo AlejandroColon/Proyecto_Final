@@ -50,7 +50,7 @@ public class PrincipalDoctor extends JDialog {
 	public PrincipalDoctor() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalDoctor.class.getResource("/images/icon.png")));
 		setResizable(false);
-		setTitle("Principal Doctor");
+		setTitle("Principal");
 		setBounds(100, 100, 526, 366);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

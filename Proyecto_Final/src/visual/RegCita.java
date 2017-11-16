@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
+import java.awt.Toolkit;
 
 public class RegCita extends JDialog {
 
@@ -27,7 +28,6 @@ public class RegCita extends JDialog {
 	private JTextField txtCedula;
 	private JTextField txtNombre;
 	private JTextField txtEdad;
-	private JTextField textField_3;
 	private JTextField txtDireccion;
 	private JTextField txtID;
 	private JTextField txtFecha;
@@ -50,6 +50,9 @@ public class RegCita extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegCita() {
+		setTitle("Registrar cita");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegCita.class.getResource("/images/icon.png")));
+		setResizable(false);
 		setBounds(100, 100, 528, 359);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,28 +98,19 @@ public class RegCita extends JDialog {
 		panelDatosPersona.add(lblAos);
 		
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(227, 72, 46, 14);
+		lblSexo.setBounds(227, 44, 46, 14);
 		panelDatosPersona.add(lblSexo);
 		
 		JCheckBox chckbxM = new JCheckBox("M");
-		chckbxM.setBounds(279, 69, 33, 23);
+		chckbxM.setBounds(256, 43, 33, 23);
 		panelDatosPersona.add(chckbxM);
 		
 		JCheckBox chckbxF = new JCheckBox("F");
-		chckbxF.setBounds(314, 69, 33, 23);
+		chckbxF.setBounds(291, 43, 33, 23);
 		panelDatosPersona.add(chckbxF);
 		
-		JLabel lblApellido = new JLabel("Apellido:");
-		lblApellido.setBounds(227, 47, 46, 14);
-		panelDatosPersona.add(lblApellido);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(283, 44, 109, 20);
-		panelDatosPersona.add(textField_3);
-		textField_3.setColumns(10);
-		
 		JButton btnBuscar = new JButton("Buscar...");
-		btnBuscar.setBounds(227, 18, 89, 23);
+		btnBuscar.setBounds(227, 18, 97, 23);
 		panelDatosPersona.add(btnBuscar);
 		
 		JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
@@ -180,7 +174,7 @@ public class RegCita extends JDialog {
 				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
-				JButton btnCancelar = new JButton("Cancel");
+				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}

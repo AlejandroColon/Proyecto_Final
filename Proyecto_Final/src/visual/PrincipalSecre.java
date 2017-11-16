@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Toolkit;
 
 public class PrincipalSecre extends JDialog {
 
@@ -50,6 +51,9 @@ public class PrincipalSecre extends JDialog {
 	 * Create the dialog.
 	 */
 	public PrincipalSecre() {
+		setTitle("Principal");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalSecre.class.getResource("/images/icon.png")));
+		setResizable(false);
 		setBounds(100, 100, 533, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
