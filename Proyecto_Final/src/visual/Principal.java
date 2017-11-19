@@ -6,6 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logical.Administrativo;
+import logical.Clinica;
+import logical.Doctor;
+import logical.Persona;
+
 import java.awt.Toolkit;
 
 public class Principal extends JFrame {
@@ -28,6 +34,13 @@ public class Principal extends JFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				Persona p = new Doctor("000","Dr. Maunel Perez",10,"809-","casa","m","doctor","123","abc","Cirujano",3);
+				Clinica.getInstance().addPersona(p);
+				Persona p2 = new Administrativo("001","Lic. Manuela Pereza",15,"829","la casa de manuel","F","secre","abc");
+				Clinica.getInstance().addPersona(p2);
+				
+				Login vent = new Login();
+				vent.setVisible(true);
 			}
 		});
 	}

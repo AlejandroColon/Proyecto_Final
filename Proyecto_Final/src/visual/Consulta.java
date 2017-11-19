@@ -43,6 +43,7 @@ public class Consulta extends JDialog {
 	JComboBox<String> cmbAseguradora;
 	JTextArea txtSintomas;
 	JTextArea txtTratamiento;
+	JComboBox<String> cmbSangre;
 
 	/**
 	 * Launch the application.
@@ -157,10 +158,10 @@ public class Consulta extends JDialog {
 		lblTipoDeSangre.setBounds(261, 56, 71, 14);
 		panel.add(lblTipoDeSangre);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<...>", "A+", "A-", "B-", "O-", "O+", "AB+", "AB-"}));
-		comboBox.setBounds(261, 69, 71, 20);
-		panel.add(comboBox);
+		cmbSangre = new JComboBox<String>();
+		cmbSangre.setModel(new DefaultComboBoxModel<String>(new String[] {"<...>", "A+", "A-", "B-", "O-", "O+", "AB+", "AB-"}));
+		cmbSangre.setBounds(261, 69, 71, 20);
+		panel.add(cmbSangre);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Datos de Consulta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
