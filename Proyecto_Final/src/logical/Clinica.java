@@ -315,15 +315,45 @@ public class Clinica {
 	}
 	
 	public boolean validarUsuario(String user){
-		boolean validar = true;
+		boolean validar = false;
 		int i = 0;
-		while(validar && i < misPersonas.size()){
-			if(((Trabajador) misPersonas.get(i)).getUsuario().equalsIgnoreCase(user)){
-				validar = false;
+		while(!validar && i < misPersonas.size()){
+			if(misPersonas.get(i) instanceof Trabajador){
+				if(((Trabajador) misPersonas.get(i)).getUsuario().equalsIgnoreCase(user)) {
+				validar = true;
+				}
 			}
 			i++;
 		}
 		return validar;
+	}
+	
+	public Persona buscarTrabajador(String user) {
+		Persona trabajador = null;
+		boolean encontrado = false;
+		int i = 0;
+		while(!encontrado && i< misPersonas.size()) {
+			if(misPersonas.get(i) instanceof Trabajador) {
+				if(((Trabajador) misPersonas.get(i)).getUsuario().equalsIgnoreCase(user)) {
+					encontrado = true;
+					trabajador = misPersonas.get(i);
+				}
+			}
+			i++;
+		}
+		return trabajador;
+	}
+	
+	public boolean validarLogin(String user, String password) {
+		Trabajador userlog = null;
+		boolean acceder = false;
+		if(validarUsuario(user)) {    //Aqui utilizo la funcion validarUsuario para comprobar si el usuario existe o se escribio bien.
+			userlog = (Trabajador) buscarTrabajador(user);
+			if(userlog.getPassword().equals(password)) {
+				acceder = true;
+			}
+		}
+		return acceder;
 	}
 }
 
@@ -340,5 +370,9 @@ public class Clinica {
  * Modificacion: Oscar Rodriguez
  * Fecha: 13/11/17
  * Anotaciones: Se creo el metodo salvarPersonas() para crear un archivo
+ * 
+ * Modificaciones: Oscar Rodriguez
+ * Fecha: 19/11/2017
+ * Anotaciones: Metodos para validar usuario y contrasena.
  * 
  * */

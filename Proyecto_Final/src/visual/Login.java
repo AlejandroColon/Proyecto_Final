@@ -7,12 +7,20 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logical.Administrativo;
+import logical.Clinica;
+import logical.Doctor;
+import logical.Persona;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Login extends JDialog {
 
@@ -22,7 +30,7 @@ public class Login extends JDialog {
 	private static final long serialVersionUID = -339133479221982755L;	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JTextField txtContrasena;
+	private JPasswordField passContra;
 
 	/**
 	 * Launch the application.
@@ -62,11 +70,6 @@ public class Login extends JDialog {
 		lblContrasea.setBounds(46, 201, 86, 14);
 		contentPanel.add(lblContrasea);
 		
-		txtContrasena = new JTextField();
-		txtContrasena.setBounds(46, 216, 157, 20);
-		contentPanel.add(txtContrasena);
-		txtContrasena.setColumns(10);
-		
 		JPanel panel = new JPanel();
 		panel.setBounds(63, 21, 125, 125);
 		contentPanel.add(panel);
@@ -75,6 +78,10 @@ public class Login extends JDialog {
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/user.png")));
 		panel.add(lblNewLabel, BorderLayout.CENTER);
+		
+		passContra = new JPasswordField();
+		passContra.setBounds(46, 215, 157, 20);
+		contentPanel.add(passContra);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -83,7 +90,22 @@ public class Login extends JDialog {
 				JButton btnIniciarSesion = new JButton("Iniciar sesion");
 				btnIniciarSesion.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+						String user = txtUsuario.getText();
+						String password = passContra.getPassword().toString();
+						if(Clinica.getInstance().validarLogin(user, password)) {
+							Persona usuario = Clinica.getInstance().buscarTrabajador(user);
+							if(usuario instanceof Doctor) {
+								PrincipalDoctor doctor = new PrincipalDoctor();
+								doctor.setVisible(true);
+								doctor.setLocationRelativeTo(null);
+							}else if(usuario instanceof Administrativo) {
+								PrincipalSecre secre = new PrincipalSecre();
+								secre.setVisible(true);
+								secre.setLocationRelativeTo(null);
+							}
+						}else {
+							JOptionPane.showMessageDialog(null, "Usuario y contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
+						}
 					}
 				});
 				btnIniciarSesion.setActionCommand("OK");

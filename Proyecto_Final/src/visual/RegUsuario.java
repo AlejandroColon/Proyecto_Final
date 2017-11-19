@@ -51,6 +51,7 @@ public class RegUsuario extends JDialog {
 	private JRadioButton rdbtnMedico;
 	private JFormattedTextField txtNombre;
 	private JRadioButton rdbtnAdm;
+	private JFormattedTextField txtCedula;
 
 	/**
 	 * Launch the application.
@@ -140,7 +141,7 @@ public class RegUsuario extends JDialog {
 		txtNombre.setBounds(212, 37, 164, 20);
 		panel.add(txtNombre);
 		
-		JFormattedTextField txtCedula = new JFormattedTextField();
+		txtCedula = new JFormattedTextField();
 		txtCedula.setBounds(10, 37, 164, 20);
 		panel.add(txtCedula);
 		
@@ -218,11 +219,29 @@ public class RegUsuario extends JDialog {
 		panel_3.setLayout(null);
 		
 		rdbtnMedico = new JRadioButton("Medico");
-		rdbtnMedico.setBounds(17, 18, 67, 23);
+		rdbtnMedico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnMedico.setSelected(true);
+				rdbtnAdm.setSelected(false);
+				txtEspecialidad.setEditable(true);
+				txtExequatur.setEditable(true);
+				spnCitasXDia.setEnabled(true);
+			}
+		});
+		rdbtnMedico.setBounds(38, 18, 67, 23);
 		panel_3.add(rdbtnMedico);
 		
-		rdbtnAdm = new JRadioButton("Administrativo");
-		rdbtnAdm.setBounds(86, 18, 98, 23);
+		rdbtnAdm = new JRadioButton("Adm.");
+		rdbtnAdm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnMedico.setSelected(false);
+				rdbtnAdm.setSelected(true);
+				txtEspecialidad.setEditable(false);
+				txtExequatur.setEditable(false);
+				spnCitasXDia.setEnabled(false);
+			}
+		});
+		rdbtnAdm.setBounds(107, 18, 77, 23);
 		panel_3.add(rdbtnAdm);
 		{
 			JPanel buttonPane = new JPanel();
@@ -232,8 +251,8 @@ public class RegUsuario extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(passContra.getPassword().toString().equalsIgnoreCase(passConfContra.getPassword().toString())
-								/*&& (validarUsuario(txtUsuario.getText()) == true)*/) {
+						if(passContra.getPassword().toString().equals(passConfContra.getPassword().toString())
+								&& (Clinica.getInstance().validarUsuario(txtUsuario.getText()) == false)) {
 							Persona aux = null;
 							String cedula = txtCedula.getText();
 							String nombre = txtNombre.getText();
