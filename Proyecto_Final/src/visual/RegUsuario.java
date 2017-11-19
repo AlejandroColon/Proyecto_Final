@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import logical.Administrativo;
 import logical.Clinica;
@@ -18,15 +19,16 @@ import logical.Persona;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 
 public class RegUsuario extends JDialog {
 
@@ -35,20 +37,20 @@ public class RegUsuario extends JDialog {
 	 */
 	private static final long serialVersionUID = -3374135961528682571L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCedula;
-	private JTextField txtNombre;
-	private JTextField txtEdad;
-	private JTextField txtTelefono;
 	private JTextField txtDireccion;
 	private JTextField txtExequatur;
 	private JTextField txtEspecialidad;
-	private JTextField txtUsuario;
-	private JPasswordField passContra;
-	private JPasswordField passConfContra;
-	private JComboBox<String> cbxSexo;
-	private JRadioButton rdbtnMedico;
-	private JRadioButton rdbtnAdministrativo;
 	private JSpinner spnCitasXDia;
+	private JPasswordField passConfContra;
+	private JPasswordField passContra;
+	private JTextField txtUsuario;
+	private JCheckBox chckbxM;
+	private JCheckBox chckbxF;
+	private JFormattedTextField txtFechaNacimiento;
+	private JFormattedTextField txtTelefono;
+	private JRadioButton rdbtnMedico;
+	private JFormattedTextField txtNombre;
+	private JRadioButton rdbtnAdm;
 
 	/**
 	 * Launch the application.
@@ -69,7 +71,7 @@ public class RegUsuario extends JDialog {
 	public RegUsuario() {
 		setTitle("Registro de usuarios");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegUsuario.class.getResource("/images/icon.png")));
-		setBounds(100, 100, 450, 488);
+		setBounds(100, 100, 423, 538);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -77,7 +79,7 @@ public class RegUsuario extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos personales", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 414, 264);
+		panel.setBounds(10, 11, 386, 198);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -89,136 +91,139 @@ public class RegUsuario extends JDialog {
 		lblCedula.setBounds(10, 24, 60, 14);
 		panel.add(lblCedula);
 		
-		txtCedula = new JTextField();
-		txtCedula.setBounds(10, 37, 192, 20);
-		panel.add(txtCedula);
-		txtCedula.setColumns(10);
-		
-		txtNombre = new JTextField();
-		txtNombre.setBounds(212, 37, 192, 20);
-		panel.add(txtNombre);
-		txtNombre.setColumns(10);
-		
-		JLabel lblEdad = new JLabel("Edad:");
-		lblEdad.setBounds(10, 68, 46, 14);
+		JLabel lblEdad = new JLabel("Fecha de nacimiento:");
+		lblEdad.setBounds(10, 68, 164, 14);
 		panel.add(lblEdad);
 		
-		txtEdad = new JTextField();
-		txtEdad.setBounds(10, 82, 76, 20);
-		panel.add(txtEdad);
-		txtEdad.setColumns(10);
-		
 		JLabel lblTelefono = new JLabel("Telefono:");
-		lblTelefono.setBounds(212, 68, 86, 14);
+		lblTelefono.setBounds(212, 113, 86, 14);
 		panel.add(lblTelefono);
 		
-		txtTelefono = new JTextField();
-		txtTelefono.setBounds(212, 82, 192, 20);
-		panel.add(txtTelefono);
-		txtTelefono.setColumns(10);
-		
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(96, 68, 46, 14);
+		lblSexo.setBounds(212, 68, 46, 14);
 		panel.add(lblSexo);
-		
-		cbxSexo = new JComboBox<String>();
-		cbxSexo.setModel(new DefaultComboBoxModel<String> (new String[] {"<Seleccione>", "Masculino", "Femenino", "Otro"}));
-		cbxSexo.setBounds(96, 82, 106, 20);
-		panel.add(cbxSexo);
 		
 		JLabel lblDireccion = new JLabel("Direccion:");
 		lblDireccion.setBounds(10, 113, 76, 14);
 		panel.add(lblDireccion);
 		
 		txtDireccion = new JTextField();
-		txtDireccion.setBounds(10, 126, 394, 20);
+		txtDireccion.setBounds(10, 127, 164, 20);
 		panel.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
-		rdbtnMedico = new JRadioButton("Medico");
-		rdbtnMedico.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(rdbtnMedico.isSelected()) {
-					txtEspecialidad.setEditable(true);
-					txtExequatur.setEditable(true);
-					spnCitasXDia.setEnabled(true);
-				}
-			}
-		});
-		rdbtnMedico.setBounds(65, 215, 109, 23);
-		panel.add(rdbtnMedico);
+		chckbxM = new JCheckBox("M");
+		chckbxM.setBounds(210, 81, 38, 23);
+		panel.add(chckbxM);
 		
-		rdbtnAdministrativo = new JRadioButton("Administrativo");
-		rdbtnAdministrativo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				txtEspecialidad.setEditable(false);
-				txtExequatur.setEditable(false);
-				spnCitasXDia.setEnabled(false);
-			}
-		});
-		rdbtnAdministrativo.setBounds(239, 215, 109, 23);
-		panel.add(rdbtnAdministrativo);
+		chckbxF = new JCheckBox("F");
+		chckbxF.setBounds(250, 81, 97, 23);
+		panel.add(chckbxF);
 		
-		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(10, 157, 60, 14);
-		panel.add(lblUsuario);
+		txtFechaNacimiento = new JFormattedTextField();
+		txtFechaNacimiento.setBounds(10, 82, 164, 20);
+		panel.add(txtFechaNacimiento);
 		
-		txtUsuario = new JTextField();
-		txtUsuario.setBounds(14, 175, 86, 20);
-		panel.add(txtUsuario);
-		txtUsuario.setColumns(10);
+		MaskFormatter maskphone = null;
+		try {
+			maskphone = new MaskFormatter("(###) ###-####");
+			maskphone.setPlaceholderCharacter('_');
+		}catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setBounds(114, 157, 76, 14);
-		panel.add(lblContrasea);
+		txtTelefono = new JFormattedTextField(maskphone);
+		txtTelefono.setBounds(212, 127, 164, 20);
+		panel.add(txtTelefono);
 		
-		passContra = new JPasswordField();
-		passContra.setBounds(114, 175, 135, 20);
-		panel.add(passContra);
+		txtNombre = new JFormattedTextField();
+		txtNombre.setBounds(212, 37, 164, 20);
+		panel.add(txtNombre);
 		
-		JLabel lblConfirmarContrase = new JLabel("Confirmar contrase\u00F1a:");
-		lblConfirmarContrase.setBounds(263, 157, 148, 14);
-		panel.add(lblConfirmarContrase);
-		
-		passConfContra = new JPasswordField();
-		passConfContra.setBounds(263, 175, 135, 20);
-		panel.add(passConfContra);
+		JFormattedTextField txtCedula = new JFormattedTextField();
+		txtCedula.setBounds(10, 37, 164, 20);
+		panel.add(txtCedula);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Datos Medicos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 286, 414, 122);
+		panel_1.setBounds(206, 279, 190, 182);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblExequatur = new JLabel("Exequatur:");
-		lblExequatur.setBounds(10, 21, 100, 14);
+		lblExequatur.setBounds(10, 29, 100, 14);
 		panel_1.add(lblExequatur);
 		
 		txtExequatur = new JTextField();
 		txtExequatur.setEditable(false);
-		txtExequatur.setBounds(10, 35, 191, 20);
+		txtExequatur.setBounds(10, 46, 164, 20);
 		panel_1.add(txtExequatur);
 		txtExequatur.setColumns(10);
 		
 		JLabel lblEspecialidad = new JLabel("Especialidad:");
-		lblEspecialidad.setBounds(211, 21, 92, 14);
+		lblEspecialidad.setBounds(10, 77, 92, 14);
 		panel_1.add(lblEspecialidad);
 		
 		txtEspecialidad = new JTextField();
 		txtEspecialidad.setEditable(false);
-		txtEspecialidad.setBounds(211, 35, 191, 20);
+		txtEspecialidad.setBounds(10, 93, 164, 20);
 		panel_1.add(txtEspecialidad);
 		txtEspecialidad.setColumns(10);
 		
 		spnCitasXDia = new JSpinner();
 		spnCitasXDia.setEnabled(false);
 		spnCitasXDia.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spnCitasXDia.setBounds(157, 80, 100, 20);
+		spnCitasXDia.setBounds(10, 137, 164, 20);
 		panel_1.add(spnCitasXDia);
 		
 		JLabel lblCitasPorDia = new JLabel("Citas por dia:");
-		lblCitasPorDia.setBounds(157, 66, 100, 14);
+		lblCitasPorDia.setBounds(10, 123, 100, 14);
 		panel_1.add(lblCitasPorDia);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(null, "Datos de usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBounds(10, 220, 186, 241);
+		contentPanel.add(panel_2);
+		panel_2.setLayout(null);
+		
+		passConfContra = new JPasswordField();
+		passConfContra.setBounds(11, 136, 164, 20);
+		panel_2.add(passConfContra);
+		
+		JLabel label = new JLabel("Confirmar contrase\u00F1a:");
+		label.setBounds(11, 122, 148, 14);
+		panel_2.add(label);
+		
+		passContra = new JPasswordField();
+		passContra.setBounds(11, 91, 164, 20);
+		panel_2.add(passContra);
+		
+		JLabel label_1 = new JLabel("Contrase\u00F1a:");
+		label_1.setBounds(11, 77, 76, 14);
+		panel_2.add(label_1);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setColumns(10);
+		txtUsuario.setBounds(11, 46, 164, 20);
+		panel_2.add(txtUsuario);
+		
+		JLabel label_2 = new JLabel("Usuario:");
+		label_2.setBounds(11, 29, 60, 14);
+		panel_2.add(label_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "Categoria", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBounds(206, 220, 190, 48);
+		contentPanel.add(panel_3);
+		panel_3.setLayout(null);
+		
+		rdbtnMedico = new JRadioButton("Medico");
+		rdbtnMedico.setBounds(17, 18, 67, 23);
+		panel_3.add(rdbtnMedico);
+		
+		rdbtnAdm = new JRadioButton("Administrativo");
+		rdbtnAdm.setBounds(86, 18, 98, 23);
+		panel_3.add(rdbtnAdm);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -227,14 +232,20 @@ public class RegUsuario extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(passContra.getPassword().toString().equalsIgnoreCase(passConfContra.getPassword().toString())) {
+						if(passContra.getPassword().toString().equalsIgnoreCase(passConfContra.getPassword().toString())
+								/*&& (validarUsuario(txtUsuario.getText()) == true)*/) {
 							Persona aux = null;
 							String cedula = txtCedula.getText();
 							String nombre = txtNombre.getText();
-							int edad = Integer.valueOf(txtEdad.getText());
+							int edad = 5;//Integer.valueOf(txtFechaNacimiento.getText());
 							String telefono = txtTelefono.getText();
 							String direccion = txtDireccion.getText();
-							String sexo = cbxSexo.getSelectedItem().toString();
+							String sexo="";
+							if(chckbxF.isSelected()) {
+								sexo = "Femenino";	
+							}if(chckbxM.isSelected()) {
+								sexo = "Masculino";
+							}
 							String usuario = txtUsuario.getText();
 							String password = passContra.getPassword().toString();
 							if(rdbtnMedico.isSelected()) {
@@ -250,8 +261,10 @@ public class RegUsuario extends JDialog {
 							} catch (IOException e1) {
 								e1.printStackTrace();
 							}
+						}else if(passContra.getPassword().toString().equalsIgnoreCase(passConfContra.getPassword().toString()) == false) {
+							JOptionPane.showMessageDialog(null, "Contraseñas no coinciden, favor volver a digitarlas", "Aviso", JOptionPane.WARNING_MESSAGE);
 						}else {
-							JOptionPane.showMessageDialog(null, "Contraseñas no coincide, favor volver a digitarlas", "Aviso", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "El usuario ya ha sido utilizado, favor elegir otro", "Aviso", JOptionPane.WARNING_MESSAGE);
 						}
 						
 					}
@@ -272,4 +285,7 @@ public class RegUsuario extends JDialog {
 /*
  * Creado por: Oscar Rodriguez
  * Fecha: 13/11/17
+ * 
+ * Modificacion: Oscar Rodriguez
+ * Fecha: 19/11/2017
  */
