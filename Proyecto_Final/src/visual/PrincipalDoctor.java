@@ -85,7 +85,7 @@ public class PrincipalDoctor extends JDialog {
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columnNames);
 		table.setModel(model);
-		LoadTable();
+		//LoadTable();
 		table.setModel(model);
 
 		scrollPane.setViewportView(table);

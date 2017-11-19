@@ -92,7 +92,7 @@ public class Login extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						String user = txtUsuario.getText();
 						String password = passContra.getPassword().toString();
-						if(Clinica.getInstance().validarLogin(user, password)) {
+						if(!Clinica.getInstance().validarLogin(user, password)) {
 							Persona usuario = Clinica.getInstance().buscarTrabajador(user);
 							if(usuario instanceof Doctor) {
 								PrincipalDoctor doctor = new PrincipalDoctor();
@@ -104,7 +104,7 @@ public class Login extends JDialog {
 								secre.setLocationRelativeTo(null);
 							}
 						}else {
-							JOptionPane.showMessageDialog(null, "Usuario y contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Usuario o contraseña Inválido", "Advertencia", JOptionPane.WARNING_MESSAGE);
 						}
 					}
 				});
