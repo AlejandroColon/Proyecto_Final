@@ -134,9 +134,14 @@ public class PrincipalSecre extends JDialog {
 			}
 		}
 	}
+	//public void loadTable(){
+		
+	//}
 }
 
 /*
  * Creado por: Yamilka 13/11/17
+ * Modificaciones:
+ * Yamilka le dio formato al btnRegistrar para que se guarden los consultantes y las citas
  * 
  */

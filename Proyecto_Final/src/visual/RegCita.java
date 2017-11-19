@@ -11,6 +11,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
 import logical.Cita;
+import logical.Clinica;
 import logical.Consultante;
 import logical.Doctor;
 import logical.Persona;
@@ -18,6 +19,7 @@ import logical.Persona;
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -38,8 +40,11 @@ public class RegCita extends JDialog {
 	private JTextField txtDireccion;
 	private JTextField txtID;
 	private JTextField txtFecha;
-	private JComboBox<String> cbxDoctor; //OJO AQUÍ, al cbx le puse un tipo string para que se quitara el warning meanwhile
-	private JFormattedTextField formattedTextFldCedula,formattedTextFldNombre, formattedTextFldNacimiento, formattedTextFldTelefono ;
+	private JComboBox<String> cbxDoctor; // OJO AQUÍ, al cbx le puse un tipo
+											// string para que se quitara el
+											// warning meanwhile
+	private JFormattedTextField formattedTextFldCedula, formattedTextFldNombre, formattedTextFldNacimiento,
+			formattedTextFldTelefono;
 
 	/**
 	 * Launch the application.
@@ -67,129 +72,167 @@ public class RegCita extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setLocationRelativeTo(null);
-		
+
 		JPanel panelDatosPersona = new JPanel();
-		panelDatosPersona.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos de la persona a consultar", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelDatosPersona.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
+				"Datos de la persona a consultar", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelDatosPersona.setBounds(10, 11, 262, 213);
 		contentPanel.add(panelDatosPersona);
 		panelDatosPersona.setLayout(null);
-		
+
 		JLabel lblCdula = new JLabel("C\u00E9dula:");
 		lblCdula.setBounds(10, 22, 46, 14);
 		panelDatosPersona.add(lblCdula);
-		
+
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(10, 70, 67, 14);
 		panelDatosPersona.add(lblNombre);
-		
+
 		JLabel lblEdad = new JLabel("Fecha de nacimiento:");
 		lblEdad.setBounds(10, 118, 146, 14);
 		panelDatosPersona.add(lblEdad);
-		
+
 		JLabel lblSexo = new JLabel("Sexo:");
 		lblSexo.setBounds(139, 71, 46, 14);
 		panelDatosPersona.add(lblSexo);
-		
+
 		JCheckBox chckbxM = new JCheckBox("M");
+		chckbxM.setEnabled(false);
 		chckbxM.setBounds(139, 85, 33, 23);
 		panelDatosPersona.add(chckbxM);
-		
+
 		JCheckBox chckbxF = new JCheckBox("F");
+		chckbxF.setEnabled(false);
 		chckbxF.setBounds(174, 85, 33, 23);
 		panelDatosPersona.add(chckbxF);
-		
+
 		JButton btnBuscar = new JButton("Buscar...");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cedula = formattedTextFldCedula.getText();
+				Persona aux = null;
+				//int edad = 0;
+				aux = Clinica.getInstance().findByCedula(cedula);
+				if (aux == null) {
+					txtDireccion.setEnabled(true);
+					formattedTextFldNacimiento.setEnabled(true);
+					formattedTextFldNombre.setEnabled(true);
+					formattedTextFldTelefono.setEnabled(true);
+					chckbxF.setEnabled(true);
+					chckbxM.setEnabled(true);
+				} else if (aux != null) {
+					txtDireccion.setText(aux.getDireccion());
+					formattedTextFldNacimiento.setText("00/00/0000");
+					formattedTextFldNombre.setText(aux.getNombre());
+					formattedTextFldTelefono.setText(aux.getTelefono());
+					String sexo = aux.getSexo();
+					if (sexo.equalsIgnoreCase("Feminino")) {
+						chckbxF.setSelected(true);
+						chckbxM.setSelected(false);
+					} else if (sexo.equalsIgnoreCase("Masculino")) {
+						chckbxM.setSelected(true);
+						chckbxF.setSelected(true);
+					}
+
+				}
+			}
+		});
 		btnBuscar.setBounds(129, 38, 97, 23);
 		panelDatosPersona.add(btnBuscar);
-		
+
 		JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
 		lblTelfono.setBounds(139, 118, 46, 14);
 		panelDatosPersona.add(lblTelfono);
-		
+
 		MaskFormatter maskPhone = null;
-        try {
-        	maskPhone = new MaskFormatter("(###) ###-####");
-        	maskPhone.setPlaceholderCharacter('_');
-        }catch (ParseException e) {
-            e.printStackTrace();
-        }
-		
+		try {
+			maskPhone = new MaskFormatter("(###) ###-####");
+			maskPhone.setPlaceholderCharacter('_');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 		formattedTextFldTelefono = new JFormattedTextField(maskPhone);
+		formattedTextFldTelefono.setEnabled(false);
 		formattedTextFldTelefono.setText("");
 		formattedTextFldTelefono.setBounds(139, 135, 109, 20);
 		panelDatosPersona.add(formattedTextFldTelefono);
-		
+
 		JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
 		lblDireccin.setBounds(10, 166, 67, 14);
 		panelDatosPersona.add(lblDireccin);
-		
+
 		txtDireccion = new JTextField();
+		txtDireccion.setEnabled(false);
 		txtDireccion.setBounds(10, 183, 238, 20);
 		panelDatosPersona.add(txtDireccion);
 		txtDireccion.setColumns(10);
-		
-		
-		
+
 		MaskFormatter maskCedula = null;
-        try {
-        	maskCedula = new MaskFormatter("###-#######-#");
-        	maskCedula.setPlaceholderCharacter('_');
-        }catch (ParseException e) {
-            e.printStackTrace();
-        }
-		
+		try {
+			maskCedula = new MaskFormatter("###-#######-#");
+			maskCedula.setPlaceholderCharacter('_');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 		formattedTextFldCedula = new JFormattedTextField(maskCedula);
 		formattedTextFldCedula.setBounds(10, 39, 109, 20);
 		panelDatosPersona.add(formattedTextFldCedula);
-		
+
 		MaskFormatter maskName = null;
 		try {
 			maskName = new MaskFormatter("************************************");
 		} catch (ParseException e1) {
 			e1.printStackTrace();
-		} 
-		maskName.setValidCharacters("qwertyuiopasdfghjklzxcvbnm" +
-                    "           QWERTYUIOPASDFGHJKLZXCVBNM "+"ÁáÉéÍíÚú");
+		}
+		maskName.setValidCharacters(
+				"qwertyuiopasdfghjklzxcvbnm" + "           QWERTYUIOPASDFGHJKLZXCVBNM " + "ÁáÉéÍíÚú");
 		maskName.setPlaceholderCharacter(' ');
-		
+
 		formattedTextFldNombre = new JFormattedTextField(maskName);
+		formattedTextFldNombre.setEnabled(false);
 		formattedTextFldNombre.setBounds(10, 87, 109, 20);
 		panelDatosPersona.add(formattedTextFldNombre);
-		
+
 		formattedTextFldNacimiento = new JFormattedTextField();
+		formattedTextFldNacimiento.setEnabled(false);
 		formattedTextFldNacimiento.setBounds(10, 135, 109, 20);
 		panelDatosPersona.add(formattedTextFldNacimiento);
-		
+
 		JPanel panelDatosCita = new JPanel();
-		panelDatosCita.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos de la cita", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelDatosCita.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos de la cita",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelDatosCita.setBounds(10, 237, 262, 127);
 		contentPanel.add(panelDatosCita);
 		panelDatosCita.setLayout(null);
-		
+
 		JLabel lblId = new JLabel("ID:");
 		lblId.setBounds(10, 23, 46, 14);
 		panelDatosCita.add(lblId);
-		
+
 		txtID = new JTextField();
+		txtID.setText("CIT-" + (Clinica.getInstance().getMisCitas().size() + 1));
+		txtID.setEnabled(false);
 		txtID.setBounds(10, 42, 106, 20);
 		panelDatosCita.add(txtID);
 		txtID.setColumns(10);
-		
+
 		JLabel lblFecha = new JLabel("Fecha:");
 		lblFecha.setBounds(139, 23, 46, 14);
 		panelDatosCita.add(lblFecha);
-		
+
 		txtFecha = new JTextField();
 		txtFecha.setBounds(139, 42, 86, 20);
 		panelDatosCita.add(txtFecha);
 		txtFecha.setColumns(10);
-		
+
 		JLabel lblDoctor = new JLabel("Doctor:");
 		lblDoctor.setBounds(10, 73, 46, 14);
 		panelDatosCita.add(lblDoctor);
-		
-		cbxDoctor = new JComboBox<String>();//lo mismo aquí le agregué tipo argumento como String para que se quitara el warning
-		cbxDoctor.setModel(new DefaultComboBoxModel<String>(new String[] {"<Seleccione>"}));
+
+		cbxDoctor = new JComboBox<String>();
+		cbxDoctor.setModel(new DefaultComboBoxModel<String>(new String[] { "<Seleccione>" }));
 		cbxDoctor.setBounds(10, 90, 106, 20);
 		panelDatosCita.add(cbxDoctor);
 		{
@@ -200,27 +243,40 @@ public class RegCita extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String cedula = formattedTextFldCedula.getText();
-						String nombre = formattedTextFldNombre.getText();
-						String direccion = txtDireccion.getText();
-						String telefono = formattedTextFldTelefono.getText();
-						int edad = 5;
-						String sexo = null;
-						if(chckbxF.isSelected()){
-							sexo = "Femenino";
-						}
-						else if(chckbxM.isSelected()){
-						    sexo = "Masculino";
-						}
-						Persona newConsultante = new Consultante(cedula, nombre, edad, telefono, direccion, sexo);
-						//aqui llamar la funcion para añadir el consultante al arraylist de consultantes
+						// Datos de la cita
 						String id = txtID.getText();
-						Doctor doctor = (Doctor)cbxDoctor.getSelectedItem();
+						Doctor doctor = (Doctor) cbxDoctor.getSelectedItem();
 						String fecha = txtFecha.getText();
-						Cita newCita = new Cita(id, fecha, doctor, newConsultante);
-						//aqui llamar la funcion para add la cita al array de citas
-						
-						
+						// verificando si la persona existe o no
+						Persona aux = Clinica.getInstance().findByCedula(formattedTextFldCedula.getText());
+						if (aux == null) {
+							String cedula = formattedTextFldCedula.getText();
+							String nombre = formattedTextFldNombre.getText();
+							String direccion = txtDireccion.getText();
+							String telefono = formattedTextFldTelefono.getText();
+							int edad = 5;
+							String sexo = null;
+							if (chckbxF.isSelected()) {
+								sexo = "Femenino";
+							} else if (chckbxM.isSelected()) {
+								sexo = "Masculino";
+							}
+							// Como el consultante no existia antes se crea
+							Persona newConsultante = new Consultante(cedula, nombre, edad, telefono, direccion, sexo);
+							Clinica.getInstance().addPersona(newConsultante);
+							Cita newCita = new Cita(id, fecha, doctor, newConsultante);
+							Clinica.getInstance().addCitas(newCita);
+						}
+						// Si el consultante existe ya solo creame una cita
+						// nueva con los datos de la persona registro
+						else if (aux != null) {
+							Cita newCita = new Cita(id, fecha, doctor, aux);
+							Clinica.getInstance().addCitas(newCita);
+						}
+
+						JOptionPane.showMessageDialog(null, "La operación ha sido exitosa", "Información",
+								JOptionPane.INFORMATION_MESSAGE);
+
 					}
 				});
 				btnRegistrar.setActionCommand("OK");
@@ -233,5 +289,12 @@ public class RegCita extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
+	}
+
+	public void clean() {
+		formattedTextFldCedula.setText("");
+		formattedTextFldNombre.setText("");
+		formattedTextFldNacimiento.setText(new String(""));
+		formattedTextFldTelefono.setText(new String(""));
 	}
 }
