@@ -37,7 +37,6 @@ public class Consulta extends JDialog {
 	private JTextField txtDireccion;
 	private JTextField txtNumAfiliado;
 	private JTextField txtEdad;
-	private JTextField txtTipoSangre;
 	private JTextField txtCodigo;
 	private JTextField txtDiagnostico;
 	JComboBox<String> cmbEnfermedad;
@@ -65,14 +64,14 @@ public class Consulta extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Consulta.class.getResource("/images/icon.png")));
 		setResizable(false);
 		setTitle("Consulta");
-		setBounds(100, 100, 450, 572);
+		setBounds(100, 100, 400, 572);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JTabbedPane informacion = new JTabbedPane(JTabbedPane.TOP);
-		informacion.setBounds(10, 11, 424, 488);
+		informacion.setBounds(10, 11, 375, 488);
 		contentPanel.add(informacion);
 		
 		JPanel consulta = new JPanel();
@@ -87,7 +86,7 @@ public class Consulta extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos de Cliente",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 399, 166);
+		panel.setBounds(10, 11, 354, 166);
 		consulta.add(panel);
 		panel.setLayout(null);
 		
@@ -96,76 +95,76 @@ public class Consulta extends JDialog {
 		panel.add(lblCdula);
 		
 		txtCedula = new JTextField();
-		txtCedula.setBounds(10, 34, 100, 20);
+		txtCedula.setBounds(10, 34, 143, 20);
 		panel.add(txtCedula);
 		txtCedula.setColumns(10);
 		
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(45, 69, 143, 20);
+		txtNombre.setBounds(10, 69, 143, 20);
 		panel.add(txtNombre);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(45, 56, 65, 14);
+		lblNombre.setBounds(10, 56, 65, 14);
 		panel.add(lblNombre);
 		
 		txtTelefono = new JTextField();
 		txtTelefono.setColumns(10);
-		txtTelefono.setBounds(45, 104, 143, 20);
+		txtTelefono.setBounds(10, 104, 143, 20);
 		panel.add(txtTelefono);
 		
 		JLabel lblTelfono_1 = new JLabel("Tel\u00E9fono:");
-		lblTelfono_1.setBounds(45, 91, 65, 14);
+		lblTelfono_1.setBounds(10, 91, 65, 14);
 		panel.add(lblTelfono_1);
 		
 		txtDireccion = new JTextField();
 		txtDireccion.setColumns(10);
-		txtDireccion.setBounds(217, 104, 143, 20);
+		txtDireccion.setBounds(189, 104, 143, 20);
 		panel.add(txtDireccion);
 		
 		JLabel lblApellido = new JLabel("Direcci\u00F3n:");
-		lblApellido.setBounds(217, 91, 59, 14);
+		lblApellido.setBounds(189, 91, 59, 14);
 		panel.add(lblApellido);
 		
 		JLabel lblDireccin = new JLabel("Aseguradora:");
-		lblDireccin.setBounds(217, 126, 83, 14);
+		lblDireccin.setBounds(189, 126, 83, 14);
 		panel.add(lblDireccin);
 		
 		txtNumAfiliado = new JTextField();
 		txtNumAfiliado.setColumns(10);
-		txtNumAfiliado.setBounds(45, 139, 143, 20);
+		txtNumAfiliado.setBounds(10, 139, 143, 20);
 		panel.add(txtNumAfiliado);
 		
 		JLabel lblTelfono = new JLabel("N\u00FAmero Afiliado:");
-		lblTelfono.setBounds(45, 126, 110, 14);
+		lblTelfono.setBounds(10, 126, 110, 14);
 		panel.add(lblTelfono);
 		
 		cmbAseguradora = new JComboBox<String>();
 		cmbAseguradora.setModel(new DefaultComboBoxModel<String>(new String[] {"<Seleccione>", "Senasa", "ARS Palic Salud", "ARS Humano", "ARS Monumental", "Semma"}));
-		cmbAseguradora.setBounds(217, 139, 143, 20);
+		cmbAseguradora.setBounds(189, 139, 143, 20);
 		panel.add(cmbAseguradora);
 		
 		JLabel lblEdad = new JLabel("Edad:");
-		lblEdad.setBounds(215, 56, 46, 14);
+		lblEdad.setBounds(187, 56, 46, 14);
 		panel.add(lblEdad);
 		
 		txtEdad = new JTextField();
-		txtEdad.setBounds(214, 69, 30, 20);
+		txtEdad.setBounds(189, 69, 65, 20);
 		panel.add(txtEdad);
 		txtEdad.setColumns(10);
 		
-		txtTipoSangre = new JTextField();
-		txtTipoSangre.setColumns(10);
-		txtTipoSangre.setBounds(295, 69, 30, 20);
-		panel.add(txtTipoSangre);
-		
-		JLabel lblTipoDeSangre = new JLabel("Tipo de Sangre:");
-		lblTipoDeSangre.setBounds(273, 56, 100, 14);
+		JLabel lblTipoDeSangre = new JLabel("Tipo Sangre:");
+		lblTipoDeSangre.setBounds(261, 56, 71, 14);
 		panel.add(lblTipoDeSangre);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<...>", "A+", "A-", "B-", "O-", "O+", "AB+", "AB-"}));
+		comboBox.setBounds(261, 69, 71, 20);
+		panel.add(comboBox);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Datos de Consulta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 188, 399, 267);
+		panel_1.setBounds(10, 188, 354, 267);
 		consulta.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -179,7 +178,7 @@ public class Consulta extends JDialog {
 		panel_1.add(lblCdigo);
 		
 		JCheckBox chckbxAgregarAHistoria = new JCheckBox("Agregar a Historia Cl\u00EDnica");
-		chckbxAgregarAHistoria.setBounds(215, 17, 178, 23);
+		chckbxAgregarAHistoria.setBounds(144, 17, 178, 23);
 		panel_1.add(chckbxAgregarAHistoria);
 		
 		JLabel lblSntomas = new JLabel("S\u00EDntomas:");
@@ -200,16 +199,16 @@ public class Consulta extends JDialog {
 		panel_1.add(lblTratamiento);
 		
 		JLabel lblEnfermedadBajoVigilancia = new JLabel("Enfermedad bajo Vigilancia:");
-		lblEnfermedadBajoVigilancia.setBounds(228, 139, 165, 14);
+		lblEnfermedadBajoVigilancia.setBounds(183, 139, 165, 14);
 		panel_1.add(lblEnfermedadBajoVigilancia);
 		
 		cmbEnfermedad = new JComboBox<String>();
 		cmbEnfermedad.setModel(new DefaultComboBoxModel<String>(new String[] {"<Ninguna>"}));
-		cmbEnfermedad.setBounds(226, 152, 163, 20);
+		cmbEnfermedad.setBounds(181, 152, 163, 20);
 		panel_1.add(cmbEnfermedad);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 76, 379, 52);
+		panel_2.setBounds(10, 76, 334, 52);
 		panel_1.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
@@ -221,7 +220,7 @@ public class Consulta extends JDialog {
 		scrollPaneSintomas.setViewportView(txtSintomas);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(10, 192, 379, 64);
+		panel_3.setBounds(10, 192, 334, 64);
 		panel_1.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
@@ -238,25 +237,25 @@ public class Consulta extends JDialog {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new TitledBorder(null, "Historia Cl\u00EDnica", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_4.setBounds(10, 28, 399, 404);
+		panel_4.setBounds(10, 28, 350, 404);
 		historia.add(panel_4);
 		panel_4.setLayout(null);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(Color.LIGHT_GRAY);
-		panel_5.setBounds(10, 25, 379, 336);
+		panel_5.setBounds(10, 25, 330, 336);
 		panel_4.add(panel_5);
 		
 		JButton btnVerHistoriaClnica = new JButton("Ver Historia Cl\u00EDnica");
 		btnVerHistoriaClnica.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnVerHistoriaClnica.setBounds(268, 372, 121, 23);
+		btnVerHistoriaClnica.setBounds(219, 372, 121, 23);
 		panel_4.add(btnVerHistoriaClnica);
 		informacion.addTab("Control de Vacunas", vacunas);
 		vacunas.setLayout(null);
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new TitledBorder(null, "Vacunas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_6.setBounds(10, 53, 399, 364);
+		panel_6.setBounds(10, 53, 350, 364);
 		vacunas.add(panel_6);
 		panel_6.setLayout(null);
 		//informacion.addTab("Panel 4", panel_4);

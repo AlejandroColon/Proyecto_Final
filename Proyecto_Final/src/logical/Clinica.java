@@ -253,6 +253,78 @@ public class Clinica {
 			readCita.close();
 		}	
 	} 
+	
+	public Persona findByCedula(String cedula){
+		Persona p =null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		while(!encontrado && i <misPersonas.size()){
+			if(misPersonas.get(i).getCedula().equalsIgnoreCase(cedula)){
+				p = misPersonas.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return p;
+	}
+	
+	public Cita findCitaByID(String id){
+		Cita c =null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		while(!encontrado && i <misCitas.size()){
+			if(misCitas.get(i).getId().equalsIgnoreCase(id)){
+				c = misCitas.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return c;
+	}
+	
+	public Consulta findConsultaByCodigo(String codigo){
+		Consulta c = null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		while(!encontrado && i <misConsultas.size()){
+			if(misConsultas.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				c = misConsultas.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return c;
+	}
+	
+	public Consulta findConsultaByCedula(String cedula){
+		Consulta c = null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		while(!encontrado && i <misConsultas.size()){
+			if(misConsultas.get(i).getPaciente().getCedula().equalsIgnoreCase(cedula)){
+				c = misConsultas.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return c;
+	}
+	
+	public boolean validarUsuario(String user){
+		boolean validar = true;
+		int i = 0;
+		while(validar && i < misPersonas.size()){
+			if(((Trabajador) misPersonas.get(i)).getUsuario().equalsIgnoreCase(user)){
+				validar = false;
+			}
+			i++;
+		}
+		return validar;
+	}
 }
 
 /*
