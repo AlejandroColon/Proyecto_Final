@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+
 import logical.Cita;
 import logical.Clinica;
 
@@ -36,6 +37,8 @@ public class PrincipalDoctor extends JDialog {
 	/**
 	 * Launch the application.
 	 */
+	
+	/*
 	public static void main(String[] args) {
 		try {
 			PrincipalDoctor dialog = new PrincipalDoctor();
@@ -85,7 +88,7 @@ public class PrincipalDoctor extends JDialog {
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columnNames);
 		table.setModel(model);
-		//LoadTable();
+		LoadTable();
 		table.setModel(model);
 
 		scrollPane.setViewportView(table);
@@ -103,6 +106,10 @@ public class PrincipalDoctor extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}
@@ -114,7 +121,8 @@ public class PrincipalDoctor extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		Cita c = null;
-		for (int i = 0; i < Clinica.getInstance().getMisPersonas().size(); i++) {
+		
+		for (int i = 0; i < Clinica.getInstance().getMisCitas().size(); i++) {
 			c = Clinica.getInstance().getMisCitas().get(i);
 
 			fila[0] = c.getId();

@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -12,7 +11,6 @@ import logical.Administrativo;
 import logical.Clinica;
 import logical.Doctor;
 import logical.Persona;
-import logical.Trabajador;
 
 import java.awt.Toolkit;
 
@@ -33,15 +31,16 @@ public class Principal extends JFrame {
 				try {
 					Principal frame = new Principal();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					Thread.sleep(3000);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				Persona p = new Doctor("000","Dr. Maunel Perez",10,"809-","casa","m","doctor","123","abc","Cirujano",3);
+				Persona p = new Doctor("050-0021076-4","Dr. Maunel Perez",10,"809-","casa","m","doctor","123","abc","Cirujano",3);
 				Clinica.getInstance().addPersona(p);
-				//JOptionPane.showMessageDialog(null, "Usuario:<" + ((Trabajador)Clinica.getInstance().getMisPersonas().get(0)).getUsuario() + ">", "Advertencia", JOptionPane.WARNING_MESSAGE);
-				Persona p2 = new Administrativo("001","Lic. Manuela Pereza",15,"829","la casa de manuel","F","secre","abc");
+				Persona p2 = new Administrativo("402-8566965-3","Lic. Manuela Pereza",15,"829","la casa de manuel","F","secre","abc");
 				Clinica.getInstance().addPersona(p2);
-				//JOptionPane.showMessageDialog(null, "Usuario:<" + ((Trabajador)Clinica.getInstance().getMisPersonas().get(1)).getUsuario() + ">", "Advertencia", JOptionPane.WARNING_MESSAGE);
+				
 				
 				Login log = new Login();
 				log.setVisible(true);
