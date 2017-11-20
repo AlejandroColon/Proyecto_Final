@@ -40,9 +40,7 @@ public class RegCita extends JDialog {
 	private JTextField txtDireccion;
 	private JTextField txtID;
 	private JTextField txtFecha;
-	private JComboBox<String> cbxDoctor; // OJO AQUÍ, al cbx le puse un tipo
-											// string para que se quitara el
-											// warning meanwhile
+	private JComboBox<String> cbxDoctor;
 	private JFormattedTextField formattedTextFldCedula, formattedTextFldNombre, formattedTextFldNacimiento,
 			formattedTextFldTelefono;
 
@@ -212,12 +210,13 @@ public class RegCita extends JDialog {
 		panelDatosCita.add(lblId);
 
 		txtID = new JTextField();
-		txtID.setText("CIT-" + (Clinica.getInstance().getMisCitas().size() + 1));
+		
 		txtID.setEnabled(false);
 		txtID.setBounds(10, 42, 106, 20);
 		panelDatosCita.add(txtID);
 		txtID.setColumns(10);
-
+		txtID.setText("CIT-" + (Clinica.getInstance().getMisCitas().size() + 1));
+		
 		JLabel lblFecha = new JLabel("Fecha:");
 		lblFecha.setBounds(139, 23, 46, 14);
 		panelDatosCita.add(lblFecha);
@@ -235,6 +234,7 @@ public class RegCita extends JDialog {
 		cbxDoctor.setModel(new DefaultComboBoxModel<String>(new String[] { "<Seleccione>" }));
 		cbxDoctor.setBounds(10, 90, 106, 20);
 		panelDatosCita.add(cbxDoctor);
+		llenarCMB();
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -245,7 +245,7 @@ public class RegCita extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						// Datos de la cita
 						String id = txtID.getText();
-						Doctor doctor = (Doctor) cbxDoctor.getSelectedItem();
+						//Doctor doctor = (Doctor) cbxDoctor.getSelectedItem();
 						String fecha = txtFecha.getText();
 						// verificando si la persona existe o no
 						Persona aux = Clinica.getInstance().findByCedula(formattedTextFldCedula.getText());
@@ -264,13 +264,14 @@ public class RegCita extends JDialog {
 							// Como el consultante no existia antes se crea
 							Persona newConsultante = new Consultante(cedula, nombre, edad, telefono, direccion, sexo);
 							Clinica.getInstance().addPersona(newConsultante);
-							Cita newCita = new Cita(id, fecha, doctor, newConsultante);
+							Cita newCita = new Cita(id, fecha, null, newConsultante);
 							Clinica.getInstance().addCitas(newCita);
 						}
+						
 						// Si el consultante existe ya solo creame una cita
 						// nueva con los datos de la persona registro
 						else if (aux != null) {
-							Cita newCita = new Cita(id, fecha, doctor, aux);
+							Cita newCita = new Cita(id, fecha, null, aux);
 							Clinica.getInstance().addCitas(newCita);
 						}
 
@@ -291,10 +292,39 @@ public class RegCita extends JDialog {
 		}
 	}
 
+	private void llenarCMB() {
+		boolean encontrado = false;
+		cbxDoctor.removeAllItems();  	//limpiando la info del cmb
+		
+		try{
+			for (int i = 0; i < Clinica.getInstance().getMisPersonas().size(); i++){
+				if(Clinica.getInstance().getMisPersonas().get(i) instanceof Doctor){
+					cbxDoctor.addItem(new String(Clinica.getInstance().getMisPersonas().get(i).getNombre() + "(" + Clinica.getInstance().getMisPersonas().get(i).getCedula() + ") " ));
+					encontrado = true;
+				}
+			}
+			
+			if (encontrado){
+				//CMBSuministrador.insertItemAt("<Seleccione>", 0);
+				cbxDoctor.setSelectedItem(0);
+			}else{
+			
+				JOptionPane.showMessageDialog(null, "No hay Doctores Registrados", "ERROR", JOptionPane.ERROR_MESSAGE);
+				dispose();
+			}
+			
+		
+		}catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, "EL PROGRAMA HA EXPLOTADO INESPERADAMENTE", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+
 	public void clean() {
 		formattedTextFldCedula.setText("");
 		formattedTextFldNombre.setText("");
 		formattedTextFldNacimiento.setText(new String(""));
 		formattedTextFldTelefono.setText(new String(""));
+		txtID.setText("CIT-" + (Clinica.getInstance().getMisCitas().size() + 1));
 	}
 }

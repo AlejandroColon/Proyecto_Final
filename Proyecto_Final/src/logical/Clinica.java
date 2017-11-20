@@ -39,6 +39,7 @@ public class Clinica {
 		misConsultas = new ArrayList<>();
 		misEnfermedades = new ArrayList<>();
 		misEnfermedades = new ArrayList<>();
+		misCitas = new ArrayList<>();
 	}
 
 	// ****************************************GETS Y SETS*************************************

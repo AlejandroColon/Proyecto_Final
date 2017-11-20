@@ -14,12 +14,23 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import logical.Clinica;
+import logical.Doctor;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Toolkit;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PrincipalSecre extends JDialog {
 
@@ -31,8 +42,8 @@ public class PrincipalSecre extends JDialog {
 	private JTable table;
 	private static DefaultTableModel model;
 	// private static Object[] fila;
-	private JComboBox <String> cbxDoctor;//OJO AQUÍ, al cbx le puse un tipo string para que se quitara el warning meanwhile
-	private JComboBox<String> cbxFecha;//OJO AQUÍ, al cbx le puse un tipo string para que se quitara el warning meanwhile
+	private JComboBox <String> cbxDoctor;
+	private JComboBox<String> cbxFecha;
 
 	/**
 	 * Launch the application.
@@ -54,7 +65,7 @@ public class PrincipalSecre extends JDialog {
 		setTitle("Principal");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalSecre.class.getResource("/images/icon.png")));
 		setResizable(false);
-		setBounds(100, 100, 533, 300);
+		setBounds(100, 100, 533, 324);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -63,7 +74,7 @@ public class PrincipalSecre extends JDialog {
 
 		JLabel labelHora = new JLabel("00:00 a.m.");
 		labelHora.setFont(new Font("Cambria Math", Font.PLAIN, 25));
-		labelHora.setBounds(384, 12, 123, 22);
+		labelHora.setBounds(384, 46, 123, 22);
 		contentPanel.add(labelHora);
 		// Dando formato a la tabla
 		{
@@ -73,14 +84,14 @@ public class PrincipalSecre extends JDialog {
 		}
 
 		JLabel label = new JLabel("01/01/17");
-		label.setBounds(384, 37, 66, 14);
+		label.setBounds(384, 71, 66, 14);
 		contentPanel.add(label);
 
 		
 			JPanel panelTablaCitas = new JPanel();
 			panelTablaCitas
 					.setBorder(new TitledBorder(null, "Citas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panelTablaCitas.setBounds(10, 62, 497, 155);
+			panelTablaCitas.setBounds(10, 96, 497, 155);
 			contentPanel.add(panelTablaCitas);
 			panelTablaCitas.setLayout(new BorderLayout(0, 0));
 
@@ -101,22 +112,43 @@ public class PrincipalSecre extends JDialog {
 		
 
 		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(10, 18, 46, 14);
+		lblFecha.setBounds(10, 52, 46, 14);
 		contentPanel.add(lblFecha);
 
 		cbxFecha = new JComboBox<String>();
 		cbxFecha.setModel(new DefaultComboBoxModel<String>(new String[] { "<Seleccione>" }));
-		cbxFecha.setBounds(66, 15, 123, 20);
+		cbxFecha.setBounds(66, 49, 123, 20);
 		contentPanel.add(cbxFecha);
 
 		JLabel lblDoctor = new JLabel("Doctor:");
-		lblDoctor.setBounds(209, 17, 46, 14);
+		lblDoctor.setBounds(209, 51, 46, 14);
 		contentPanel.add(lblDoctor);
 
 		cbxDoctor = new JComboBox<String>();
 		cbxDoctor.setModel(new DefaultComboBoxModel<String>(new String[] { "<Seleccione>" }));
-		cbxDoctor.setBounds(253, 14, 121, 20);
+		cbxDoctor.setBounds(253, 48, 121, 20);
 		contentPanel.add(cbxDoctor);
+		llenarCMB();
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 527, 21);
+		contentPanel.add(menuBar);
+		
+		JMenu mnRegistrar = new JMenu("Registrar");
+		menuBar.add(mnRegistrar);
+		
+		JMenuItem mntmRegistrarCita = new JMenuItem("Registrar Cita");
+		mntmRegistrarCita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegCita frame =  new RegCita();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
+		mnRegistrar.add(mntmRegistrarCita);
+		
+		JMenuItem mntmRegistrarOtra = new JMenuItem("Registrar otra ");
+		mnRegistrar.add(mntmRegistrarOtra);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -134,9 +166,30 @@ public class PrincipalSecre extends JDialog {
 			}
 		}
 	}
-	//public void loadTable(){
+
+	private void llenarCMB() {
+		boolean encontrado = false;
+		cbxDoctor.removeAllItems();  	//limpiando la info del cmb
 		
-	//}
+		try{
+			for (int i = 0; i < Clinica.getInstance().getMisPersonas().size(); i++){
+				if(Clinica.getInstance().getMisPersonas().get(i) instanceof Doctor){
+					cbxDoctor.addItem(new String(Clinica.getInstance().getMisPersonas().get(i).getNombre() + "(" + Clinica.getInstance().getMisPersonas().get(i).getCedula() + ") " ));
+					encontrado = true;
+				}
+			}
+			
+			if (encontrado){
+				//CMBSuministrador.insertItemAt("<Seleccione>", 0);
+				cbxDoctor.setSelectedItem(0);
+			}else{
+			cbxDoctor.removeAllItems();
+			cbxDoctor.addItem(new String("<sin doctores>"));
+			}
+		}catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, "EL PROGRAMA HA EXPLOTADO INESPERADAMENTE", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
 
 /*

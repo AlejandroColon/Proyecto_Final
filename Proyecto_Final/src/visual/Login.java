@@ -102,6 +102,7 @@ public class Login extends JDialog {
 								PrincipalSecre secre = new PrincipalSecre();
 								secre.setVisible(true);
 								secre.setLocationRelativeTo(null);
+								
 							}
 						}else {
 							JOptionPane.showMessageDialog(null, "Usuario o contraseña Inválido", "Advertencia", JOptionPane.WARNING_MESSAGE);
