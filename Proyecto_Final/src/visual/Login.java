@@ -91,8 +91,8 @@ public class Login extends JDialog {
 				btnIniciarSesion.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String user = txtUsuario.getText();
-						String password = passContra.getPassword().toString();
-						if(!Clinica.getInstance().validarLogin(user, password)) {
+						String password = String.valueOf(passContra.getPassword());
+						if(Clinica.getInstance().validarLogin(user, password)) {
 							Persona usuario = Clinica.getInstance().buscarTrabajador(user);
 							if(usuario instanceof Doctor) {
 								PrincipalDoctor doctor = new PrincipalDoctor();
@@ -115,6 +115,11 @@ public class Login extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}

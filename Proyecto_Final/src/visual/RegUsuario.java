@@ -24,7 +24,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+//import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
@@ -251,7 +251,16 @@ public class RegUsuario extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(passContra.getPassword().toString().equals(passConfContra.getPassword().toString())
+						
+						if(txtCedula.getText().equalsIgnoreCase("")|| txtDireccion.getText().equalsIgnoreCase("") || (txtEspecialidad.isEditable()&& txtEspecialidad.getText().equalsIgnoreCase(""))
+								|| (txtExequatur.isEditable() && txtExequatur.getText().equalsIgnoreCase("")) || txtFechaNacimiento.getText().equalsIgnoreCase("")
+								|| txtNombre.getText().equalsIgnoreCase("")|| txtTelefono.getText().equalsIgnoreCase("")|| txtUsuario.getText().equalsIgnoreCase("")
+								|| passContra.getPassword().toString().equalsIgnoreCase("")|| passConfContra.getPassword().toString().equalsIgnoreCase("")){
+							JOptionPane.showMessageDialog(null, "No puede dejar campos vacios", "Aviso", JOptionPane.WARNING_MESSAGE);
+						}else {
+							String prueba = String.valueOf(passContra.getPassword());
+							String pruebaconf = String.valueOf(passConfContra.getPassword());
+						if(prueba.equals(pruebaconf)
 								&& (Clinica.getInstance().validarUsuario(txtUsuario.getText()) == false)) {
 							Persona aux = null;
 							String cedula = txtCedula.getText();
@@ -266,7 +275,7 @@ public class RegUsuario extends JDialog {
 								sexo = "Masculino";
 							}
 							String usuario = txtUsuario.getText();
-							String password = passContra.getPassword().toString();
+							String password = String.valueOf(passContra.getPassword());
 							if(rdbtnMedico.isSelected()) {
 								String especialidad =txtEspecialidad.getText();
 								String exequatur = txtExequatur.getText();
@@ -275,17 +284,19 @@ public class RegUsuario extends JDialog {
 							}else
 								aux = new Administrativo(cedula, nombre, edad, telefono, direccion, sexo, usuario, password);
 							Clinica.getInstance().addPersona(aux);
-							try {
+							JOptionPane.showMessageDialog(null, "Usuario registrado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+							/*try {
 								Clinica.getInstance().salvarPersonas();
 							} catch (IOException e1) {
 								e1.printStackTrace();
-							}
-						}else if(passContra.getPassword().toString().equalsIgnoreCase(passConfContra.getPassword().toString()) == false) {
+							}*/
+						}else if(passContra.getPassword().toString().equals(passConfContra.getPassword().toString()) == false) {
 							JOptionPane.showMessageDialog(null, "Contraseñas no coinciden, favor volver a digitarlas", "Aviso", JOptionPane.WARNING_MESSAGE);
 						}else {
 							JOptionPane.showMessageDialog(null, "El usuario ya ha sido utilizado, favor elegir otro", "Aviso", JOptionPane.WARNING_MESSAGE);
 						}
 						
+					}
 					}
 				});
 				okButton.setActionCommand("OK");
