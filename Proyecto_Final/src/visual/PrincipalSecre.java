@@ -145,9 +145,23 @@ public class PrincipalSecre extends JDialog {
 		menuBar.add(mnPersonal);
 		
 		JMenuItem mntmRegistrarTrabajador = new JMenuItem("Registrar Trabajador");
+		mntmRegistrarTrabajador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegUsuario frame = new RegUsuario();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
 		mnPersonal.add(mntmRegistrarTrabajador);
 		
 		JMenuItem mntmListaDeUsuarios = new JMenuItem("Lista de Usuarios");
+		mntmListaDeUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaTrabajadores frame = new ListaTrabajadores();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
 		mnPersonal.add(mntmListaDeUsuarios);
 		
 		JButton btnRefrescarTabla = new JButton("Refrescar tabla");

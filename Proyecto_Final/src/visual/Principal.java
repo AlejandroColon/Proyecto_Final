@@ -41,18 +41,9 @@ public class Principal extends JFrame {
 				Persona p2 = new Administrativo("402-8566965-3","Lic. Manuela Pereza",15,"829","la casa de manuel","F","secre","abc");
 				Clinica.getInstance().addPersona(p2);
 				
-				RegUsuario rUsuario = new RegUsuario();
-				rUsuario.setVisible(true);
-				rUsuario.setLocationRelativeTo(null);
-				
-				ListaTrabajadores lista = new ListaTrabajadores();
-				lista.setVisible(true);
-				lista.setLocationRelativeTo(null);
-				
-				
-				/*Login log = new Login();
+				Login log = new Login();
 				log.setVisible(true);
-				log.setLocationRelativeTo(null);*/
+				log.setLocationRelativeTo(null);
 			}
 		});
 	}

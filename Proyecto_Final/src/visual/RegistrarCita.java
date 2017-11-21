@@ -41,10 +41,11 @@ public class RegistrarCita extends JDialog {
 	private JTextField txtID;
 	private JTextField txtFecha;
 	private JComboBox<String> cbxDoctor;
-	private JFormattedTextField formattedTextFldCedula, formattedTextFldNombre, formattedTextFldNacimiento,
-			formattedTextFldTelefono;
+	private JFormattedTextField txtFormatCedula, txtFormatFechaNaci,
+			txtFormatTelefono;
 	JCheckBox chckbxM;
 	JCheckBox chckbxF;
+	private JTextField txtNombre;
 	/**
 	 * Launch the application.
 	 */
@@ -128,23 +129,23 @@ public class RegistrarCita extends JDialog {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String cedula = formattedTextFldCedula.getText();
+				String cedula = txtFormatCedula.getText();
 				Persona aux = null;
 				// int edad = 0;
 				aux = Clinica.getInstance().findByCedula(cedula);
 				if (aux == null) {
 					txtDireccion.setEnabled(true);
-					formattedTextFldNacimiento.setEditable(true);
-					formattedTextFldNombre.setEditable(true);
-					formattedTextFldTelefono.setEditable(true);
+					txtFormatFechaNaci.setEditable(true);
+					txtNombre.setEditable(true);
+					txtFormatTelefono.setEditable(true);
 					txtDireccion.setEditable(true);
 					chckbxF.setEnabled(true);
 					chckbxM.setEnabled(true);
 				} else if (aux != null) {
 					txtDireccion.setText(aux.getDireccion());
-					formattedTextFldNacimiento.setText("00/00/0000");
-					formattedTextFldNombre.setText(aux.getNombre());
-					formattedTextFldTelefono.setText(aux.getTelefono());
+					txtFormatFechaNaci.setText("00/00/0000");
+					txtNombre.setText(aux.getNombre());
+					txtFormatTelefono.setText(aux.getTelefono());
 					String sexo = aux.getSexo();
 					if (sexo.equalsIgnoreCase("Feminino")) {
 						chckbxF.setSelected(true);
@@ -157,7 +158,7 @@ public class RegistrarCita extends JDialog {
 				}
 			}
 		});
-		btnBuscar.setBounds(129, 38, 67, 23);
+		btnBuscar.setBounds(129, 38, 91, 23);
 		panelDatosPersona.add(btnBuscar);
 
 		JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
@@ -172,11 +173,11 @@ public class RegistrarCita extends JDialog {
 			e.printStackTrace();
 		}
 
-		formattedTextFldTelefono = new JFormattedTextField(maskPhone);
-		formattedTextFldTelefono.setEditable(false);
-		formattedTextFldTelefono.setText("");
-		formattedTextFldTelefono.setBounds(139, 135, 109, 20);
-		panelDatosPersona.add(formattedTextFldTelefono);
+		txtFormatTelefono = new JFormattedTextField(maskPhone);
+		txtFormatTelefono.setEditable(false);
+		txtFormatTelefono.setText("");
+		txtFormatTelefono.setBounds(139, 135, 109, 20);
+		panelDatosPersona.add(txtFormatTelefono);
 
 		JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
 		lblDireccin.setBounds(10, 166, 67, 14);
@@ -196,28 +197,28 @@ public class RegistrarCita extends JDialog {
 			e.printStackTrace();
 		}
 
-		formattedTextFldCedula = new JFormattedTextField(maskCedula);
-		formattedTextFldCedula.setBounds(10, 39, 109, 20);
-		panelDatosPersona.add(formattedTextFldCedula);
+		txtFormatCedula = new JFormattedTextField(maskCedula);
+		txtFormatCedula.setBounds(10, 39, 109, 20);
+		panelDatosPersona.add(txtFormatCedula);
 
 		MaskFormatter maskName = null;
 		try {
-			maskName = new MaskFormatter("************************************");
+			maskName = new MaskFormatter("********************");
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
 		maskName.setValidCharacters("qwertyuiopasdfghjklzxcvbnmñ" + "QWERTYUIOPASDFGHJKLZXCVBNM " + "ÁáÉéÍíÚú");
 		maskName.setPlaceholderCharacter(' ');
 
-		formattedTextFldNombre = new JFormattedTextField(maskName);
-		formattedTextFldNombre.setEditable(false);
-		formattedTextFldNombre.setBounds(10, 87, 109, 20);
-		panelDatosPersona.add(formattedTextFldNombre);
-
-		formattedTextFldNacimiento = new JFormattedTextField();
-		formattedTextFldNacimiento.setEditable(false);
-		formattedTextFldNacimiento.setBounds(10, 135, 109, 20);
-		panelDatosPersona.add(formattedTextFldNacimiento);
+		txtFormatFechaNaci = new JFormattedTextField();
+		txtFormatFechaNaci.setEditable(false);
+		txtFormatFechaNaci.setBounds(10, 135, 109, 20);
+		panelDatosPersona.add(txtFormatFechaNaci);
+		
+		txtNombre = new JTextField();
+		txtNombre.setBounds(10, 86, 109, 20);
+		panelDatosPersona.add(txtNombre);
+		txtNombre.setColumns(10);
 
 		JPanel panelDatosCita = new JPanel();
 		panelDatosCita.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos de la cita",
@@ -263,7 +264,7 @@ public class RegistrarCita extends JDialog {
 			{
 				/*
 				 * Esta es la seccion de registrar cita
-				 * se de be tener presente que aun no se utiliza el txtFecha de nacimineto.
+				 * se debe tener presente que aun no se utiliza el txtFecha de nacimineto.
 				 * 
 				 * 
 				 * se debe hacer el metodo para calcular la edad.
@@ -273,6 +274,14 @@ public class RegistrarCita extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
+						if(txtFormatCedula.getText().toString().equalsIgnoreCase("")|| txtNombre.getText().toString().equalsIgnoreCase("")||
+								txtFormatTelefono.getText().toString().equalsIgnoreCase("")||txtFormatFechaNaci.getText().toString().equalsIgnoreCase("")
+								|| txtDireccion.getText().equalsIgnoreCase("") || txtFecha.getText().equalsIgnoreCase("")||
+								cbxDoctor.getSelectedItem().toString().equalsIgnoreCase("Seleccione")){
+							JOptionPane.showMessageDialog(null, "Compruebe que no existan datos inválidos", null, JOptionPane.WARNING_MESSAGE, null);
+						}
+						else{
 
 						// Datos de la cita
 						String id = txtID.getText();
@@ -280,26 +289,27 @@ public class RegistrarCita extends JDialog {
 						String fecha = txtFecha.getText();
 
 						// verificando si la persona existe o no
-						Persona aux = Clinica.getInstance().findByCedula(formattedTextFldCedula.getText());
+						Persona aux = Clinica.getInstance().findByCedula(txtFormatCedula.getText());
 						if (aux == null) {
-							String cedula = formattedTextFldCedula.getText();
-							String nombre = formattedTextFldNombre.getText();
+							String cedula = txtFormatCedula.getText();
+							String nombre = txtNombre.getText();
 							String direccion = txtDireccion.getText();
-							String telefono = formattedTextFldTelefono.getText();
+							String telefono = txtFormatTelefono.getText();
 							int edad = 5;
 							String sexo = null;
 							if (chckbxF.isSelected()) {
 								sexo = "Femenino";
 							} else {
 								sexo = "Masculino";
+							}
+							
 								// Creando nuevo Consultante
 								Persona newConsultante = new Consultante(cedula, nombre, edad, telefono, direccion,
 										sexo);
 								Clinica.getInstance().addPersona(newConsultante);
 								Cita newCita = new Cita(id, fecha, doctor, newConsultante);
 								Clinica.getInstance().addCitas(newCita);
-							}
-						} else{
+							} else{
 							//Si el consultante existe, solo se crea la cita
 							Cita newCita = new Cita(id, fecha, doctor, aux);
 							Clinica.getInstance().addCitas(newCita);
@@ -309,9 +319,10 @@ public class RegistrarCita extends JDialog {
 								JOptionPane.INFORMATION_MESSAGE);
 						clean();
 					}
+					}
 
 					private Doctor buscarDoctor() {
-						/* Esta funcion captura el String seleccionado en el cbxDoctor y extrae la cedula del miso.
+						/* Esta funcion captura el String seleccionado en el cbxDoctor y extrae la cedula del mismo.
 						 * luego implementa la funcion de buscar persona por cedula(implementada en la clase principal.
 						 * retorna el objeto doctor seleccionado*/
 						
@@ -371,10 +382,10 @@ public class RegistrarCita extends JDialog {
 	}
 
 	public void clean() {
-		formattedTextFldCedula.setText("");
-		formattedTextFldNombre.setText("");
-		formattedTextFldNacimiento.setText(new String(""));
-		formattedTextFldTelefono.setText(new String(""));
+		txtFormatCedula.setText("");
+		txtNombre.setText("");
+		txtFormatFechaNaci.setText(new String(""));
+		txtFormatTelefono.setText(new String(""));
 		txtDireccion.setText("");
 		txtFecha.setText("");
 		chckbxF.setSelected(false);
@@ -390,6 +401,9 @@ public class RegistrarCita extends JDialog {
  * 
  * Modificado: Alejandro Colon Fecha: 20/11/17 Anotaciones:
  * 
+ * Modificado: Yamilka Fecha: 21/11/17 Anotaciones: agregué la condicion que verifica si algunos campos son invalidos antes de registrar
+ * Cambié los nombre de los txt con formato por txtFormat(Nombre)
+ *  
  * 
  * 
  */
