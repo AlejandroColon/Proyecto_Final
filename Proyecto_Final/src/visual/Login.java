@@ -97,11 +97,19 @@ public class Login extends JDialog {
 							if(usuario instanceof Doctor) {
 								PrincipalDoctor doctor = new PrincipalDoctor();
 								doctor.setVisible(true);
-								doctor.setLocationRelativeTo(null);
+								Toolkit tk = Toolkit.getDefaultToolkit();  
+							     int xSize = ((int) tk.getScreenSize().getWidth());  
+							     int ySize = ((int) tk.getScreenSize().getHeight());  
+							     doctor.setSize(xSize,ySize - 40);
+							     doctor.setLocationRelativeTo(null);
 							}else if(usuario instanceof Administrativo) {
 								PrincipalSecre secre = new PrincipalSecre();
 								secre.setVisible(true);
-								secre.setLocationRelativeTo(null);
+								Toolkit tk = Toolkit.getDefaultToolkit();  
+							     int xSize = ((int) tk.getScreenSize().getWidth());  
+							     int ySize = ((int) tk.getScreenSize().getHeight());  
+							     secre.setSize(xSize,ySize - 40);
+							     secre.setLocationRelativeTo(null);
 								
 							}
 						}else {

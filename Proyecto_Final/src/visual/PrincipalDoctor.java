@@ -13,15 +13,16 @@ import javax.swing.table.DefaultTableModel;
 import logical.Cita;
 import logical.Clinica;
 
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.SystemColor;
 
 public class PrincipalDoctor extends JDialog {
 
@@ -30,15 +31,15 @@ public class PrincipalDoctor extends JDialog {
 	 */
 	private static final long serialVersionUID = -1265006742634726451L;
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
 	private static DefaultTableModel model;
 	private static Object[] fila;
+	private JTable tableCitas;
 
 	/**
 	 * Launch the application.
 	 */
 	
-	/*
+	
 	public static void main(String[] args) {
 		try {
 			PrincipalDoctor dialog = new PrincipalDoctor();
@@ -53,53 +54,69 @@ public class PrincipalDoctor extends JDialog {
 	 * Create the dialog.
 	 */
 	public PrincipalDoctor() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalDoctor.class.getResource("/images/icon.png")));
 		setResizable(false);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalDoctor.class.getResource("/images/icon.png")));
 		setTitle("Principal");
-		setBounds(100, 100, 526, 366);
+		setBounds(100, 100, 987, 675);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		setLocationRelativeTo(null);
-
-		JLabel lblHora = new JLabel("00:00 a.m.");
-		lblHora.setFont(new Font("Cambria Math", Font.PLAIN, 25));
-		lblHora.setBounds(332, 11, 152, 30);
-		contentPanel.add(lblHora);
-
-		JLabel label = new JLabel("01/01/2017");
-		label.setBounds(332, 41, 78, 14);
-		contentPanel.add(label);
-
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Citas de Hoy:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 61, 500, 216);
-		contentPanel.add(panel_1);
-		panel_1.setLayout(null);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 24, 474, 149);
-		panel_1.add(scrollPane);
-
-		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columnNames = { "ID", "Feha", "Nombre" };
-		model = new DefaultTableModel();
-		model.setColumnIdentifiers(columnNames);
-		table.setModel(model);
-		LoadTable();
-		table.setModel(model);
-
-		scrollPane.setViewportView(table);
-
-		JButton btnRealizarConsulta = new JButton("Realizar Consulta");
-		btnRealizarConsulta.setBounds(332, 184, 152, 23);
-		panel_1.add(btnRealizarConsulta);
-		btnRealizarConsulta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		contentPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(SystemColor.control);
+			contentPanel.add(panel);
+			panel.setLayout(new BorderLayout(0, 0));
+			{
+				JPanel panel_1 = new JPanel();
+				panel_1.setBorder(new TitledBorder(null, "Citas para Hoy", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panel.add(panel_1);
+				panel_1.setLayout(null);
+				{
+					JPanel panel_2 = new JPanel();
+					panel_2.setBounds(10, 25, 440, 215);
+					panel_1.add(panel_2);
+					panel_2.setLayout(new BorderLayout(0, 0));
+					{
+						JScrollPane scrollPane = new JScrollPane();
+						panel_2.add(scrollPane, BorderLayout.CENTER);
+						{
+							tableCitas = new JTable();
+							String[] columnNames = { "ID", "Feha", "Nombre" };
+							model = new DefaultTableModel();
+							model.setColumnIdentifiers(columnNames);
+							tableCitas.setModel(model);
+							LoadTable();
+							scrollPane.setViewportView(tableCitas);
+							
+						}
+					}
+				}
+				{
+					JButton btnRealizarConsulta = new JButton("Realizar Consulta");
+					btnRealizarConsulta.setFont(new Font("Tahoma", Font.PLAIN, 9));
+					btnRealizarConsulta.setBounds(322, 251, 128, 23);
+					panel_1.add(btnRealizarConsulta);
+				}
 			}
-		});
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(0, 102, 204));
+			contentPanel.add(panel);
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(255, 204, 204));
+			contentPanel.add(panel);
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(51, 255, 0));
+			contentPanel.add(panel);
+		}
+		setLocationRelativeTo(null);
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -108,6 +125,7 @@ public class PrincipalDoctor extends JDialog {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						System.exit(0);
 					}
 				});
 				btnCancelar.setActionCommand("Cancel");
