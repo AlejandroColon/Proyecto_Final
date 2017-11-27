@@ -23,6 +23,7 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 
@@ -121,6 +122,12 @@ public class RegistrarVacunas extends JDialog {
 							Vacuna v = new Vacuna(txtCodigo.getText(), txtNombre.getText(),
 									txtDescripcion.getText());
 							Clinica.getInstance().addVacunas(v);
+							try {
+								Clinica.getInstance().salvarVacunas();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							JOptionPane.showMessageDialog(null, " Vacuna agregada existosamente",
 									"Vacuna", JOptionPane.INFORMATION_MESSAGE);
 							clear();
@@ -153,3 +160,11 @@ public class RegistrarVacunas extends JDialog {
 		}
 	}
 }
+/*
+ * Creado por: Alejandro Colón Fecha: 13/11/17 Anotaciones:
+ * 
+ * Modificado: Oscar Rodriguez
+ * Fecha: 27/11/2017
+ * Anotaciones: Llamada a las funciones para guardar en archivo
+ * 
+ */

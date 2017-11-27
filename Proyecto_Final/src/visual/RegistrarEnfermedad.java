@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class RegistrarEnfermedad extends JDialog {
@@ -123,6 +124,12 @@ public class RegistrarEnfermedad extends JDialog {
 							Enfermedad p = new Enfermedad(txtCodigo.getText(), txtNombre.getText(),
 									txtDescripcion.getText());
 							Clinica.getInstance().addEnfermedades(p);
+							try {
+								Clinica.getInstance().salvarEnfermedades();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							JOptionPane.showMessageDialog(null, "Enfermedad agregada existosamente",
 									"Enfermedad Bajo Vigilancia", JOptionPane.INFORMATION_MESSAGE);
 							clear();
@@ -165,5 +172,9 @@ public class RegistrarEnfermedad extends JDialog {
 
 /*
  * Creado por: Alejandro Colón Fecha: 13/11/17 Anotaciones:
+ * 
+ * Modificado: Oscar Rodriguez
+ * Fecha: 27/11/2017
+ * Anotaciones: Llamada a las funciones para guardar en archivo
  * 
  */

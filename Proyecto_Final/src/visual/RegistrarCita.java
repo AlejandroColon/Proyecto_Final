@@ -27,6 +27,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
@@ -314,6 +315,13 @@ public class RegistrarCita extends JDialog {
 							Cita newCita = new Cita(id, fecha, doctor, aux);
 							Clinica.getInstance().addCitas(newCita);
 						}
+						try {
+							Clinica.getInstance().salvarPersonas();
+							Clinica.getInstance().salvarCitas();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 
 						JOptionPane.showMessageDialog(null, "Cita Registrada", "Información",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -404,6 +412,8 @@ public class RegistrarCita extends JDialog {
  * Modificado: Yamilka Fecha: 21/11/17 Anotaciones: agregué la condicion que verifica si algunos campos son invalidos antes de registrar
  * Cambié los nombre de los txt con formato por txtFormat(Nombre)
  *  
- * 
+ * Modificado: Oscar Rodriguez
+ * Fecha: 27/11/2017
+ * Anotaciones: Agregue las llamadas a guardar en fichero
  * 
  */

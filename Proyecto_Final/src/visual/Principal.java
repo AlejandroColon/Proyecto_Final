@@ -13,6 +13,7 @@ import logical.Doctor;
 import logical.Persona;
 
 import java.awt.Toolkit;
+import java.io.IOException;
 
 public class Principal extends JFrame {
 
@@ -28,14 +29,22 @@ public class Principal extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+
 					Principal frame = new Principal();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
-					Thread.sleep(3000);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+					try {
+						Clinica.getInstance().leerCitas();
+						Clinica.getInstance().leerConsultas();
+						Clinica.getInstance().leerEnfermedades();
+						Clinica.getInstance().leerPersonas();
+						Clinica.getInstance().leerVacunas();
+						Thread.sleep(3000);
+					} catch (ClassNotFoundException | IOException | InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
 				Persona p = new Doctor("050-0021076-4","Dr. Maunel Perez",10,"809-","casa","m","doctor","123","abc","Cirujano",3);
 				Clinica.getInstance().addPersona(p);
 				Persona p2 = new Administrativo("402-8566965-3","Lic. Manuela Pereza",15,"829","la casa de manuel","F","secre","abc");

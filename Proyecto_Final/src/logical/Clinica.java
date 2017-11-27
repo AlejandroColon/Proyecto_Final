@@ -121,7 +121,7 @@ public class Clinica {
 		for(Persona aux : misPersonas) {    //aqui recorro el array de personas para copiarlas al archivo.
 			writePersona.writeObject(aux);
 		}
-		fPersona.close();
+		writePersona.close();
 	}
 	
 	public void leerPersonas() throws FileNotFoundException, IOException, ClassNotFoundException{
@@ -133,9 +133,8 @@ public class Clinica {
 			int cantPersonas = readPersona.readInt();
 			
 			for(int i = 0; i < cantPersonas; i ++){
-				addPersona((Persona)readPersona.readObject());
+				misPersonas.add((Persona)readPersona.readObject());
 			}
-			fPersona.close();
 			readPersona.close();
 		}	
 	} 
@@ -149,7 +148,7 @@ public class Clinica {
 		for(Vacuna aux : misVacunas) {    //aqui recorro el array de personas para copiarlas al archivo.
 			writeVacuna.writeObject(aux);
 		}
-		fVacuna.close();
+		writeVacuna.close();
 	}
 	
 	public void leerVacunas() throws FileNotFoundException, IOException, ClassNotFoundException{
@@ -161,9 +160,8 @@ public class Clinica {
 			int cantVacuna = readVacuna.readInt();
 			
 			for(int i = 0; i < cantVacuna; i ++){
-				addVacunas((Vacuna)readVacuna.readObject());
+				misVacunas.add((Vacuna) readVacuna.readObject());
 			}
-			fVacuna.close();
 			readVacuna.close();
 		}	
 	} 
@@ -178,7 +176,7 @@ public class Clinica {
 			writeEnfermedad.writeObject(aux);
 		}
 		
-		fEnfermedad.close();
+		writeEnfermedad.close();
 	}
 	
 	public void leerEnfermedades() throws FileNotFoundException, IOException, ClassNotFoundException{
@@ -190,9 +188,8 @@ public class Clinica {
 			int cantEnfermedades = readEnfermedad.readInt();
 			
 			for(int i = 0; i < cantEnfermedades; i ++){
-				addEnfermedades((Enfermedad)readEnfermedad.readObject());
+				misEnfermedades.add((Enfermedad) readEnfermedad.readObject());
 			}
-			fEnfermedad.close();
 			readEnfermedad.close();
 		}	
 	} 
@@ -207,7 +204,7 @@ public class Clinica {
 			writeConsulta.writeObject(aux);
 		}
 		
-		fConsulta.close();
+		writeConsulta.close();
 	}
 	
 	public void leerConsultas() throws FileNotFoundException, IOException, ClassNotFoundException{
@@ -219,9 +216,8 @@ public class Clinica {
 			int cantConsultas = readConsulta.readInt();
 			
 			for(int i = 0; i < cantConsultas; i ++){
-				addConsulta((Consulta)readConsulta.readObject());
+				misConsultas.add((Consulta) readConsulta.readObject());
 			}
-			fConsulta.close();
 			readConsulta.close();
 		}	
 	} 
@@ -248,9 +244,8 @@ public class Clinica {
 			int cantCita = readCita.readInt();
 			
 			for(int i = 0; i < cantCita; i ++){
-				addCitas((Cita)readCita.readObject());
+				misCitas.add((Cita) readCita.readObject());
 			}
-			fCita.close();
 			readCita.close();
 		}	
 	} 
@@ -376,4 +371,7 @@ public class Clinica {
  * Fecha: 19/11/2017
  * Anotaciones: Metodos para validar usuario y contrasena.
  * 
+ * Modificaciones: Oscar Rodriguez
+ * Fecha: 27/11/2017
+ * Anotaciones: modificar las funciones de agregar en archivo
  * */

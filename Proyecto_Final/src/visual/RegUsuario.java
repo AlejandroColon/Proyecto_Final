@@ -24,6 +24,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 //import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
@@ -285,11 +286,13 @@ public class RegUsuario extends JDialog {
 								aux = new Administrativo(cedula, nombre, edad, telefono, direccion, sexo, usuario, password);
 							Clinica.getInstance().addPersona(aux);
 							JOptionPane.showMessageDialog(null, "Usuario registrado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-							/*try {
+							clean();
+							try {
 								Clinica.getInstance().salvarPersonas();
 							} catch (IOException e1) {
 								e1.printStackTrace();
-							}*/
+							}
+							
 						}else if(passContra.getPassword().toString().equals(passConfContra.getPassword().toString()) == false) {
 							JOptionPane.showMessageDialog(null, "Contraseñas no coinciden, favor volver a digitarlas", "Aviso", JOptionPane.WARNING_MESSAGE);
 						}else {
@@ -310,6 +313,28 @@ public class RegUsuario extends JDialog {
 			}
 		}
 	}
+
+	private void clean() {
+		txtCedula.setText("");
+		txtDireccion.setText("");
+		txtEspecialidad.setText("");
+		txtExequatur.setText("");
+		txtFechaNacimiento.setText("");
+		txtNombre.setText("");
+		txtTelefono.setText("");
+		txtUsuario.setText("");
+		spnCitasXDia.setValue(1);
+		rdbtnAdm.setSelected(false);
+		rdbtnMedico.setSelected(false);
+		txtEspecialidad.setEnabled(false);
+		txtExequatur.setEnabled(false);
+		spnCitasXDia.setEnabled(false);
+		chckbxF.setSelected(false);
+		chckbxM.setSelected(false);
+		passConfContra.setText("");
+		passContra.setText("");
+		
+	}
 }
 
 /*
@@ -318,4 +343,8 @@ public class RegUsuario extends JDialog {
  * 
  * Modificacion: Oscar Rodriguez
  * Fecha: 19/11/2017
+ * 
+ * Modificaciones: Oscar Rodriguez
+ * Fecha: 19/11/2017
+ * Anotaciones: Agregar funciones para guardar en archivo
  */
