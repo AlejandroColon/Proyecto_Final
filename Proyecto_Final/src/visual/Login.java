@@ -8,9 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import logical.Administrativo;
 import logical.Clinica;
-import logical.Doctor;
 import logical.Persona;
 
 import javax.swing.JLabel;
@@ -94,26 +92,17 @@ public class Login extends JDialog {
 						String password = String.valueOf(passContra.getPassword());
 						if(Clinica.getInstance().validarLogin(user, password)) {
 							Persona usuario = Clinica.getInstance().buscarTrabajador(user);
-							if(usuario instanceof Doctor) {
-								PrincipalDoctor doctor = new PrincipalDoctor();
-								doctor.setVisible(true);
+							if(usuario!=null) {
+								Dashboard frame = new Dashboard(usuario);
+								frame.setVisible(true);
 								Toolkit tk = Toolkit.getDefaultToolkit();  
 							     int xSize = ((int) tk.getScreenSize().getWidth());  
 							     int ySize = ((int) tk.getScreenSize().getHeight());  
-							     doctor.setSize(xSize,ySize - 40);
-							     doctor.setLocationRelativeTo(null);
-							}else if(usuario instanceof Administrativo) {
-								PrincipalSecre secre = new PrincipalSecre();
-								secre.setVisible(true);
-								Toolkit tk = Toolkit.getDefaultToolkit();  
-							     int xSize = ((int) tk.getScreenSize().getWidth());  
-							     int ySize = ((int) tk.getScreenSize().getHeight());  
-							     secre.setSize(xSize,ySize - 40);
-							     secre.setLocationRelativeTo(null);
-								
+							     frame.setSize(xSize,ySize - 40);
+							     frame.setLocationRelativeTo(null);							
 							}
 						}else {
-							JOptionPane.showMessageDialog(null, "Usuario o contraseña Inválido", "Advertencia", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Usuario o contraseña Inválido","Advertencia", JOptionPane.WARNING_MESSAGE);
 						}
 					}
 				});
