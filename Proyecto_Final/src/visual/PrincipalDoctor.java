@@ -104,6 +104,11 @@ public class PrincipalDoctor extends JDialog {
 			JPanel panel = new JPanel();
 			panel.setBackground(new Color(0, 102, 204));
 			contentPanel.add(panel);
+			panel.setLayout(null);
+			
+			JButton btnNewButton = new JButton("New button");
+			btnNewButton.setBounds(118, 122, 89, 23);
+			panel.add(btnNewButton);
 		}
 		{
 			JPanel panel = new JPanel();
