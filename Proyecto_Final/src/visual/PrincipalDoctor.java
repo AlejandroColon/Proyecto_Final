@@ -23,6 +23,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.SystemColor;
+import javax.swing.JMenuBar;
 
 public class PrincipalDoctor extends JDialog {
 
@@ -59,6 +60,13 @@ public class PrincipalDoctor extends JDialog {
 		setTitle("Principal");
 		setBounds(100, 100, 987, 675);
 		getContentPane().setLayout(new BorderLayout());
+		
+		JPanel panel_3 = new JPanel();
+		getContentPane().add(panel_3, BorderLayout.NORTH);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
+		JMenuBar menuBar = new JMenuBar();
+		panel_3.add(menuBar);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new GridLayout(0, 2, 0, 0));
