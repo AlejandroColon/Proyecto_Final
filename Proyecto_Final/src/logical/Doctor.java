@@ -1,6 +1,8 @@
 package logical;
 
-public class Doctor extends Trabajador {
+import java.io.Serializable;
+
+public class Doctor extends Trabajador implements Serializable{
 	
 	/**
 	 * 

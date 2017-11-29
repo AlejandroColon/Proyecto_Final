@@ -1,7 +1,13 @@
 package logical;
 
-public abstract class Control {
+import java.io.Serializable;
 
+public abstract class Control implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5275546808494649833L;
 	//***********************Atributos********************************
 	protected String codigo;
 	protected String nombre;

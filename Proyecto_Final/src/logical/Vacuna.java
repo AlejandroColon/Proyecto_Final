@@ -1,6 +1,13 @@
 package logical;
 
-public class Vacuna extends Control {
+import java.io.Serializable;
+
+public class Vacuna extends Control implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8456913315990710729L;
+
 	// **************************Atributos*******************
 
 	// *****************************Constructor********************

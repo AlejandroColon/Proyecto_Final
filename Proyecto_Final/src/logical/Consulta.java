@@ -1,7 +1,13 @@
 package logical;
 
-public class Consulta extends InfoClinica {
+import java.io.Serializable;
 
+public class Consulta extends InfoClinica implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3318443731129026912L;
 	// ********************************ATRIBUTOS******************************
 	private Paciente paciente;
 	// ******************************CONSTRUCTOR******************************

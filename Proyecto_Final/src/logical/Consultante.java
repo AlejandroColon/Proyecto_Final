@@ -1,6 +1,8 @@
 package logical;
 
-public class Consultante extends Persona {
+import java.io.Serializable;
+
+public class Consultante extends Persona implements Serializable{
 	
 	//**************************************ATRIBUTOS DE LA CLASE************************************************
 	

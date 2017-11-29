@@ -1,6 +1,13 @@
 package logical;
 
-public class Enfermedad extends Control {
+import java.io.Serializable;
+
+public class Enfermedad extends Control implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5650943839921258950L;
 
 	//**************************Atributos*******************
 	

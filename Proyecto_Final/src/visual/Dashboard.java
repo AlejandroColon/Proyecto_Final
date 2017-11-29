@@ -49,6 +49,7 @@ public class Dashboard extends JDialog {
 	private TableRowSorter<TableModel> trsFiltro;
 	private JComboBox<String> cbxFiltro1;
 	private JComboBox<String> cbxFiltro2;
+	private Persona p = null;
 
 	/**
 	 * Launch the application.
@@ -62,6 +63,9 @@ public class Dashboard extends JDialog {
 	 * /** Create the dialog.
 	 */
 	public Dashboard(Persona persona) {
+
+		p = persona;
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Dashboard.class.getResource("/images/icon.png")));
 		setTitle("Principal");
 		setBounds(100, 100, 987, 738);
@@ -92,10 +96,10 @@ public class Dashboard extends JDialog {
 			JMenuItem mntmRegistrarTrabajador = new JMenuItem("Registrar Trabajador");
 			mntmRegistrarTrabajador.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					RegUsuario frame =  new RegUsuario();
+					RegUsuario frame = new RegUsuario();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
-				
+
 				}
 			});
 			mnAdministrador.add(mntmRegistrarTrabajador);
@@ -114,6 +118,13 @@ public class Dashboard extends JDialog {
 			menuBar.add(mnCitas);
 
 			JMenuItem mntmRegistrar = new JMenuItem("Registrar");
+			mntmRegistrar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					RegistrarCita frame = new RegistrarCita();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+				}
+			});
 			mnCitas.add(mntmRegistrar);
 
 			JMenuItem mntmModificarConsultante = new JMenuItem("Modificar Consultante");
@@ -143,22 +154,48 @@ public class Dashboard extends JDialog {
 						panel_TablaCita.add(scrollPane, BorderLayout.CENTER);
 						{
 							tableCitas = new JTable();
-							String[] columnNames = { "ID", "Feha", "Nombre" };
-							model = new DefaultTableModel();
-							model.setColumnIdentifiers(columnNames);
-							tableCitas.setModel(model);
-							LoadTable();
-							scrollPane.setViewportView(tableCitas);
+
+							if (p instanceof Administrativo) {
+								String[] columnNames = { "ID", "Feha", "Paciente", "Doctor" };
+								model = new DefaultTableModel();
+								model.setColumnIdentifiers(columnNames);
+								tableCitas.setModel(model);
+								LoadTableAdministrativo();
+								scrollPane.setViewportView(tableCitas);
+							} else {
+								String[] columnNames = { "ID", "Feha", "Paciente" };
+								model = new DefaultTableModel();
+								model.setColumnIdentifiers(columnNames);
+								tableCitas.setModel(model);
+								LoadTableDoctor();
+								scrollPane.setViewportView(tableCitas);
+							}
 
 						}
 					}
 				}
 				{
 					JButton btnRealizarConsulta = new JButton("Realizar Consulta");
+					btnRealizarConsulta.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							try {
+								int column = 0;
+								int row = tableCitas.getSelectedRow();
+								String value = tableCitas.getModel().getValueAt(row, column).toString();
+								Cita c = Clinica.getInstance().findCitaByID(value);
+								RealizarConsulta frame = new RealizarConsulta(c.getCitado());
+								frame.setVisible(true);
+								frame.setLocationRelativeTo(null);
+							} catch (Exception e1) {
+								
+							}
+
+						}
+					});
 					btnRealizarConsulta.setFont(new Font("Tahoma", Font.PLAIN, 9));
 					btnRealizarConsulta.setBounds(322, 283, 128, 23);
 					panelCita2.add(btnRealizarConsulta);
-					if (persona instanceof Administrativo) {
+					if (p instanceof Administrativo) {
 						btnRealizarConsulta.setVisible(false);
 					}
 				}
@@ -167,7 +204,7 @@ public class Dashboard extends JDialog {
 				tableCitas.setRowSorter(trsFiltro);
 
 				JPanel panel_Filtro = new JPanel();
-				panel_Filtro.setBounds(10, 22, 440, 34);
+				panel_Filtro.setBounds(10, 22, 380, 34);
 				panelCita2.add(panel_Filtro);
 				panel_Filtro.setLayout(null);
 
@@ -199,9 +236,18 @@ public class Dashboard extends JDialog {
 				btnModificarCita.setFont(new Font("Tahoma", Font.PLAIN, 9));
 				btnModificarCita.setBounds(322, 283, 128, 23);
 				panelCita2.add(btnModificarCita);
-				if (persona instanceof Doctor) {
+
+				JButton btnNewButton = new JButton("R");
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						LoadTableAdministrativo();
+					}
+				});
+				btnNewButton.setBounds(401, 22, 49, 34);
+				panelCita2.add(btnNewButton);
+				if (p instanceof Doctor) {
 					panel_Filtro.setVisible(false);
-				} else if (persona instanceof Administrativo) {
+				} else if (p instanceof Administrativo) {
 					panel_Filtro.setVisible(true);
 				}
 			}
@@ -211,10 +257,6 @@ public class Dashboard extends JDialog {
 			panel.setBackground(new Color(0, 102, 204));
 			contentPanel.add(panel);
 			panel.setLayout(null);
-
-			JButton btnNewButton = new JButton("New button");
-			btnNewButton.setBounds(118, 122, 89, 23);
-			panel.add(btnNewButton);
 		}
 		{
 			JPanel panel = new JPanel();
@@ -246,7 +288,7 @@ public class Dashboard extends JDialog {
 
 	}
 
-	private void LoadTable() {
+	private void LoadTableAdministrativo() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		Cita c = null;
@@ -257,9 +299,26 @@ public class Dashboard extends JDialog {
 			fila[0] = c.getId();
 			fila[1] = c.getFecha();
 			fila[2] = c.getCitado().getNombre();
+			fila[3] = c.getDoctor().getNombre();
 			model.addRow(fila);
 		}
 
+	}
+
+	public void LoadTableDoctor() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		Cita c = null;
+
+		for (int i = 0; i < Clinica.getInstance().getMisCitas().size(); i++) {
+			c = Clinica.getInstance().getMisCitas().get(i);
+			if (c.getDoctor().getCedula().equalsIgnoreCase(p.getCedula())) {
+				fila[0] = c.getId();
+				fila[1] = c.getFecha();
+				fila[2] = c.getCitado().getNombre();
+				model.addRow(fila);
+			}
+		}
 	}
 
 	public void filtro1() {
@@ -273,13 +332,15 @@ public class Dashboard extends JDialog {
 		int columnaABuscar = 3;
 		trsFiltro.setRowFilter(RowFilter.regexFilter(cbxFiltro2.getSelectedItem().toString(), columnaABuscar));
 	}
-
 }
 
 /*
  * Creado por: Yamilka 12/11/17
  * 
- * Modificado por: Yamilka 27/11/2017
- * Anotaciones: agregar los fitros a la tabla de citas y el btnModifcarCitas, así como hacer que estos se deshabiliten o habiliten
- * dependiendo de quien está entrando(doctor o secre).
+ * Modificado por: Yamilka 27/11/2017 Anotaciones: agregar los fitros a la tabla
+ * de citas y el btnModifcarCitas, así como hacer que estos se deshabiliten o
+ * habiliten dependiendo de quien está entrando(doctor o secre).
+ * 
+ * Modificado por: Alejandro Colom 29/11/2017 Anotaciones: dividir cargar tabla
+ * en admin y doc
  */

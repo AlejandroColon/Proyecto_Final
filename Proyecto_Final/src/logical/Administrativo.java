@@ -1,6 +1,8 @@
 package logical;
 
-public class Administrativo extends Trabajador {
+import java.io.Serializable;
+
+public class Administrativo extends Trabajador implements Serializable{
 	
 	/**
 	 * 

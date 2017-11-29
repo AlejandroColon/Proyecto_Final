@@ -356,6 +356,8 @@ public class Clinica implements Serializable{
 		}
 		return acceder;
 	}
+	
+	
 }
 
 /*
@@ -379,4 +381,9 @@ public class Clinica implements Serializable{
  * Modificaciones: Oscar Rodriguez
  * Fecha: 27/11/2017
  * Anotaciones: modificar las funciones de agregar en archivo
+ * 
+ * 
+ * Modificacion: Alejandro Colón
+ * Fecha: 29/11/17
+ * Anotaciones:
  * */

@@ -1,6 +1,8 @@
 package logical;
 
-public abstract class Trabajador extends Persona {
+import java.io.Serializable;
+
+public abstract class Trabajador extends Persona implements Serializable{
 	
 	/**
 	 * 

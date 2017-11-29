@@ -1,6 +1,13 @@
 package logical;
 
-public class Historial extends InfoClinica {
+import java.io.Serializable;
+
+public class Historial extends InfoClinica implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6069021962541681501L;
 
 	// ********************************ATRIBUTOS*****************************
 

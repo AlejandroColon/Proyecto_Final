@@ -1,7 +1,13 @@
 package logical;
 
-public abstract class InfoClinica {
+import java.io.Serializable;
 
+public abstract class InfoClinica implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1495026567206777360L;
 	// *****************************ATRIBUTOS****************************
 	private String codigo;
 	private String fecha; // más adelante se determinará si debe ser date o no

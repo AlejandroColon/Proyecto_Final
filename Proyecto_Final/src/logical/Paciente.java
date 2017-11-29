@@ -1,8 +1,9 @@
 package logical;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Paciente extends Persona {
+public class Paciente extends Persona implements Serializable{
 
 	/**
 	 * 
@@ -10,8 +11,8 @@ public class Paciente extends Persona {
 	private static final long serialVersionUID = 1281050099341321750L;
 	// **************************************ATRIBUTOS DE LA CLASE************************************************
 	private String numeroAfiliado;
-	private ArrayList<String> misVacunas;// Luego de subir, cambiar a clase Vacuna
-	private ArrayList<String> miHistorial;// Luego de subir, cambiar a clase Historial.
+	private ArrayList<Vacuna> misVacunas;// Luego de subir, cambiar a clase Vacuna
+	private ArrayList<Historial> miHistorial;// Luego de subir, cambiar a clase Historial.
 
 	// **************************************CONSTRUCTOR DE LA CLASE**********************************************
 	public Paciente(String cedula, String nombre, int edad, String telefono, String direccion,
@@ -23,19 +24,19 @@ public class Paciente extends Persona {
 	}
 
 	// *********************************************SETS Y GETS***************************************************
-	public ArrayList<String> getMisVacunas() {
+	public ArrayList<Vacuna> getMisVacunas() {
 		return misVacunas;
 	}
 
-	public void setMisVacunas(ArrayList<String> misVacunas) {
+	public void setMisVacunas(ArrayList<Vacuna> misVacunas) {
 		this.misVacunas = misVacunas;
 	}
 
-	public ArrayList<String> getMiHistorial() {
+	public ArrayList<Historial> getMiHistorial() {
 		return miHistorial;
 	}
 
-	public void setMiHistorial(ArrayList<String> miHistorial) {
+	public void setMiHistorial(ArrayList<Historial> miHistorial) {
 		this.miHistorial = miHistorial;
 	}
 
