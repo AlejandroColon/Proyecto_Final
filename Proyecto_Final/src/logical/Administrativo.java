@@ -2,6 +2,11 @@ package logical;
 
 public class Administrativo extends Trabajador {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2028985840255312992L;
+
 	//*************************************CONSTRUCTOR DE LA CLASE**************************************************
 	public Administrativo(String cedula, String nombre, int edad, String telefono, String direccion,
 			String sexo, String usuario, String password) {

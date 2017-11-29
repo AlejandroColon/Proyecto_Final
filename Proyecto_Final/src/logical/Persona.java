@@ -1,9 +1,15 @@
 package logical;
 
-public abstract class Persona {
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable{
 	
 	//**************************************ATRIBUTOS DE LA CLASE***********************************************
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7041660825441736841L;
 	protected String cedula;
 	protected String nombre;
 	protected int edad;

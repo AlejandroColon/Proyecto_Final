@@ -2,6 +2,10 @@ package logical;
 
 public class Doctor extends Trabajador {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 655100937815671529L;
 	//******************************************ATRIBUTOS*******************************************
 	private String exequatur;
 	private String especialidad;

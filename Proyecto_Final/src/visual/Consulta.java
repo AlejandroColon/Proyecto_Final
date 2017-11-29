@@ -10,8 +10,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import logical.Paciente;
+import logical.Persona;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
 import java.awt.Toolkit;
@@ -23,6 +29,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 public class Consulta extends JDialog {
 
@@ -44,6 +51,9 @@ public class Consulta extends JDialog {
 	JTextArea txtSintomas;
 	JTextArea txtTratamiento;
 	JComboBox<String> cmbSangre;
+	private JTable tableHsitoriaClinica;
+	private static DefaultTableModel model;
+	private static Object[] fila;
 
 	/**
 	 * Launch the application.
@@ -159,9 +169,13 @@ public class Consulta extends JDialog {
 		panel.add(lblTipoDeSangre);
 		
 		cmbSangre = new JComboBox<String>();
-		cmbSangre.setModel(new DefaultComboBoxModel<String>(new String[] {"<...>", "A+", "A-", "B-", "O-", "O+", "AB+", "AB-"}));
+		cmbSangre.setModel(new DefaultComboBoxModel<String>(new String[] {"--", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"}));
 		cmbSangre.setBounds(261, 69, 71, 20);
 		panel.add(cmbSangre);
+		
+		
+		Persona p = null;
+		loadConsulta(p);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Datos de Consulta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -246,6 +260,18 @@ public class Consulta extends JDialog {
 		panel_5.setBackground(Color.LIGHT_GRAY);
 		panel_5.setBounds(10, 25, 330, 336);
 		panel_4.add(panel_5);
+		panel_5.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_5.add(scrollPane, BorderLayout.CENTER);
+		
+		tableHsitoriaClinica = new JTable();
+		String[] columnNames = { "ID", "Fecha"};
+		model = new DefaultTableModel();
+		model.setColumnIdentifiers(columnNames);
+		tableHsitoriaClinica.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//se crea un arreglo de string con los nombres de la col de mi tabla
+		tableHsitoriaClinica.setModel(model);
+		scrollPane.setViewportView(tableHsitoriaClinica);
 		
 		JButton btnVerHistoriaClnica = new JButton("Ver Historia Cl\u00EDnica");
 		btnVerHistoriaClnica.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -283,6 +309,54 @@ public class Consulta extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
+	}
+
+	private void loadConsulta(Persona p) {
+	/*
+	 * la idea es que hay una lista de consultantes y de pacientes.
+	 * dependiendo si la persoan pasada por parametro es paciente o no,
+	 * se procede de manera distinta (al momento de cargar info)...
+	 * 
+	 * */
+	 
+		if(p != null){		
+			txtCedula.setText(p.getCedula());
+			txtNombre.setText(p.getNombre());
+			txtDireccion.setText(p.getDireccion());
+			txtTelefono.setText(p.getTelefono());
+			
+			if(p instanceof Paciente){
+				txtNumAfiliado.setText(((Paciente) p).getNumeroAfiliado());
+				cmbAseguradora.setSelectedIndex(determinarAseguradora());
+				cmbSangre.setSelectedIndex(determinarSangre());
+				cargarHistoriaClinica(p);
+				cargarVacunas(p);
+			}
+			
+		}else{
+			
+		}
+		
+	}
+
+	private void cargarVacunas(Persona p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void cargarHistoriaClinica(Persona p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private int determinarSangre() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private int determinarAseguradora() {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 }
 

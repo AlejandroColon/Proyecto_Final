@@ -7,11 +7,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Clinica {
+public class Clinica implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6706713879333725409L;
 	// ***********************************ATRIBUTOS********************************
 	private ArrayList<Persona> misPersonas;
 	private ArrayList<Consulta> misConsultas;
@@ -21,15 +26,15 @@ public class Clinica {
 	private static Clinica clinica = null;
 	
 	//Archivos
-	private String pathFilePersona = "archivo/misPersonas.dat";
+	private String pathFilePersona = "misPersonas.dat";
 	private File filePersona =  new File(pathFilePersona);
-	private String pathFileVacuna = "archivo/misVacunas.dat";
+	private String pathFileVacuna = "misVacunas.dat";
 	private File fileVacuna =  new File(pathFileVacuna);
-	private String pathFileEnfermedad = "archivo/misEnfermedades.dat";
+	private String pathFileEnfermedad = "misEnfermedades.dat";
 	private File fileEnfermedad =  new File(pathFileEnfermedad);
-	private String pathFileCita = "archivo/misCitas.dat";
+	private String pathFileCita = "misCitas.dat";
 	private File fileCita =  new File(pathFileCita);
-	private String pathFileConsulta = "archivo/misConsultas.dat";
+	private String pathFileConsulta = "misConsultas.dat";
 	private File fileConsulta =  new File(pathFileConsulta);
 
 	// ************************************CONSTRUCTOR*****************************

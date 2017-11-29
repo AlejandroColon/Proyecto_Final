@@ -2,6 +2,10 @@ package logical;
 
 public abstract class Trabajador extends Persona {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6524013019595222580L;
 	//*******************************************ATRIBUTOS DE LA CLASE*******************************************
 	protected String usuario;
 	protected String password;

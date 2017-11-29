@@ -90,9 +90,23 @@ public class Dashboard extends JDialog {
 			menuBar.add(mnAdministrador);
 
 			JMenuItem mntmRegistrarTrabajador = new JMenuItem("Registrar Trabajador");
+			mntmRegistrarTrabajador.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					RegUsuario frame =  new RegUsuario();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+				
+				}
+			});
 			mnAdministrador.add(mntmRegistrarTrabajador);
 
 			JMenuItem mntmVerLista = new JMenuItem("Ver lista");
+			mntmVerLista.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ListaTrabajadores frame = new ListaTrabajadores();
+					frame.setVisible(true);
+				}
+			});
 			mnAdministrador.add(mntmVerLista);
 		}
 		{
