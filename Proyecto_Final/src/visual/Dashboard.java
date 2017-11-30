@@ -236,15 +236,6 @@ public class Dashboard extends JDialog {
 				btnModificarCita.setFont(new Font("Tahoma", Font.PLAIN, 9));
 				btnModificarCita.setBounds(322, 283, 128, 23);
 				panelCita2.add(btnModificarCita);
-
-				JButton btnNewButton = new JButton("R");
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						LoadTableAdministrativo();
-					}
-				});
-				btnNewButton.setBounds(401, 22, 49, 34);
-				panelCita2.add(btnNewButton);
 				if (p instanceof Doctor) {
 					panel_Filtro.setVisible(false);
 				} else if (p instanceof Administrativo) {
