@@ -12,11 +12,12 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import logical.Cita;
 import logical.Clinica;
+import logical.Enfermedad;
 import logical.Historial;
 import logical.Paciente;
 import logical.Persona;
+import logical.Vacuna;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -31,6 +32,9 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 
@@ -57,6 +61,9 @@ public class RealizarConsulta extends JDialog {
 	private JTable tableHsitoriaClinica;
 	private static DefaultTableModel model;
 	private static Object[] fila;
+	private static DefaultTableModel model2;
+	private static Object[] fila2;
+	private JTable tableVacuna;
 
 	public RealizarConsulta(Persona p) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RealizarConsulta.class.getResource("/images/icon.png")));
@@ -166,8 +173,6 @@ public class RealizarConsulta extends JDialog {
 		cmbSangre.setBounds(261, 69, 71, 20);
 		panel.add(cmbSangre);
 
-		loadConsulta(p);
-
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(
 				new TitledBorder(null, "Datos de Consulta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -176,6 +181,7 @@ public class RealizarConsulta extends JDialog {
 		panel_1.setLayout(null);
 
 		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
 		txtCodigo.setBounds(10, 34, 100, 20);
 		panel_1.add(txtCodigo);
@@ -263,8 +269,7 @@ public class RealizarConsulta extends JDialog {
 		String[] columnNames = { "ID", "Fecha" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columnNames);
-		tableHsitoriaClinica.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// se crea un arreglo de string con
-																					// los nombres de la col de mi tabla
+		tableHsitoriaClinica.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableHsitoriaClinica.setModel(model);
 		scrollPane.setViewportView(tableHsitoriaClinica);
 
@@ -277,11 +282,29 @@ public class RealizarConsulta extends JDialog {
 
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new TitledBorder(null, "Vacunas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_6.setBounds(10, 53, 350, 364);
+		panel_6.setBounds(10, 29, 350, 405);
 		vacunas.add(panel_6);
 		panel_6.setLayout(null);
+
+		JPanel panel_7 = new JPanel();
+		panel_7.setBounds(10, 21, 330, 342);
+		panel_6.add(panel_7);
+		panel_7.setLayout(new BorderLayout(0, 0));
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_7.add(scrollPane_1, BorderLayout.CENTER);
+
+		tableVacuna = new JTable();
+		String[] columnNames2 = { "Código", "Nombre", "Estado" };
+		model2 = new DefaultTableModel();
+		model2.setColumnIdentifiers(columnNames2);
+		tableVacuna.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableVacuna.setModel(model2);
+		scrollPane_1.setViewportView(tableVacuna);
 		// informacion.addTab("Panel 4", panel_4);
 		// informacion.addTab("Panel 5", panel_5);
+
+		loadConsulta(p);
 
 		{
 			JPanel buttonPane = new JPanel();
@@ -289,6 +312,52 @@ public class RealizarConsulta extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnRegistar = new JButton("Guardar");
+				btnRegistar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Enfermedad enf = null;
+
+						String cedula = p.getCedula();
+						String nombre = p.getNombre();
+						String sexo = p.getSexo();
+						int edad = Integer.parseInt(txtEdad.getText());
+						String tipoSangre = cmbSangre.getSelectedItem().toString();
+						String telefono = p.getTelefono();
+						String direccion = p.getDireccion();
+						String numeroAfiliado = txtNumAfiliado.getText();
+						String aseguradora = cmbAseguradora.getSelectedItem().toString();
+
+						Paciente aux = new Paciente(cedula, nombre, edad, tipoSangre, telefono, direccion, sexo,
+								numeroAfiliado, aseguradora);
+						Clinica.getInstance().addPaciente(aux);
+
+						if (chckbxAgregarAHistoria.isSelected()) {
+							String codigo = detCodigoHistoria(aux);
+							String fecha = fechaActual();
+							String sintomas = txtSintomas.getText();
+							String diagnostico = txtDiagnostico.getText();
+							String tratamiento = txtTratamiento.getText();
+
+							if (!cmbEnfermedad.getSelectedItem().toString().equalsIgnoreCase("<Seleccione>")) {
+								// ***********************
+							}
+							Historial hist = new Historial(codigo, fecha, sintomas, diagnostico, tratamiento, enf);
+
+							Clinica.getInstance().addHistoriaPaciente(aux.getCedula(), hist);
+
+						}
+
+					}
+
+					private String detCodigoHistoria(Paciente aux) {
+						return "HIST-" + (aux.getMiHistorial().size() + 1);
+					}
+
+					private String fechaActual() {
+						DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+						Date date = new Date();
+						return dateFormat.format(date);
+					}
+				});
 				btnRegistar.setActionCommand("OK");
 				buttonPane.add(btnRegistar);
 				getRootPane().setDefaultButton(btnRegistar);
@@ -297,7 +366,7 @@ public class RealizarConsulta extends JDialog {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						System.exit(0);
+						dispose();
 					}
 				});
 				btnCancelar.setActionCommand("Cancel");
@@ -314,18 +383,33 @@ public class RealizarConsulta extends JDialog {
 		 * 
 		 */
 
-		if (p != null) {
-			txtCedula.setText(p.getCedula());
-			txtNombre.setText(p.getNombre());
-			txtDireccion.setText(p.getDireccion());
-			txtTelefono.setText(p.getTelefono());
+		boolean encontrado = false;
 
-			if (p instanceof Paciente) {
+		if (p != null) {
+			
+			for (int i = 0; i < Clinica.getInstance().getMisPacientes().size(); i++) {
+				if (p.getCedula().equalsIgnoreCase(Clinica.getInstance().getMisPacientes().get(i).getCedula()))
+					encontrado = true;
+			}
+
+			if (encontrado) {
+				txtCedula.setText(p.getCedula());
+				txtNombre.setText(p.getNombre());
+				txtDireccion.setText(p.getDireccion());
+				txtEdad.setText("" + p.getEdad());
+				txtTelefono.setText(p.getTelefono());
 				txtNumAfiliado.setText(((Paciente) p).getNumeroAfiliado());
 				cmbAseguradora.setSelectedIndex(determinarAseguradora());
 				cmbSangre.setSelectedIndex(determinarSangre());
-				//cargarHistoriaClinica(p);
+				cargarHistoriaClinica(p);
 				cargarVacunas(p);
+			} else {
+				txtCedula.setText(p.getCedula());
+				txtNombre.setText(p.getNombre());
+				txtDireccion.setText(p.getDireccion());
+				txtEdad.setText("" + p.getEdad());
+				txtTelefono.setText(p.getTelefono());
+				llenarTablaVacunas();
 			}
 
 		} else {
@@ -334,18 +418,55 @@ public class RealizarConsulta extends JDialog {
 
 	}
 
-	private void cargarVacunas(Persona p) {
-		// TODO Auto-generated method stub
+	private void llenarTablaVacunas() {
+		model2.setRowCount(0);
+		fila2 = new Object[model2.getColumnCount()];
+		Vacuna v = null;
 
+		for (int i = 0; i < Clinica.getInstance().getMisVacunas().size(); i++) {
+			v = Clinica.getInstance().getMisVacunas().get(i);
+			fila2[0] = v.getCodigo();
+			fila2[1] = v.getNombre();
+			fila2[2] = "No Aplicada";
+
+			model2.addRow(fila2);
+		}
 	}
 
-	private void cargarHistoriaClinica(Paciente p) {
+	private void cargarVacunas(Persona p) {
+		model2.setRowCount(0);
+		fila2 = new Object[model2.getColumnCount()];
+		Vacuna v = null;
+
+		for (int i = 0; i < Clinica.getInstance().getMisVacunas().size(); i++) {
+			boolean encontrado = false;
+			v = Clinica.getInstance().getMisVacunas().get(i);
+
+			fila2[0] = v.getCodigo();
+			fila2[1] = v.getNombre();
+
+			for (int j = 0; j < ((Paciente) p).getMisVacunas().size(); j++) {
+				if (((Paciente) p).getMisVacunas().get(j).getCodigo().equalsIgnoreCase(v.getCodigo())) {
+					encontrado = true;
+				}
+			}
+
+			if (encontrado)
+				fila2[2] = "Aplicada";
+			else
+				fila2[2] = "No Aplicada";
+
+			model2.addRow(fila2);
+		}
+	}
+
+	private void cargarHistoriaClinica(Persona p) {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		Historial h = null;
 
-		for (int i = 0; i < p.getMiHistorial().size(); i++) {
-			h = p.getMiHistorial().get(i);
+		for (int i = 0; i < ((Paciente) p).getMiHistorial().size(); i++) {
+			h = ((Paciente) p).getMiHistorial().get(i);
 
 			fila[0] = h.getCodigo();
 			fila[1] = h.getFecha();
@@ -368,4 +489,8 @@ public class RealizarConsulta extends JDialog {
 /*
  * 
  * Creado Por: Alejandro Colón. Fecha: 12/11/17 Anotaciones:
+ * 
+ * 
+ * Creado Por: Alejandro Colón. Fecha: 30/11/17 Anotaciones: agregar paciente
+ *
  */

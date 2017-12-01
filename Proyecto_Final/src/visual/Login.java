@@ -25,27 +25,11 @@ public class Login extends JDialog {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -339133479221982755L;	
+	private static final long serialVersionUID = -339133479221982755L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
 	private JPasswordField passContra;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			Login dialog = new Login();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/images/icon.png")));
 		setTitle("Acceso al usuario");
@@ -54,29 +38,29 @@ public class Login extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(46, 161, 56, 14);
 		contentPanel.add(lblUsuario);
-		
+
 		txtUsuario = new JTextField();
 		txtUsuario.setBounds(46, 176, 157, 20);
 		contentPanel.add(txtUsuario);
 		txtUsuario.setColumns(10);
-		
+
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setBounds(46, 201, 86, 14);
 		contentPanel.add(lblContrasea);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(63, 21, 125, 125);
 		contentPanel.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/user.png")));
 		panel.add(lblNewLabel, BorderLayout.CENTER);
-		
+
 		passContra = new JPasswordField();
 		passContra.setBounds(46, 215, 157, 20);
 		contentPanel.add(passContra);
@@ -90,19 +74,21 @@ public class Login extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						String user = txtUsuario.getText();
 						String password = String.valueOf(passContra.getPassword());
-						if(Clinica.getInstance().validarLogin(user, password)) {
+						if (Clinica.getInstance().validarLogin(user, password)) {
 							Persona usuario = Clinica.getInstance().buscarTrabajador(user);
-							if(usuario!=null) {
-								Dashboard frame = new Dashboard(usuario);
+							if (usuario != null) {
+								Principal frame = new Principal(usuario);
 								frame.setVisible(true);
-								Toolkit tk = Toolkit.getDefaultToolkit();  
-							     int xSize = ((int) tk.getScreenSize().getWidth());  
-							     int ySize = ((int) tk.getScreenSize().getHeight());  
-							     frame.setSize(xSize,ySize - 40);
-							     frame.setLocationRelativeTo(null);							
+								Toolkit tk = Toolkit.getDefaultToolkit();
+								int xSize = ((int) tk.getScreenSize().getWidth());
+								int ySize = ((int) tk.getScreenSize().getHeight());
+								frame.setSize(xSize, ySize - 40);
+								frame.setLocationRelativeTo(null);
+								dispose();
 							}
-						}else {
-							JOptionPane.showMessageDialog(null, "Usuario o contraseña Inválido","Advertencia", JOptionPane.WARNING_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog(null, "Usuario o contraseña Inválido", "Advertencia",
+									JOptionPane.WARNING_MESSAGE);
 						}
 					}
 				});
@@ -114,7 +100,7 @@ public class Login extends JDialog {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						System.exit(0);
 					}
 				});
 				btnCancelar.setActionCommand("Cancel");
@@ -126,9 +112,7 @@ public class Login extends JDialog {
 
 /*
  * 
- * Creado Por: Oscar Rodriguez.
- * Fecha: 12/11/17
- * Anotaciones:
+ * Creado Por: Oscar Rodriguez. Fecha: 12/11/17 Anotaciones:
  * 
  * 
  */

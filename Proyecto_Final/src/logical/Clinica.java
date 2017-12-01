@@ -23,6 +23,7 @@ public class Clinica implements Serializable{
 	private ArrayList<Vacuna> misVacunas;
 	private ArrayList<Enfermedad> misEnfermedades;
 	private ArrayList<Cita> misCitas;
+	private ArrayList<Paciente> misPacientes;
 	private static Clinica clinica = null;
 	
 	//Archivos
@@ -36,6 +37,8 @@ public class Clinica implements Serializable{
 	private File fileCita =  new File(pathFileCita);
 	private String pathFileConsulta = "misConsultas.dat";
 	private File fileConsulta =  new File(pathFileConsulta);
+	private String pathFilePaciente = "misPacientes.dat";
+	private File filePaciente =  new File(pathFilePaciente);
 
 	// ************************************CONSTRUCTOR*****************************
 	public Clinica() {
@@ -44,7 +47,9 @@ public class Clinica implements Serializable{
 		misConsultas = new ArrayList<>();
 		misEnfermedades = new ArrayList<>();
 		misEnfermedades = new ArrayList<>();
+		misVacunas = new ArrayList<>();
 		misCitas = new ArrayList<>();
+		misPacientes = new ArrayList<>();
 	}
 
 	// ****************************************GETS Y SETS*************************************
@@ -89,6 +94,14 @@ public class Clinica implements Serializable{
 		this.misCitas = misCitas;
 	}
 
+	public ArrayList<Paciente> getMisPacientes() {
+		return misPacientes;
+	}
+
+	public void setMisPacientes(ArrayList<Paciente> misPacientes) {
+		this.misPacientes = misPacientes;
+	}
+
 	// ***************************************METODOS*******************************
 	public static Clinica getInstance() {
 		if (clinica == null) {
@@ -115,6 +128,10 @@ public class Clinica implements Serializable{
 	
 	public void addCitas(Cita c) {
 		misCitas.add(c);
+	}
+	
+	public void addPaciente(Paciente p) {
+		misPacientes.add(p);
 	}
 	
 	public void salvarPersonas() throws IOException{
@@ -145,7 +162,7 @@ public class Clinica implements Serializable{
 	} 
 	
 	public void salvarVacunas() throws IOException{
-		FileOutputStream fVacuna = new FileOutputStream(pathFilePersona);
+		FileOutputStream fVacuna = new FileOutputStream(pathFileVacuna);
 		ObjectOutputStream writeVacuna = new ObjectOutputStream(fVacuna);
 		
 		writeVacuna.writeInt(misVacunas.size());
@@ -159,7 +176,7 @@ public class Clinica implements Serializable{
 	public void leerVacunas() throws FileNotFoundException, IOException, ClassNotFoundException{
 		if(fileVacuna.exists() == true){
 			
-			FileInputStream fVacuna =  new FileInputStream(pathFilePersona);
+			FileInputStream fVacuna =  new FileInputStream(pathFileVacuna);
 			ObjectInputStream readVacuna = new ObjectInputStream(fVacuna);		
 			
 			int cantVacuna = readVacuna.readInt();
@@ -255,6 +272,34 @@ public class Clinica implements Serializable{
 		}	
 	} 
 	
+	public void salvarPacientes() throws IOException{
+		FileOutputStream fPaciente = new FileOutputStream(pathFilePaciente);
+		ObjectOutputStream writePaciente = new ObjectOutputStream(fPaciente);
+		
+		writePaciente.writeInt(misPacientes.size());
+		
+		for(Paciente aux : misPacientes) {    //aqui recorro el array de personas para copiarlas al archivo.
+			writePaciente.writeObject(aux);
+		}
+		
+		writePaciente.close();
+	}
+	
+	public void leerPacientes() throws FileNotFoundException, IOException, ClassNotFoundException{
+		if(filePaciente.exists() == true){
+			
+			FileInputStream fPaciente =  new FileInputStream(pathFilePaciente);
+			ObjectInputStream readPaciente = new ObjectInputStream(fPaciente);		
+			
+			int cantPacientes = readPaciente.readInt();
+			
+			for(int i = 0; i < cantPacientes; i ++){
+				misPacientes.add((Paciente) readPaciente.readObject());
+			}
+			readPaciente.close();
+		}	
+	}
+	
 	public Persona findByCedula(String cedula){
 		Persona p =null;
 		boolean encontrado = false;
@@ -313,6 +358,26 @@ public class Clinica implements Serializable{
 			i++;
 		}
 		return c;
+	}
+	
+	public Paciente findPacienteByCedula(String cedula){
+		Paciente p = null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		while(!encontrado && i <misPacientes.size()){
+			if(misPacientes.get(i).getCedula().equalsIgnoreCase(cedula)){
+				p = misPacientes.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return p;
+	}
+	
+	public void addHistoriaPaciente(String cedula, Historial h){
+		Paciente p = findPacienteByCedula(cedula);
+		p.getMiHistorial().add(h);
 	}
 	
 	public boolean validarUsuario(String user){
@@ -386,4 +451,8 @@ public class Clinica implements Serializable{
  * Modificacion: Alejandro Colón
  * Fecha: 29/11/17
  * Anotaciones:
+ * 
+ * Modificacion: Alejandro Colón
+ * Fecha: 30/11/17
+ * Anotaciones: Agregando arraylist de Pacientes, metodos para leer y salvar pacientes.
  * */

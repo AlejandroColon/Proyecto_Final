@@ -96,7 +96,7 @@ public class Dashboard extends JDialog {
 			JMenuItem mntmRegistrarTrabajador = new JMenuItem("Registrar Trabajador");
 			mntmRegistrarTrabajador.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					RegUsuario frame = new RegUsuario();
+					RegistrarUsuario frame = new RegistrarUsuario();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 

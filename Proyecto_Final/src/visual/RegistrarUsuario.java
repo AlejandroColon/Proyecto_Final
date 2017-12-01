@@ -31,7 +31,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 
-public class RegUsuario extends JDialog {
+public class RegistrarUsuario extends JDialog {
 
 	/**
 	 * 
@@ -59,7 +59,7 @@ public class RegUsuario extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			RegUsuario dialog = new RegUsuario();
+			RegistrarUsuario dialog = new RegistrarUsuario();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -70,9 +70,9 @@ public class RegUsuario extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegUsuario() {
+	public RegistrarUsuario() {
 		setTitle("Registro de usuarios");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(RegUsuario.class.getResource("/images/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarUsuario.class.getResource("/images/icon.png")));
 		setBounds(100, 100, 423, 538);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -157,7 +157,7 @@ public class RegistrarEnfermedad extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						txtNombre.setText("");
 						txtDescripcion.setText("");
-						System.exit(0);
+						dispose();
 					}
 				});
 				btnCancelar.setActionCommand("Cancel");
