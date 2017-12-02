@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 import logical.Administrativo;
 import logical.Cita;
 import logical.Clinica;
-import logical.Doctor;
 import logical.Persona;
 
 import java.awt.Toolkit;
@@ -61,19 +60,16 @@ public class Principal extends JFrame {
 				} catch (ClassNotFoundException | IOException e) {
 
 				}
-				//Persona aux = Clinica.getInstance().getMisPersonas().get(1);
-				//Principal frame = new Principal(aux);
-				//frame.setVisible(true);
-				//frame.setLocationRelativeTo(null);
+				
 				/*
 				  Persona p = new Doctor("050-0022526-4","Dr. Maunel Perez",10,"809-","casa","m","doctor","123"
 				  ,"abc","Cirujano",3); 
 				  Clinica.getInstance().addPersona(p); 
 				  Persona p2 = new  Administrativo("402-8566965-3","Lic. Manuela Pereza",15,
-				  "829","la casa de manuel","F","secre","abc");
+				  "829","la casa de manuel","F","secre","123");
 				  Clinica.getInstance().addPersona(p2);
-				 
 				*/
+				
 				Login log = new Login();
 				log.setVisible(true);
 				log.setLocationRelativeTo(null);

@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import logical.Clinica;
+import logical.Consulta;
 import logical.Enfermedad;
 import logical.Historial;
 import logical.Paciente;
@@ -20,6 +21,7 @@ import logical.Persona;
 import logical.Vacuna;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
@@ -148,8 +150,7 @@ public class RealizarConsulta extends JDialog {
 		panel.add(lblTelfono);
 
 		cmbAseguradora = new JComboBox<String>();
-		cmbAseguradora.setModel(new DefaultComboBoxModel<String>(
-				new String[] { "<Seleccione>", "Senasa", "ARS Palic Salud", "ARS Humano", "ARS Monumental", "Semma" }));
+		cmbAseguradora.setModel(new DefaultComboBoxModel<String>(new String[] {"<Seleccione>", "Senasa", "ARS Palic Salud", "ARS Humano", "ARS Monumental", "Semma"}));
 		cmbAseguradora.setBounds(189, 139, 143, 20);
 		panel.add(cmbAseguradora);
 
@@ -301,11 +302,13 @@ public class RealizarConsulta extends JDialog {
 		tableVacuna.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableVacuna.setModel(model2);
 		scrollPane_1.setViewportView(tableVacuna);
+
 		// informacion.addTab("Panel 4", panel_4);
 		// informacion.addTab("Panel 5", panel_5);
 
 		loadConsulta(p);
-
+		txtCodigo.setText("CON-" + (Clinica.getInstance().getMisConsultas().size() + 1));
+		llenarCMBEnfermedad();
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -315,37 +318,69 @@ public class RealizarConsulta extends JDialog {
 				btnRegistar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Enfermedad enf = null;
+						
+						try {
+							if(Clinica.getInstance().findPacienteByCedula(txtCedula.getText()) == null) {
+								String cedula = p.getCedula();
+								String nombre = p.getNombre();
+								String sexo = p.getSexo();
+								int edad = Integer.parseInt(txtEdad.getText());
+								String tipoSangre = cmbSangre.getSelectedItem().toString();
+								String telefono = p.getTelefono();
+								String direccion = p.getDireccion();
+								String numeroAfiliado = txtNumAfiliado.getText();
+								String aseguradora = cmbAseguradora.getSelectedItem().toString();
 
-						String cedula = p.getCedula();
-						String nombre = p.getNombre();
-						String sexo = p.getSexo();
-						int edad = Integer.parseInt(txtEdad.getText());
-						String tipoSangre = cmbSangre.getSelectedItem().toString();
-						String telefono = p.getTelefono();
-						String direccion = p.getDireccion();
-						String numeroAfiliado = txtNumAfiliado.getText();
-						String aseguradora = cmbAseguradora.getSelectedItem().toString();
-
-						Paciente aux = new Paciente(cedula, nombre, edad, tipoSangre, telefono, direccion, sexo,
-								numeroAfiliado, aseguradora);
-						Clinica.getInstance().addPaciente(aux);
-
-						if (chckbxAgregarAHistoria.isSelected()) {
-							String codigo = detCodigoHistoria(aux);
+								Paciente aux = new Paciente(cedula, nombre, edad, tipoSangre, telefono, direccion, sexo,
+										numeroAfiliado, aseguradora);
+								Clinica.getInstance().addPaciente(aux);
+							}
+							
+							String codigo = detCodigoHistoria(Clinica.getInstance().findPacienteByCedula(txtCedula.getText()));
 							String fecha = fechaActual();
 							String sintomas = txtSintomas.getText();
 							String diagnostico = txtDiagnostico.getText();
 							String tratamiento = txtTratamiento.getText();
 
-							if (!cmbEnfermedad.getSelectedItem().toString().equalsIgnoreCase("<Seleccione>")) {
-								// ***********************
+							if (chckbxAgregarAHistoria.isSelected()) {
+								if (!cmbEnfermedad.getSelectedItem().toString().equalsIgnoreCase("<Seleccione>")) {
+									enf = Clinica.getInstance().findEnfermedadByCodigo(determCodigoEnfermedad());
+								}
+								
+								Historial hist = new Historial(codigo, fecha, sintomas, diagnostico, tratamiento, enf);
+
+								Clinica.getInstance().addHistoriaPaciente(txtCedula.getText(), hist);
+
 							}
-							Historial hist = new Historial(codigo, fecha, sintomas, diagnostico, tratamiento, enf);
-
-							Clinica.getInstance().addHistoriaPaciente(aux.getCedula(), hist);
-
+							
+							Consulta c = new Consulta(codigo, fecha, sintomas, diagnostico, tratamiento, enf, Clinica.getInstance().findPacienteByCedula(txtCedula.getText()));
+							Clinica.getInstance().addConsulta(c);
+							Clinica.getInstance().salvarConsultas();
+							Clinica.getInstance().salvarPacientes();
+							
+							JOptionPane.showMessageDialog(null, "Consulta realizada exitosamente", "Información",
+									JOptionPane.INFORMATION_MESSAGE);
+							
+						} catch (Exception e2) {
+							JOptionPane.showMessageDialog(null, "TAMO ZUPENSO", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+							
 						}
+						
 
+					}
+
+					private String determCodigoEnfermedad() {
+						String codigo = "";
+						int size = cmbEnfermedad.getSelectedItem().toString().length(); 
+						
+						if(Clinica.getInstance().getMisEnfermedades().size()<10) {
+							codigo = (cmbEnfermedad.getSelectedItem().toString()).substring(size - 6, size - 1);
+						}else {
+							codigo = (cmbEnfermedad.getSelectedItem().toString()).substring(size - 7, size - 1);
+							
+						}
+						return codigo;
 					}
 
 					private String detCodigoHistoria(Paciente aux) {
@@ -375,6 +410,39 @@ public class RealizarConsulta extends JDialog {
 		}
 	}
 
+	private void llenarCMBEnfermedad() {
+		boolean encontrado = false;
+		cmbEnfermedad.removeAllItems(); // limpiando la info del cmb
+
+		try {
+			
+			cmbEnfermedad.addItem(new String("<Seleccione>"));
+			
+			for (int i = 0; i < Clinica.getInstance().getMisEnfermedades().size(); i++) {
+					cmbEnfermedad.addItem(new String(Clinica.getInstance().getMisEnfermedades().get(i).getNombre() + "  (" + 
+							Clinica.getInstance().getMisEnfermedades().get(i).getCodigo() + ")"));
+					encontrado = true;
+				
+			}
+
+			if (encontrado) {
+				//cmbEnfermedad.insertItemAt("<Seleccione>", 0);
+				cmbEnfermedad.setSelectedItem(0);
+				cmbEnfermedad.setSelectedItem(0);
+			} else {
+				cmbEnfermedad.removeAllItems(); 
+				cmbEnfermedad.insertItemAt("<Seleccione>", 0);
+				cmbEnfermedad.setSelectedItem(0);
+				dispose();
+			}
+
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, "EL PROGRAMA HA EXPLOTADO INESPERADAMENTE", "ERROR",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+
 	private void loadConsulta(Persona p) {
 		/*
 		 * la idea es que hay una lista de consultantes y de pacientes. dependiendo si
@@ -386,11 +454,8 @@ public class RealizarConsulta extends JDialog {
 		boolean encontrado = false;
 
 		if (p != null) {
-			
-			for (int i = 0; i < Clinica.getInstance().getMisPacientes().size(); i++) {
-				if (p.getCedula().equalsIgnoreCase(Clinica.getInstance().getMisPacientes().get(i).getCedula()))
-					encontrado = true;
-			}
+
+			Paciente person = Clinica.getInstance().findPacienteByCedula(p.getCedula());
 
 			if (encontrado) {
 				txtCedula.setText(p.getCedula());
@@ -398,11 +463,11 @@ public class RealizarConsulta extends JDialog {
 				txtDireccion.setText(p.getDireccion());
 				txtEdad.setText("" + p.getEdad());
 				txtTelefono.setText(p.getTelefono());
-				txtNumAfiliado.setText(((Paciente) p).getNumeroAfiliado());
-				cmbAseguradora.setSelectedIndex(determinarAseguradora());
-				cmbSangre.setSelectedIndex(determinarSangre());
-				cargarHistoriaClinica(p);
-				cargarVacunas(p);
+				txtNumAfiliado.setText(person.getNumeroAfiliado());
+				cmbAseguradora.setSelectedIndex(determinarAseguradora(person));
+				cmbSangre.setSelectedIndex(determinarSangre(person));
+				cargarHistoriaClinica(person);
+				cargarVacunas(person);
 			} else {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
@@ -475,14 +540,32 @@ public class RealizarConsulta extends JDialog {
 
 	}
 
-	private int determinarSangre() {
-		// TODO Auto-generated method stub
-		return 0;
+	private int determinarSangre(Paciente p) {
+		int i = 0;
+		boolean encontrado = false;
+
+		while (!encontrado && i < 9) {
+			if (p.getTipoSangre().equalsIgnoreCase(cmbSangre.getItemAt(i).toString())) {
+				encontrado = true;
+			}
+			i++;
+		}
+
+		return i - 1;
 	}
 
-	private int determinarAseguradora() {
-		// TODO Auto-generated method stub
-		return 1;
+	private int determinarAseguradora(Paciente p) {
+		int i = 0;
+		boolean encontrado = false;
+
+		while (!encontrado && i < 6) {
+			if (p.getAseguradora().equalsIgnoreCase(cmbAseguradora.getItemAt(i).toString())) {
+				encontrado = true;
+			}
+			i++;
+		}
+
+		return i - 1;
 	}
 }
 

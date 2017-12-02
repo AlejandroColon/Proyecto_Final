@@ -10,8 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-public class Clinica implements Serializable{
+public class Clinica implements Serializable {
 
 	/**
 	 * 
@@ -25,20 +24,20 @@ public class Clinica implements Serializable{
 	private ArrayList<Cita> misCitas;
 	private ArrayList<Paciente> misPacientes;
 	private static Clinica clinica = null;
-	
-	//Archivos
+
+	// Archivos
 	private String pathFilePersona = "misPersonas.dat";
-	private File filePersona =  new File(pathFilePersona);
+	private File filePersona = new File(pathFilePersona);
 	private String pathFileVacuna = "misVacunas.dat";
-	private File fileVacuna =  new File(pathFileVacuna);
+	private File fileVacuna = new File(pathFileVacuna);
 	private String pathFileEnfermedad = "misEnfermedades.dat";
-	private File fileEnfermedad =  new File(pathFileEnfermedad);
+	private File fileEnfermedad = new File(pathFileEnfermedad);
 	private String pathFileCita = "misCitas.dat";
-	private File fileCita =  new File(pathFileCita);
+	private File fileCita = new File(pathFileCita);
 	private String pathFileConsulta = "misConsultas.dat";
-	private File fileConsulta =  new File(pathFileConsulta);
+	private File fileConsulta = new File(pathFileConsulta);
 	private String pathFilePaciente = "misPacientes.dat";
-	private File filePaciente =  new File(pathFilePaciente);
+	private File filePaciente = new File(pathFilePaciente);
 
 	// ************************************CONSTRUCTOR*****************************
 	public Clinica() {
@@ -52,7 +51,8 @@ public class Clinica implements Serializable{
 		misPacientes = new ArrayList<>();
 	}
 
-	// ****************************************GETS Y SETS*************************************
+	// ****************************************GETS Y
+	// SETS*************************************
 	public ArrayList<Persona> getMisPersonas() {
 		return misPersonas;
 	}
@@ -84,7 +84,6 @@ public class Clinica implements Serializable{
 	public void setMisEnfermedades(ArrayList<Enfermedad> misEnfermedades) {
 		this.misEnfermedades = misEnfermedades;
 	}
-	
 
 	public ArrayList<Cita> getMisCitas() {
 		return misCitas;
@@ -125,188 +124,188 @@ public class Clinica implements Serializable{
 	public void addVacunas(Vacuna c) {
 		misVacunas.add(c);
 	}
-	
+
 	public void addCitas(Cita c) {
 		misCitas.add(c);
 	}
-	
+
 	public void addPaciente(Paciente p) {
 		misPacientes.add(p);
 	}
-	
-	public void salvarPersonas() throws IOException{
+
+	public void salvarPersonas() throws IOException {
 		FileOutputStream fPersona = new FileOutputStream(pathFilePersona);
 		ObjectOutputStream writePersona = new ObjectOutputStream(fPersona);
-		
+
 		writePersona.writeInt(misPersonas.size());
-		
-		for(Persona aux : misPersonas) {    //aqui recorro el array de personas para copiarlas al archivo.
+
+		for (Persona aux : misPersonas) { // aqui recorro el array de personas para copiarlas al archivo.
 			writePersona.writeObject(aux);
 		}
 		writePersona.close();
 	}
-	
-	public void leerPersonas() throws FileNotFoundException, IOException, ClassNotFoundException{
-		if(filePersona.exists() == true){
-			
-			FileInputStream fPersona =  new FileInputStream(pathFilePersona);
-			ObjectInputStream readPersona = new ObjectInputStream(fPersona);		
-			
+
+	public void leerPersonas() throws FileNotFoundException, IOException, ClassNotFoundException {
+		if (filePersona.exists() == true) {
+
+			FileInputStream fPersona = new FileInputStream(pathFilePersona);
+			ObjectInputStream readPersona = new ObjectInputStream(fPersona);
+
 			int cantPersonas = readPersona.readInt();
-			
-			for(int i = 0; i < cantPersonas; i ++){
-				misPersonas.add((Persona)readPersona.readObject());
+
+			for (int i = 0; i < cantPersonas; i++) {
+				misPersonas.add((Persona) readPersona.readObject());
 			}
 			readPersona.close();
-		}	
-	} 
-	
-	public void salvarVacunas() throws IOException{
+		}
+	}
+
+	public void salvarVacunas() throws IOException {
 		FileOutputStream fVacuna = new FileOutputStream(pathFileVacuna);
 		ObjectOutputStream writeVacuna = new ObjectOutputStream(fVacuna);
-		
+
 		writeVacuna.writeInt(misVacunas.size());
-		
-		for(Vacuna aux : misVacunas) {    //aqui recorro el array de personas para copiarlas al archivo.
+
+		for (Vacuna aux : misVacunas) { // aqui recorro el array de personas para copiarlas al archivo.
 			writeVacuna.writeObject(aux);
 		}
 		writeVacuna.close();
 	}
-	
-	public void leerVacunas() throws FileNotFoundException, IOException, ClassNotFoundException{
-		if(fileVacuna.exists() == true){
-			
-			FileInputStream fVacuna =  new FileInputStream(pathFileVacuna);
-			ObjectInputStream readVacuna = new ObjectInputStream(fVacuna);		
-			
+
+	public void leerVacunas() throws FileNotFoundException, IOException, ClassNotFoundException {
+		if (fileVacuna.exists() == true) {
+
+			FileInputStream fVacuna = new FileInputStream(pathFileVacuna);
+			ObjectInputStream readVacuna = new ObjectInputStream(fVacuna);
+
 			int cantVacuna = readVacuna.readInt();
-			
-			for(int i = 0; i < cantVacuna; i ++){
+
+			for (int i = 0; i < cantVacuna; i++) {
 				misVacunas.add((Vacuna) readVacuna.readObject());
 			}
 			readVacuna.close();
-		}	
-	} 
-	
-	public void salvarEnfermedades() throws IOException{
+		}
+	}
+
+	public void salvarEnfermedades() throws IOException {
 		FileOutputStream fEnfermedad = new FileOutputStream(pathFileEnfermedad);
 		ObjectOutputStream writeEnfermedad = new ObjectOutputStream(fEnfermedad);
-		
+
 		writeEnfermedad.writeInt(misEnfermedades.size());
-		
-		for(Enfermedad aux : misEnfermedades) {    //aqui recorro el array de personas para copiarlas al archivo.
+
+		for (Enfermedad aux : misEnfermedades) { // aqui recorro el array de personas para copiarlas al archivo.
 			writeEnfermedad.writeObject(aux);
 		}
-		
+
 		writeEnfermedad.close();
 	}
-	
-	public void leerEnfermedades() throws FileNotFoundException, IOException, ClassNotFoundException{
-		if(fileEnfermedad.exists() == true){
-			
-			FileInputStream fEnfermedad =  new FileInputStream(pathFileEnfermedad);
-			ObjectInputStream readEnfermedad = new ObjectInputStream(fEnfermedad);		
-			
+
+	public void leerEnfermedades() throws FileNotFoundException, IOException, ClassNotFoundException {
+		if (fileEnfermedad.exists() == true) {
+
+			FileInputStream fEnfermedad = new FileInputStream(pathFileEnfermedad);
+			ObjectInputStream readEnfermedad = new ObjectInputStream(fEnfermedad);
+
 			int cantEnfermedades = readEnfermedad.readInt();
-			
-			for(int i = 0; i < cantEnfermedades; i ++){
+
+			for (int i = 0; i < cantEnfermedades; i++) {
 				misEnfermedades.add((Enfermedad) readEnfermedad.readObject());
 			}
 			readEnfermedad.close();
-		}	
-	} 
-	
-	public void salvarConsultas() throws IOException{
+		}
+	}
+
+	public void salvarConsultas() throws IOException {
 		FileOutputStream fConsulta = new FileOutputStream(pathFileConsulta);
 		ObjectOutputStream writeConsulta = new ObjectOutputStream(fConsulta);
-		
+
 		writeConsulta.writeInt(misConsultas.size());
-		
-		for(Consulta aux : misConsultas) {    //aqui recorro el array de personas para copiarlas al archivo.
+
+		for (Consulta aux : misConsultas) { // aqui recorro el array de personas para copiarlas al archivo.
 			writeConsulta.writeObject(aux);
 		}
-		
+
 		writeConsulta.close();
 	}
-	
-	public void leerConsultas() throws FileNotFoundException, IOException, ClassNotFoundException{
-		if(fileConsulta.exists() == true){
-			
-			FileInputStream fConsulta =  new FileInputStream(pathFileConsulta);
-			ObjectInputStream readConsulta = new ObjectInputStream(fConsulta);		
-			
+
+	public void leerConsultas() throws FileNotFoundException, IOException, ClassNotFoundException {
+		if (fileConsulta.exists() == true) {
+
+			FileInputStream fConsulta = new FileInputStream(pathFileConsulta);
+			ObjectInputStream readConsulta = new ObjectInputStream(fConsulta);
+
 			int cantConsultas = readConsulta.readInt();
-			
-			for(int i = 0; i < cantConsultas; i ++){
+
+			for (int i = 0; i < cantConsultas; i++) {
 				misConsultas.add((Consulta) readConsulta.readObject());
 			}
 			readConsulta.close();
-		}	
-	} 
-	
-	public void salvarCitas() throws IOException{
+		}
+	}
+
+	public void salvarCitas() throws IOException {
 		FileOutputStream fCita = new FileOutputStream(pathFileCita);
 		ObjectOutputStream writeCita = new ObjectOutputStream(fCita);
-		
+
 		writeCita.writeInt(misCitas.size());
-		
-		for(Cita aux : misCitas) {    //aqui recorro el array de personas para copiarlas al archivo.
+
+		for (Cita aux : misCitas) { // aqui recorro el array de personas para copiarlas al archivo.
 			writeCita.writeObject(aux);
 		}
-		
+
 		fCita.close();
 	}
-	
-	public void leerCitas() throws FileNotFoundException, IOException, ClassNotFoundException{
-		if(fileCita.exists() == true){
-			
-			FileInputStream fCita =  new FileInputStream(pathFileCita);
-			ObjectInputStream readCita = new ObjectInputStream(fCita);		
-			
+
+	public void leerCitas() throws FileNotFoundException, IOException, ClassNotFoundException {
+		if (fileCita.exists() == true) {
+
+			FileInputStream fCita = new FileInputStream(pathFileCita);
+			ObjectInputStream readCita = new ObjectInputStream(fCita);
+
 			int cantCita = readCita.readInt();
-			
-			for(int i = 0; i < cantCita; i ++){
+
+			for (int i = 0; i < cantCita; i++) {
 				misCitas.add((Cita) readCita.readObject());
 			}
 			readCita.close();
-		}	
-	} 
-	
-	public void salvarPacientes() throws IOException{
+		}
+	}
+
+	public void salvarPacientes() throws IOException {
 		FileOutputStream fPaciente = new FileOutputStream(pathFilePaciente);
 		ObjectOutputStream writePaciente = new ObjectOutputStream(fPaciente);
-		
+
 		writePaciente.writeInt(misPacientes.size());
-		
-		for(Paciente aux : misPacientes) {    //aqui recorro el array de personas para copiarlas al archivo.
+
+		for (Paciente aux : misPacientes) { // aqui recorro el array de personas para copiarlas al archivo.
 			writePaciente.writeObject(aux);
 		}
-		
+
 		writePaciente.close();
 	}
-	
-	public void leerPacientes() throws FileNotFoundException, IOException, ClassNotFoundException{
-		if(filePaciente.exists() == true){
-			
-			FileInputStream fPaciente =  new FileInputStream(pathFilePaciente);
-			ObjectInputStream readPaciente = new ObjectInputStream(fPaciente);		
-			
+
+	public void leerPacientes() throws FileNotFoundException, IOException, ClassNotFoundException {
+		if (filePaciente.exists() == true) {
+
+			FileInputStream fPaciente = new FileInputStream(pathFilePaciente);
+			ObjectInputStream readPaciente = new ObjectInputStream(fPaciente);
+
 			int cantPacientes = readPaciente.readInt();
-			
-			for(int i = 0; i < cantPacientes; i ++){
+
+			for (int i = 0; i < cantPacientes; i++) {
 				misPacientes.add((Paciente) readPaciente.readObject());
 			}
 			readPaciente.close();
-		}	
+		}
 	}
-	
-	public Persona findByCedula(String cedula){
-		Persona p =null;
+
+	public Persona findByCedula(String cedula) {
+		Persona p = null;
 		boolean encontrado = false;
 		int i = 0;
-		
-		while(!encontrado && i <misPersonas.size()){
-			if(misPersonas.get(i).getCedula().equalsIgnoreCase(cedula)){
+
+		while (!encontrado && i < misPersonas.size()) {
+			if (misPersonas.get(i).getCedula().equalsIgnoreCase(cedula)) {
 				p = misPersonas.get(i);
 				encontrado = true;
 			}
@@ -314,14 +313,14 @@ public class Clinica implements Serializable{
 		}
 		return p;
 	}
-	
-	public Cita findCitaByID(String id){
-		Cita c =null;
+
+	public Cita findCitaByID(String id) {
+		Cita c = null;
 		boolean encontrado = false;
 		int i = 0;
-		
-		while(!encontrado && i <misCitas.size()){
-			if(misCitas.get(i).getId().equalsIgnoreCase(id)){
+
+		while (!encontrado && i < misCitas.size()) {
+			if (misCitas.get(i).getId().equalsIgnoreCase(id)) {
 				c = misCitas.get(i);
 				encontrado = true;
 			}
@@ -329,14 +328,14 @@ public class Clinica implements Serializable{
 		}
 		return c;
 	}
-	
-	public Consulta findConsultaByCodigo(String codigo){
+
+	public Consulta findConsultaByCodigo(String codigo) {
 		Consulta c = null;
 		boolean encontrado = false;
 		int i = 0;
-		
-		while(!encontrado && i <misConsultas.size()){
-			if(misConsultas.get(i).getCodigo().equalsIgnoreCase(codigo)){
+
+		while (!encontrado && i < misConsultas.size()) {
+			if (misConsultas.get(i).getCodigo().equalsIgnoreCase(codigo)) {
 				c = misConsultas.get(i);
 				encontrado = true;
 			}
@@ -344,14 +343,14 @@ public class Clinica implements Serializable{
 		}
 		return c;
 	}
-	
-	public Consulta findConsultaByCedula(String cedula){
+
+	public Consulta findConsultaByCedula(String cedula) {
 		Consulta c = null;
 		boolean encontrado = false;
 		int i = 0;
-		
-		while(!encontrado && i <misConsultas.size()){
-			if(misConsultas.get(i).getPaciente().getCedula().equalsIgnoreCase(cedula)){
+
+		while (!encontrado && i < misConsultas.size()) {
+			if (misConsultas.get(i).getPaciente().getCedula().equalsIgnoreCase(cedula)) {
 				c = misConsultas.get(i);
 				encontrado = true;
 			}
@@ -359,14 +358,14 @@ public class Clinica implements Serializable{
 		}
 		return c;
 	}
-	
-	public Paciente findPacienteByCedula(String cedula){
+
+	public Paciente findPacienteByCedula(String cedula) {
 		Paciente p = null;
 		boolean encontrado = false;
 		int i = 0;
-		
-		while(!encontrado && i <misPacientes.size()){
-			if(misPacientes.get(i).getCedula().equalsIgnoreCase(cedula)){
+
+		while (!encontrado && i < misPacientes.size()) {
+			if (misPacientes.get(i).getCedula().equalsIgnoreCase(cedula)) {
 				p = misPacientes.get(i);
 				encontrado = true;
 			}
@@ -374,33 +373,33 @@ public class Clinica implements Serializable{
 		}
 		return p;
 	}
-	
-	public void addHistoriaPaciente(String cedula, Historial h){
+
+	public void addHistoriaPaciente(String cedula, Historial h) {
 		Paciente p = findPacienteByCedula(cedula);
 		p.getMiHistorial().add(h);
 	}
-	
-	public boolean validarUsuario(String user){
+
+	public boolean validarUsuario(String user) {
 		boolean validar = false;
 		int i = 0;
-		while(!validar && i < misPersonas.size()){
-			if(misPersonas.get(i) instanceof Trabajador){
-				if(((Trabajador) misPersonas.get(i)).getUsuario().equalsIgnoreCase(user)) {
-				validar = true;
+		while (!validar && i < misPersonas.size()) {
+			if (misPersonas.get(i) instanceof Trabajador) {
+				if (((Trabajador) misPersonas.get(i)).getUsuario().equalsIgnoreCase(user)) {
+					validar = true;
 				}
 			}
 			i++;
 		}
 		return validar;
 	}
-	
+
 	public Persona buscarTrabajador(String user) {
 		Persona trabajador = null;
 		boolean encontrado = false;
 		int i = 0;
-		while(!encontrado && i< misPersonas.size()) {
-			if(misPersonas.get(i) instanceof Trabajador) {
-				if(((Trabajador) misPersonas.get(i)).getUsuario().equalsIgnoreCase(user)) {
+		while (!encontrado && i < misPersonas.size()) {
+			if (misPersonas.get(i) instanceof Trabajador) {
+				if (((Trabajador) misPersonas.get(i)).getUsuario().equalsIgnoreCase(user)) {
 					encontrado = true;
 					trabajador = misPersonas.get(i);
 				}
@@ -409,50 +408,51 @@ public class Clinica implements Serializable{
 		}
 		return trabajador;
 	}
-	
+
 	public boolean validarLogin(String user, String password) {
 		Trabajador userlog = null;
 		boolean acceder = false;
-		if(validarUsuario(user)) {    //Aqui utilizo la funcion validarUsuario para comprobar si el usuario existe o se escribio bien.
+		if (validarUsuario(user)) { // Aqui utilizo la funcion validarUsuario para comprobar si el usuario existe o
+									// se escribio bien.
 			userlog = (Trabajador) buscarTrabajador(user);
-			if(userlog.getPassword().equals(password)) {
+			if (userlog.getPassword().equals(password)) {
 				acceder = true;
 			}
 		}
 		return acceder;
 	}
-	
-	
+
+	public Enfermedad findEnfermedadByCodigo(String codigo) {
+		Enfermedad enf = null;
+		for (int i = 0; i < misEnfermedades.size(); i++) {
+			if (codigo.equalsIgnoreCase(misEnfermedades.get(i).getCodigo())) {
+				enf = misEnfermedades.get(i);
+			}
+		}
+		return enf;
+	}
+
 }
 
 /*
- * Creado por: Alejandro Colón
- * Fecha:
- * Anotaciones:
+ * Creado por: Alejandro Colón Fecha: Anotaciones:
  * 
  * 
- * Modificacion: Alejandro Colón
- * Fecha: 13/11/17
- * Anotaciones: codificacion de instancia "Singleton"
+ * Modificacion: Alejandro Colón Fecha: 13/11/17 Anotaciones: codificacion de
+ * instancia "Singleton"
  * 
- * Modificacion: Oscar Rodriguez
- * Fecha: 13/11/17
- * Anotaciones: Se creo el metodo salvarPersonas() para crear un archivo
+ * Modificacion: Oscar Rodriguez Fecha: 13/11/17 Anotaciones: Se creo el metodo
+ * salvarPersonas() para crear un archivo
  * 
- * Modificaciones: Oscar Rodriguez
- * Fecha: 19/11/2017
- * Anotaciones: Metodos para validar usuario y contrasena.
+ * Modificaciones: Oscar Rodriguez Fecha: 19/11/2017 Anotaciones: Metodos para
+ * validar usuario y contrasena.
  * 
- * Modificaciones: Oscar Rodriguez
- * Fecha: 27/11/2017
- * Anotaciones: modificar las funciones de agregar en archivo
+ * Modificaciones: Oscar Rodriguez Fecha: 27/11/2017 Anotaciones: modificar las
+ * funciones de agregar en archivo
  * 
  * 
- * Modificacion: Alejandro Colón
- * Fecha: 29/11/17
- * Anotaciones:
+ * Modificacion: Alejandro Colón Fecha: 29/11/17 Anotaciones:
  * 
- * Modificacion: Alejandro Colón
- * Fecha: 30/11/17
- * Anotaciones: Agregando arraylist de Pacientes, metodos para leer y salvar pacientes.
- * */
+ * Modificacion: Alejandro Colón Fecha: 30/11/17 Anotaciones: Agregando
+ * arraylist de Pacientes, metodos para leer y salvar pacientes.
+ */
