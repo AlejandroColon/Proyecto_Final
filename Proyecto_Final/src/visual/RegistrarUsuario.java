@@ -30,6 +30,7 @@ import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
+import java.awt.Color;
 
 public class RegistrarUsuario extends JDialog {
 
@@ -71,15 +72,19 @@ public class RegistrarUsuario extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarUsuario() {
+		getContentPane().setBackground(Color.WHITE);
+		setBackground(Color.WHITE);
 		setTitle("Registro de usuarios");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarUsuario.class.getResource("/images/icon.png")));
 		setBounds(100, 100, 423, 538);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(null, "Datos personales", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 386, 198);
 		contentPanel.add(panel);
@@ -115,6 +120,7 @@ public class RegistrarUsuario extends JDialog {
 		txtDireccion.setColumns(10);
 		
 		chckbxM = new JCheckBox("M");
+		chckbxM.setBackground(Color.WHITE);
 		chckbxM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				chckbxF.setSelected(false);
@@ -124,6 +130,7 @@ public class RegistrarUsuario extends JDialog {
 		panel.add(chckbxM);
 		
 		chckbxF = new JCheckBox("F");
+		chckbxF.setBackground(Color.WHITE);
 		chckbxF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				chckbxM.setSelected(false);
@@ -179,10 +186,12 @@ public class RegistrarUsuario extends JDialog {
 		}
 		
 		txtCedula = new JFormattedTextField(maskID);
+		txtCedula.setForeground(Color.BLACK);
 		txtCedula.setBounds(10, 37, 164, 20);
 		panel.add(txtCedula);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		panel_1.setBorder(new TitledBorder(null, "Datos Medicos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(206, 279, 190, 182);
 		contentPanel.add(panel_1);
@@ -209,6 +218,7 @@ public class RegistrarUsuario extends JDialog {
 		txtEspecialidad.setColumns(10);
 		
 		spnCitasXDia = new JSpinner();
+		spnCitasXDia.setBackground(Color.WHITE);
 		spnCitasXDia.setEnabled(false);
 		spnCitasXDia.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		spnCitasXDia.setBounds(10, 137, 164, 20);
@@ -220,6 +230,7 @@ public class RegistrarUsuario extends JDialog {
 		panel_1.add(lblCitasPorDia);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
 		panel_2.setBorder(new TitledBorder(null, "Datos de usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setBounds(10, 220, 186, 241);
 		contentPanel.add(panel_2);
@@ -251,12 +262,14 @@ public class RegistrarUsuario extends JDialog {
 		panel_2.add(label_2);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
 		panel_3.setBorder(new TitledBorder(null, "Categoria", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setBounds(206, 220, 190, 48);
 		contentPanel.add(panel_3);
 		panel_3.setLayout(null);
 		
 		rdbtnMedico = new JRadioButton("Medico");
+		rdbtnMedico.setBackground(Color.WHITE);
 		rdbtnMedico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnMedico.setSelected(true);
@@ -270,6 +283,7 @@ public class RegistrarUsuario extends JDialog {
 		panel_3.add(rdbtnMedico);
 		
 		rdbtnAdm = new JRadioButton("Adm.");
+		rdbtnAdm.setBackground(Color.WHITE);
 		rdbtnAdm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnMedico.setSelected(false);
@@ -283,6 +297,7 @@ public class RegistrarUsuario extends JDialog {
 		panel_3.add(rdbtnAdm);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -293,7 +308,8 @@ public class RegistrarUsuario extends JDialog {
 						if(txtCedula.getText().equalsIgnoreCase("")|| txtDireccion.getText().equalsIgnoreCase("") || (txtEspecialidad.isEditable()&& txtEspecialidad.getText().equalsIgnoreCase(""))
 								|| (txtExequatur.isEditable() && txtExequatur.getText().equalsIgnoreCase("")) || txtFechaNacimiento.getText().equalsIgnoreCase("")
 								|| txtNombre.getText().equalsIgnoreCase("")|| txtTelefono.getText().equalsIgnoreCase("")|| txtUsuario.getText().equalsIgnoreCase("")
-								|| passContra.getPassword().toString().equalsIgnoreCase("")|| passConfContra.getPassword().toString().equalsIgnoreCase("")){
+								|| passContra.getPassword().toString().equalsIgnoreCase("")|| passConfContra.getPassword().toString().equalsIgnoreCase("")
+								&& Clinica.getInstance().validarCedula(txtCedula.getText())){
 							JOptionPane.showMessageDialog(null, "No puede dejar campos vacios", "Aviso", JOptionPane.WARNING_MESSAGE);
 						}else {
 							String prueba = String.valueOf(passContra.getPassword());
@@ -332,6 +348,8 @@ public class RegistrarUsuario extends JDialog {
 							
 						}else if(passContra.getPassword().toString().equals(passConfContra.getPassword().toString()) == false) {
 							JOptionPane.showMessageDialog(null, "Contraseñas no coinciden, favor volver a digitarlas", "Aviso", JOptionPane.WARNING_MESSAGE);
+						}else if(Clinica.getInstance().validarCedula(txtCedula.getText()) == false){
+							JOptionPane.showMessageDialog(null, "La persona con dicha cedula ha sido registrada", "Aviso", JOptionPane.WARNING_MESSAGE);
 						}else {
 							JOptionPane.showMessageDialog(null, "El usuario ya ha sido utilizado, favor elegir otro", "Aviso", JOptionPane.WARNING_MESSAGE);
 						}

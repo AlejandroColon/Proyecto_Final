@@ -509,6 +509,16 @@ public class Clinica implements Serializable {
 		return porciento;
 	}
 	
+	public boolean validarCedula(String cedula) {
+		boolean c = true;
+		
+		for(Persona p : misPersonas) {
+			if(p.getCedula().equalsIgnoreCase(cedula)) {
+				c = false;
+			}
+		}
+		return c;
+	}
 
 }
 
