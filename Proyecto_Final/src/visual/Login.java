@@ -120,6 +120,7 @@ public class Login extends JDialog {
 /*
  * 
  * Creado Por: Oscar Rodriguez. Fecha: 12/11/17 Anotaciones:
- * 
+ * Modificaciones: Yamilka 02/12/17 Anotaciones: Cambiar los formatos de letra
+ * y agregar iconos a los btn
  * 
  */

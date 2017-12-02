@@ -484,6 +484,20 @@ public class Clinica implements Serializable {
 		file.close();
 		linea.close();
 	}
+	
+	public double datosEstadistica(String codigo){
+		double porciento = 0;
+		for(int i=0; i<misPacientes.size();i++){
+			for(int j=0; j<misPacientes.get(i).getMiHistorial().size();j++){
+				if(misPacientes.get(i).getMiHistorial().get(j).getEnfermedad().getCodigo().equalsIgnoreCase(codigo)){
+					porciento++;
+				}
+			}
+		}
+		porciento = (porciento/misPacientes.size())*100;
+		return porciento;
+	}
+	
 
 }
 
@@ -508,4 +522,8 @@ public class Clinica implements Serializable {
  * 
  * Modificacion: Alejandro Colón Fecha: 30/11/17 Anotaciones: Agregando
  * arraylist de Pacientes, metodos para leer y salvar pacientes.
+ * 
+ * Modificación: Yamilka Vasquez 02/12/17 Anotaciones: agregar las funciones para
+ * determinar los porcentajes para las gráficas
+ * 
  */

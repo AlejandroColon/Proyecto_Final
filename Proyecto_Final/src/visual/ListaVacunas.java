@@ -116,5 +116,5 @@ public class ListaVacunas extends JDialog {
 
 }
 /*
- * 
+ *Creado por: Yamilka 02/12/17 
  * */

@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import logical.Administrativo;
 import logical.Cita;
 import logical.Clinica;
+import logical.Enfermedad;
 import logical.Persona;
 
 import java.awt.Toolkit;
@@ -20,6 +21,11 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -314,6 +320,36 @@ public class Principal extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.MAGENTA);
 		panel.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(10, 11, 522, 276);
+		panel_3.add(panel_5);
+
+		  DefaultPieDataset data = new DefaultPieDataset();
+		  for (Enfermedad aux : Clinica.getInstance().getMisEnfermedades()) {
+			
+		}
+	        data.setValue("C", 40);
+	        data.setValue("Java", 45);
+	        data.setValue("Python", 15);
+	 
+	        // Creando el Grafico
+	        JFreeChart chart = ChartFactory.createPieChart(
+	         "Ejemplo Rapido de Grafico en un ChartFrame", 
+	         data, 
+	         true, 
+	         true, 
+	         false);
+	 
+	        // Crear el Panel del Grafico con ChartPanel
+	        ChartPanel chartPanel = new ChartPanel(chart);
+	        chartPanel.setHorizontalAxisTrace(true);
+	        chartPanel.setFillZoomRectangle(false);
+	        chartPanel.setEnforceFileExtensions(false);
+	        chartPanel.setMouseWheelEnabled(true);
+	        panel_5.add(chartPanel);
+		
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.CYAN);
@@ -353,3 +389,8 @@ public class Principal extends JFrame {
 		}
 	}
 }
+/*
+ * Creado por: Alejandro
+ * Modificaciones: Yamilka 02/12/17
+ * Agregando los iconos al menu de opciones y dando formato a las letras
+ */

@@ -113,3 +113,9 @@ public class ListarEnfermedades extends JDialog {
 		}
 	}
 }
+
+/*
+ * Creado por: Yamilka 02/12/17
+ * 
+ * 
+ */
