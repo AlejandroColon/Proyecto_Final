@@ -18,6 +18,9 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import java.awt.Font;
 
 public class ListaVacunas extends JDialog {
 
@@ -51,6 +54,7 @@ public class ListaVacunas extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListaVacunas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaVacunas.class.getResource("/images/icon.png")));
 		setTitle("Listado de Vacunas");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -82,18 +86,9 @@ public class ListaVacunas extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnAceptar = new JButton("Aceptar");
-				btnAceptar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				btnAceptar.setActionCommand("OK");
-				buttonPane.add(btnAceptar);
-				getRootPane().setDefaultButton(btnAceptar);
-			}
-			{
 				JButton btnAtras = new JButton("Atr\u00E1s");
+				btnAtras.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
+				btnAtras.setIcon(new ImageIcon(ListaVacunas.class.getResource("/images/back.png")));
 				btnAtras.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

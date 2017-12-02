@@ -20,6 +20,8 @@ import javax.swing.ListSelectionModel;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class ListaTrabajadores extends JDialog {
 
@@ -77,6 +79,8 @@ public class ListaTrabajadores extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Atr\u00E1s");
+				okButton.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
+				okButton.setIcon(new ImageIcon(ListaTrabajadores.class.getResource("/images/back.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

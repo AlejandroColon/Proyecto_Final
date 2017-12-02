@@ -19,6 +19,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.Font;
 
 public class Login extends JDialog {
 
@@ -40,6 +41,7 @@ public class Login extends JDialog {
 		contentPanel.setLayout(null);
 
 		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		lblUsuario.setBounds(46, 161, 56, 14);
 		contentPanel.add(lblUsuario);
 
@@ -49,6 +51,7 @@ public class Login extends JDialog {
 		txtUsuario.setColumns(10);
 
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+		lblContrasea.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		lblContrasea.setBounds(46, 201, 86, 14);
 		contentPanel.add(lblContrasea);
 
@@ -70,6 +73,8 @@ public class Login extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnIniciarSesion = new JButton("Iniciar sesion");
+				btnIniciarSesion.setIcon(new ImageIcon(Login.class.getResource("/images/001-login.png")));
+				btnIniciarSesion.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
 				btnIniciarSesion.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String user = txtUsuario.getText();
@@ -98,6 +103,8 @@ public class Login extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(Login.class.getResource("/images/003-logout-1.png")));
+				btnCancelar.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						System.exit(0);

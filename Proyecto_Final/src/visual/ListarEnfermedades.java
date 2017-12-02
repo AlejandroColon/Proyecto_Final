@@ -18,6 +18,8 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class ListarEnfermedades extends JDialog {
 
@@ -84,18 +86,8 @@ public class ListarEnfermedades extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnAceptar = new JButton("Aceptar");
-				btnAceptar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				btnAceptar.setActionCommand("OK");
-				buttonPane.add(btnAceptar);
-				getRootPane().setDefaultButton(btnAceptar);
-			}
-			{
 				JButton btnCancelar = new JButton("Atr\u00E1s");
+				btnCancelar.setIcon(new ImageIcon(ListarEnfermedades.class.getResource("/images/back.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
