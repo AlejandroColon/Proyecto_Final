@@ -448,6 +448,11 @@ public class Clinica implements Serializable {
 		return v;
 	}
 	
+	public void addVacunasPaciente (String cedula, ArrayList<Vacuna> vacs) {
+		Paciente p = findPacienteByCedula(cedula);
+		p.setMisVacunas(vacs);
+	}
+	
 	public void generarHistorial(String cedula) throws IOException {
 		
 		Paciente p = findPacienteByCedula(cedula);

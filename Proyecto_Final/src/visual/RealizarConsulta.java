@@ -12,7 +12,6 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import logical.Cita;
 import logical.Clinica;
 import logical.Consulta;
 import logical.Enfermedad;
@@ -589,6 +588,34 @@ public class RealizarConsulta extends JDialog {
 		
 		if(value.equalsIgnoreCase("No Aplicada")) {
 			vacunasAplicadas.add(Clinica.getInstance().findVacunaByCodigo(value));
+			actualizarVacunas();
+		}
+	}
+
+	private void actualizarVacunas() {
+		model2.setRowCount(0);
+		fila2 = new Object[model2.getColumnCount()];
+		Vacuna v = null;
+		
+		for (int i = 0; i < Clinica.getInstance().getMisVacunas().size(); i++) {
+			boolean encontrado = false;
+			v = Clinica.getInstance().getMisVacunas().get(i);
+
+			fila2[0] = v.getCodigo();
+			fila2[1] = v.getNombre();
+
+			for (int j = 0; j < vacunasAplicadas.size(); j++) {
+				if (vacunasAplicadas.get(j).getCodigo().equalsIgnoreCase(v.getCodigo())) {
+					encontrado = true;
+				}
+			}
+
+			if (encontrado)
+				fila2[2] = "Aplicada";
+			else
+				fila2[2] = "No Aplicada";
+
+			model2.addRow(fila2);
 		}
 	}
 }
