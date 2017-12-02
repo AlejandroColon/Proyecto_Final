@@ -444,6 +444,7 @@ public class Clinica implements Serializable {
 				v = misVacunas.get(i);
 				encontrado = true;
 			}
+			i++;
 		}			
 		return v;
 	}

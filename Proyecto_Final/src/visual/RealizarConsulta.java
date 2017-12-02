@@ -522,7 +522,7 @@ public class RealizarConsulta extends JDialog {
 		fila2 = new Object[model2.getColumnCount()];
 		Vacuna v = null;
 
-		vacunasAplicadas = ((Paciente) p).getMisVacunas();
+		copiarArreglo(p);
 		
 		for (int i = 0; i < Clinica.getInstance().getMisVacunas().size(); i++) {
 			boolean encontrado = false;
@@ -543,6 +543,12 @@ public class RealizarConsulta extends JDialog {
 				fila2[2] = "No Aplicada";
 
 			model2.addRow(fila2);
+		}
+	}
+
+	private void copiarArreglo(Persona p) {
+		for(Vacuna aux : ((Paciente)p).getMisVacunas()) {
+			vacunasAplicadas.add(aux);
 		}
 	}
 
@@ -597,11 +603,19 @@ public class RealizarConsulta extends JDialog {
 		
 		if(estado.equalsIgnoreCase("No Aplicada")) {
 			
+			Vacuna vac = null;
+			vac = Clinica.getInstance().findVacunaByCodigo(codigo);
 			
-			vacunasAplicadas.add(Clinica.getInstance().findVacunaByCodigo(codigo));
-			JOptionPane.showMessageDialog(null, estado + ", " + codigo, "ERROR",
-					JOptionPane.ERROR_MESSAGE);
-			actualizarVacunas();
+			if(vac == null) {
+				JOptionPane.showMessageDialog(null, "hay un maco", "Información",
+						JOptionPane.INFORMATION_MESSAGE);
+			}else {
+				vacunasAplicadas.add(vac);
+				actualizarVacunas();
+				JOptionPane.showMessageDialog(null, "Vacuna Aplicada", "Información",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			
 		}
 	}
 
