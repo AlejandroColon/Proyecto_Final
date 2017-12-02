@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logical.Cita;
 import logical.Clinica;
 import logical.Consulta;
 import logical.Enfermedad;
@@ -36,6 +37,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
@@ -66,6 +68,8 @@ public class RealizarConsulta extends JDialog {
 	private static DefaultTableModel model2;
 	private static Object[] fila2;
 	private JTable tableVacuna;
+	
+	private ArrayList<Vacuna> vacunasAplicadas = new ArrayList<>();
 
 	public RealizarConsulta(Persona p) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RealizarConsulta.class.getResource("/images/icon.png")));
@@ -302,6 +306,23 @@ public class RealizarConsulta extends JDialog {
 		tableVacuna.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableVacuna.setModel(model2);
 		scrollPane_1.setViewportView(tableVacuna);
+		
+		JButton btnVacunaAplicada = new JButton("Vacuna Aplicada");
+		btnVacunaAplicada.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int column = 0;
+				int row = tableVacuna.getSelectedRow();
+				String value = tableVacuna.getModel().getValueAt(row, column).toString();
+				
+				if(value.equalsIgnoreCase("No Aplicada")) {
+					
+				}
+				
+			}
+		});
+		btnVacunaAplicada.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnVacunaAplicada.setBounds(219, 371, 121, 23);
+		panel_6.add(btnVacunaAplicada);
 
 		// informacion.addTab("Panel 4", panel_4);
 		// informacion.addTab("Panel 5", panel_5);
@@ -451,13 +472,11 @@ public class RealizarConsulta extends JDialog {
 		 * 
 		 */
 
-		boolean encontrado = false;
-
 		if (p != null) {
 
 			Paciente person = Clinica.getInstance().findPacienteByCedula(p.getCedula());
-
-			if (encontrado) {
+			
+			if (person != null) {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
 				txtDireccion.setText(p.getDireccion());
@@ -503,6 +522,8 @@ public class RealizarConsulta extends JDialog {
 		fila2 = new Object[model2.getColumnCount()];
 		Vacuna v = null;
 
+		vacunasAplicadas = ((Paciente) p).getMisVacunas();
+		
 		for (int i = 0; i < Clinica.getInstance().getMisVacunas().size(); i++) {
 			boolean encontrado = false;
 			v = Clinica.getInstance().getMisVacunas().get(i);

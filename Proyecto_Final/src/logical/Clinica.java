@@ -434,6 +434,20 @@ public class Clinica implements Serializable {
 		return enf;
 	}
 	
+	public Vacuna findVacunaByCodigo (String codigo) {
+		Vacuna v = null;
+		boolean encontrado =  false;
+		int i = 0;
+		
+		while(!encontrado && i < misVacunas.size()) {
+			if(misVacunas.get(i).getCodigo().equalsIgnoreCase(codigo)) {
+				v = misVacunas.get(i);
+				encontrado = true;
+			}
+		}			
+		return v;
+	}
+	
 	public void generarHistorial(String cedula) throws IOException {
 		
 		Paciente p = findPacienteByCedula(cedula);
