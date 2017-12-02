@@ -34,6 +34,7 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -278,6 +279,14 @@ public class RealizarConsulta extends JDialog {
 		scrollPane.setViewportView(tableHsitoriaClinica);
 
 		JButton btnVerHistoriaClnica = new JButton("Ver Historia Cl\u00EDnica");
+		btnVerHistoriaClnica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Clinica.getInstance().generarHistorial(txtCedula.getText());
+				} catch (IOException e1) {
+				}
+			}
+		});
 		btnVerHistoriaClnica.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnVerHistoriaClnica.setBounds(219, 372, 121, 23);
 		panel_4.add(btnVerHistoriaClnica);
