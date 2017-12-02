@@ -462,13 +462,22 @@ public class Clinica implements Serializable {
 		file = new FileWriter("Reporte.txt");
 		linea = new PrintWriter("Reporte.txt");
 		
-		linea.println("	Reporte de historial	");
+		linea.println("						Reporte de historial	");
 		linea.println("_________________________________________________________________________");
 		linea.println("Cedula:		"+ p.getCedula()+"	Aseguradora:	"+ p.getAseguradora());
 		linea.println("Nombre:		"+ p.getNombre()+"	Afiliado No.:	"+p.getNumeroAfiliado());
 		linea.println("Telefono:	"+ p.getTelefono()+"	Direccion:		"+p.getDireccion());
 		linea.println("________________________________________________________________________");
-		linea.println(""+p.getMiHistorial());
+		for(Historial h : p.getMiHistorial()) {
+			linea.println("Codigo:	"+h.getCodigo()+"Fecha:	"+h.getFecha());
+			linea.println("Sintomas:	"+h.getSintomas());
+			linea.println("Diagnostico:	"+h.getDiagnostico());
+			linea.println("Tratamiento:	"+h.getTratamiento());
+			if(h.getEnfermedad()!=null) {
+				linea.println("Enfermedad:	"+h.getEnfermedad());
+			}else
+				linea.println("Enfermedad:	N/A");
+		}
 		
 		file.close();
 		linea.close();
