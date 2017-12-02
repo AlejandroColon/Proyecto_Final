@@ -2,8 +2,11 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Proyecto_Final/src"/>
+	<classpathentry kind="src" path="Graficos"/>
 	<classpathentry kind="lib" path="Proyecto_Final/jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="Proyecto_Final/jgoodies-forms-1.8.0.jar"/>
 	<classpathentry kind="lib" path="Proyecto_Final/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="Graficos/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="Graficos/jcommon-1.0.23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

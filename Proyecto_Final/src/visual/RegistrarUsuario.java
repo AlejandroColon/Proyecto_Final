@@ -115,14 +115,32 @@ public class RegistrarUsuario extends JDialog {
 		txtDireccion.setColumns(10);
 		
 		chckbxM = new JCheckBox("M");
+		chckbxM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxF.setSelected(false);
+			}
+		});
 		chckbxM.setBounds(210, 81, 38, 23);
 		panel.add(chckbxM);
 		
 		chckbxF = new JCheckBox("F");
+		chckbxF.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxM.setSelected(false);
+			}
+		});
 		chckbxF.setBounds(250, 81, 97, 23);
 		panel.add(chckbxF);
 		
-		txtFechaNacimiento = new JFormattedTextField();
+		MaskFormatter maskDate = null;
+		try {
+			maskDate = new MaskFormatter("##/##/####");
+			maskDate.setPlaceholderCharacter('_');
+		}catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		txtFechaNacimiento = new JFormattedTextField(maskDate);
 		txtFechaNacimiento.setBounds(10, 82, 164, 20);
 		panel.add(txtFechaNacimiento);
 		
@@ -138,11 +156,29 @@ public class RegistrarUsuario extends JDialog {
 		txtTelefono.setBounds(212, 127, 164, 20);
 		panel.add(txtTelefono);
 		
-		txtNombre = new JFormattedTextField();
+		MaskFormatter maskName = null;
+		try {
+			maskName = new MaskFormatter("************************************");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		} 
+		maskName.setValidCharacters("qwertyuiopasdfghjklzxcvbnÒm" +
+                    "           QWERTYUIOPASDFGHJKLZXCVBN—M "+"¡·…ÈÕÌ⁄˙");
+		maskName.setPlaceholderCharacter(' ');
+		
+		txtNombre = new JFormattedTextField(maskName);
 		txtNombre.setBounds(212, 37, 164, 20);
 		panel.add(txtNombre);
 		
-		txtCedula = new JFormattedTextField();
+		MaskFormatter maskID = null;
+		try {
+			maskID = new MaskFormatter("###-#######-#");
+			maskphone.setPlaceholderCharacter('_');
+		}catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		txtCedula = new JFormattedTextField(maskID);
 		txtCedula.setBounds(10, 37, 164, 20);
 		panel.add(txtCedula);
 		
@@ -249,7 +285,7 @@ public class RegistrarUsuario extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -307,7 +343,7 @@ public class RegistrarUsuario extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Atras");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
