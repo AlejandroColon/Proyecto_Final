@@ -9,12 +9,12 @@ public abstract class InfoClinica implements Serializable{
 	 */
 	private static final long serialVersionUID = -1495026567206777360L;
 	// *****************************ATRIBUTOS****************************
-	private String codigo;
-	private String fecha; // más adelante se determinará si debe ser date o no
-	private String sintomas;
-	private String diagnostico;
-	private String tratamiento;
-	private Enfermedad enfermedad;// cuando Ale suba la clase enfermedad se va cambiar de String a Enfermedad
+	protected String codigo;
+	protected String fecha; // más adelante se determinará si debe ser date o no
+	protected String sintomas;
+	protected String diagnostico;
+	protected String tratamiento;
+	protected Enfermedad enfermedad;// cuando Ale suba la clase enfermedad se va cambiar de String a Enfermedad
 
 	// ****************************CONSTRUCTOR************************
 
