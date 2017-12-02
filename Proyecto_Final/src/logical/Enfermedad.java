@@ -10,6 +10,7 @@ public class Enfermedad extends Control implements Serializable{
 	private static final long serialVersionUID = -5650943839921258950L;
 
 	//**************************Atributos*******************
+	private boolean estado = true;
 	
 	//*****************************Constructor********************
 	public Enfermedad(String codigo, String nombre, String descripcion) {
@@ -17,6 +18,14 @@ public class Enfermedad extends Control implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	//******************************Sets y Gets*******************************
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 	
 	//*****************************Metodos*******************************
 }

@@ -214,6 +214,7 @@ public class RegistrarUsuario extends JDialog {
 		spnCitasXDia.setBounds(10, 137, 164, 20);
 		panel_1.add(spnCitasXDia);
 		
+		
 		JLabel lblCitasPorDia = new JLabel("Citas por dia:");
 		lblCitasPorDia.setBounds(10, 123, 100, 14);
 		panel_1.add(lblCitasPorDia);

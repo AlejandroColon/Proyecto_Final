@@ -13,6 +13,7 @@ public class Cita implements Serializable{
 	private String fecha;
 	private Doctor doctor;
 	private Persona citado;
+	private boolean estado = true;
 	//******************************Constructor*************
 	public Cita(String id, String fecha, Doctor doctor, Persona citado) {
 		super();
@@ -46,7 +47,15 @@ public class Cita implements Serializable{
 	public void setCitado(Persona citado) {
 		this.citado = citado;
 	}
+	public boolean isEstado() {
+		return estado;
+	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 	///**********************Metodos****************
+
+
 }
 
 
