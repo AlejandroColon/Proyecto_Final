@@ -366,8 +366,7 @@ public class RealizarConsulta extends JDialog {
 
 							}
 							
-							
-							
+							Clinica.getInstance().addVacunasPaciente(txtCedula.getText(), vacunasAplicadas);
 							Consulta c = new Consulta(codigo, fecha, sintomas, diagnostico, tratamiento, enf, Clinica.getInstance().findPacienteByCedula(txtCedula.getText()));
 							Clinica.getInstance().addConsulta(c);
 							Clinica.getInstance().salvarConsultas();
@@ -441,8 +440,6 @@ public class RealizarConsulta extends JDialog {
 			}
 
 			if (encontrado) {
-				//cmbEnfermedad.insertItemAt("<Seleccione>", 0);
-				cmbEnfermedad.setSelectedItem(0);
 				cmbEnfermedad.setSelectedItem(0);
 			} else {
 				cmbEnfermedad.removeAllItems(); 
@@ -584,12 +581,17 @@ public class RealizarConsulta extends JDialog {
 	}
 	
 	private void agregarVacuna() {
-		int column = 0;
+		int column = 2;
 		int row = tableVacuna.getSelectedRow();
-		String value = tableVacuna.getModel().getValueAt(row, column).toString();
+		String estado = tableVacuna.getModel().getValueAt(row, column).toString();
+		String codigo = tableVacuna.getModel().getValueAt(row, 0).toString();
 		
-		if(value.equalsIgnoreCase("No Aplicada")) {
-			vacunasAplicadas.add(Clinica.getInstance().findVacunaByCodigo(value));
+		if(estado.equalsIgnoreCase("No Aplicada")) {
+			
+			
+			vacunasAplicadas.add(Clinica.getInstance().findVacunaByCodigo(codigo));
+			JOptionPane.showMessageDialog(null, estado + ", " + codigo, "ERROR",
+					JOptionPane.ERROR_MESSAGE);
 			actualizarVacunas();
 		}
 	}
