@@ -29,6 +29,8 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class Principal extends JFrame {
 
@@ -40,7 +42,7 @@ public class Principal extends JFrame {
 	private JTable tableCitas;
 	private static DefaultTableModel model;
 	private static Object[] fila;
-	JComboBox<String> cmbFiltro;
+	JComboBox<String> cbxFiltro;
 
 	/**
 	 * Launch the application.
@@ -94,9 +96,13 @@ public class Principal extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenu mnInicio = new JMenu("Inicio");
+		mnInicio.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
+		mnInicio.setIcon(new ImageIcon(Principal.class.getResource("/images/001-caduceus-1.png")));
 		menuBar.add(mnInicio);
 
 		JMenuItem mntmCambiarDeUsuario = new JMenuItem("Cambiar de Usuario");
+		mntmCambiarDeUsuario.setIcon(new ImageIcon(Principal.class.getResource("/images/switch.png")));
+		mntmCambiarDeUsuario.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mntmCambiarDeUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					Login frame = new Login();
@@ -109,12 +115,18 @@ public class Principal extends JFrame {
 		mnInicio.add(mntmCambiarDeUsuario);
 
 		JMenuItem mntmCerrarSesin = new JMenuItem("Salir del Programa");
+		mntmCerrarSesin.setIcon(new ImageIcon(Principal.class.getResource("/images/exit.png")));
+		mntmCerrarSesin.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mnInicio.add(mntmCerrarSesin);
 
 		JMenu mnAdministrativo = new JMenu("Administrativo");
+		mnAdministrativo.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
+		mnAdministrativo.setIcon(new ImageIcon(Principal.class.getResource("/images/nurse.png")));
 		menuBar.add(mnAdministrativo);
 
 		JMenuItem mntmRegistrarEmpleado = new JMenuItem("Registrar Empleado");
+		mntmRegistrarEmpleado.setIcon(new ImageIcon(Principal.class.getResource("/images/worker.png")));
+		mntmRegistrarEmpleado.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mntmRegistrarEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarUsuario frame = new RegistrarUsuario();
@@ -126,9 +138,13 @@ public class Principal extends JFrame {
 		mnAdministrativo.add(mntmRegistrarEmpleado);
 
 		JMenuItem mntmModificarEmpleado = new JMenuItem("Modificar Empleado");
+		mntmModificarEmpleado.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+		mntmModificarEmpleado.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
 		mnAdministrativo.add(mntmModificarEmpleado);
 		
 		JMenuItem mntmListaDeEmpleados = new JMenuItem("Lista de Empleados");
+		mntmListaDeEmpleados.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+		mntmListaDeEmpleados.setIcon(new ImageIcon(Principal.class.getResource("/images/004-notepad.png")));
 		mntmListaDeEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListaTrabajadores frame = new ListaTrabajadores();
@@ -140,9 +156,13 @@ public class Principal extends JFrame {
 		mnAdministrativo.add(mntmListaDeEmpleados);
 
 		JMenu mnCitas = new JMenu("Citas");
+		mnCitas.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
+		mnCitas.setIcon(new ImageIcon(Principal.class.getResource("/images/stethoscope.png")));
 		menuBar.add(mnCitas);
 
 		JMenuItem mntmRegistrarCita = new JMenuItem("Registrar Cita");
+		mntmRegistrarCita.setIcon(new ImageIcon(Principal.class.getResource("/images/note.png")));
+		mntmRegistrarCita.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mntmRegistrarCita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarCita frame = new RegistrarCita();
@@ -154,12 +174,18 @@ public class Principal extends JFrame {
 		mnCitas.add(mntmRegistrarCita);
 
 		JMenuItem mntmModificarCita = new JMenuItem("Modificar Cita");
+		mntmModificarCita.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+		mntmModificarCita.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
 		mnCitas.add(mntmModificarCita);
 		
 		JMenu mnControl = new JMenu("Control");
+		mnControl.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
+		mnControl.setIcon(new ImageIcon(Principal.class.getResource("/images/002-notepad.png")));
 		menuBar.add(mnControl);
 		
 		JMenuItem mntmRegistrarEnfermedad = new JMenuItem("Registrar Enfermedad");
+		mntmRegistrarEnfermedad.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+		mntmRegistrarEnfermedad.setIcon(new ImageIcon(Principal.class.getResource("/images/biohazard.png")));
 		mntmRegistrarEnfermedad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarEnfermedad frame = new RegistrarEnfermedad();
@@ -171,6 +197,8 @@ public class Principal extends JFrame {
 		mnControl.add(mntmRegistrarEnfermedad);
 		
 		JMenuItem mntmRegistrarVacuna = new JMenuItem("Registrar Vacuna");
+		mntmRegistrarVacuna.setIcon(new ImageIcon(Principal.class.getResource("/images/012-syringe.png")));
+		mntmRegistrarVacuna.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mntmRegistrarVacuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarVacunas frame = new RegistrarVacunas();
@@ -182,9 +210,13 @@ public class Principal extends JFrame {
 		mnControl.add(mntmRegistrarVacuna);
 		
 		JMenuItem mntmModificiarEnfermedad = new JMenuItem("Modificiar Enfermedad");
+		mntmModificiarEnfermedad.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+		mntmModificiarEnfermedad.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
 		mnControl.add(mntmModificiarEnfermedad);
 		
 		JMenuItem mntmModificarVacuna = new JMenuItem("Modificar Vacuna");
+		mntmModificarVacuna.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+		mntmModificarVacuna.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
 		mnControl.add(mntmModificarVacuna);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -232,6 +264,7 @@ public class Principal extends JFrame {
 		scrollPane.setViewportView(tableCitas);
 
 		JButton btnConsulta = new JButton("Realizar Consulta");
+		btnConsulta.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
 		btnConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -255,7 +288,7 @@ public class Principal extends JFrame {
 		}
 
 		JPanel panelFiltro = new JPanel();
-		panelFiltro.setBounds(20, 23, 259, 38);
+		panelFiltro.setBounds(20, 23, 512, 38);
 		panelCitas.add(panelFiltro);
 		panelFiltro.setLayout(null);
 		
@@ -266,12 +299,13 @@ public class Principal extends JFrame {
 		}
 
 		JLabel lblFiltrarCitas = new JLabel("Filtrar Citas:");
+		lblFiltrarCitas.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
 		lblFiltrarCitas.setBounds(10, 11, 76, 14);
 		panelFiltro.add(lblFiltrarCitas);
 
-		cmbFiltro = new JComboBox<String>();
-		cmbFiltro.setBounds(96, 8, 125, 19);
-		panelFiltro.add(cmbFiltro);
+		cbxFiltro = new JComboBox<String>();
+		cbxFiltro.setBounds(96, 8, 125, 19);
+		panelFiltro.add(cbxFiltro);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.ORANGE);
