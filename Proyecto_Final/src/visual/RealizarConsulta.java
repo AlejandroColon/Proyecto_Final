@@ -310,14 +310,7 @@ public class RealizarConsulta extends JDialog {
 		JButton btnVacunaAplicada = new JButton("Vacuna Aplicada");
 		btnVacunaAplicada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int column = 0;
-				int row = tableVacuna.getSelectedRow();
-				String value = tableVacuna.getModel().getValueAt(row, column).toString();
-				
-				if(value.equalsIgnoreCase("No Aplicada")) {
-					
-				}
-				
+				agregarVacuna();
 			}
 		});
 		btnVacunaAplicada.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -587,6 +580,16 @@ public class RealizarConsulta extends JDialog {
 		}
 
 		return i - 1;
+	}
+	
+	private void agregarVacuna() {
+		int column = 0;
+		int row = tableVacuna.getSelectedRow();
+		String value = tableVacuna.getModel().getValueAt(row, column).toString();
+		
+		if(value.equalsIgnoreCase("No Aplicada")) {
+			vacunasAplicadas.add(Clinica.getInstance().findVacunaByCodigo(value));
+		}
 	}
 }
 
