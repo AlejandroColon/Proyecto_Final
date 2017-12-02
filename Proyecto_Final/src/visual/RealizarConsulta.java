@@ -384,6 +384,9 @@ public class RealizarConsulta extends JDialog {
 							JOptionPane.showMessageDialog(null, "Consulta realizada exitosamente", "Información",
 									JOptionPane.INFORMATION_MESSAGE);
 							
+							dispose();
+							
+							
 						} catch (Exception e2) {
 							JOptionPane.showMessageDialog(null, "TAMO ZUPENSO", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
@@ -483,8 +486,11 @@ public class RealizarConsulta extends JDialog {
 				txtEdad.setText("" + p.getEdad());
 				txtTelefono.setText(p.getTelefono());
 				txtNumAfiliado.setText(person.getNumeroAfiliado());
+				txtNumAfiliado.setEditable(false);
 				cmbAseguradora.setSelectedIndex(determinarAseguradora(person));
+				cmbAseguradora.setEnabled(false);
 				cmbSangre.setSelectedIndex(determinarSangre(person));
+				cmbSangre.setEnabled(false);
 				cargarHistoriaClinica(person);
 				cargarVacunas(person);
 			} else {
