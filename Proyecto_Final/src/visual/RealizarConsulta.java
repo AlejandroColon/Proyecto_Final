@@ -366,6 +366,8 @@ public class RealizarConsulta extends JDialog {
 
 							}
 							
+							
+							
 							Consulta c = new Consulta(codigo, fecha, sintomas, diagnostico, tratamiento, enf, Clinica.getInstance().findPacienteByCedula(txtCedula.getText()));
 							Clinica.getInstance().addConsulta(c);
 							Clinica.getInstance().salvarConsultas();
