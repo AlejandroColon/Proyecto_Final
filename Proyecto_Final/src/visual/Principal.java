@@ -328,11 +328,12 @@ public class Principal extends JFrame {
 
 		  DefaultPieDataset data = new DefaultPieDataset();
 		  for (Enfermedad aux : Clinica.getInstance().getMisEnfermedades()) {
-			
+			  data.setValue(aux.getNombre(), Clinica.getInstance().datosEstadistica(aux.getCodigo()));
 		}
-	        data.setValue("C", 40);
+		  data.setValue("No enfermos", Clinica.getInstance().estadisticaNoEnfermos());
+	        /*data.setValue("C", 40);
 	        data.setValue("Java", 45);
-	        data.setValue("Python", 15);
+	        data.setValue("Python", 15);*/
 	 
 	        // Creando el Grafico
 	        JFreeChart chart = ChartFactory.createPieChart(

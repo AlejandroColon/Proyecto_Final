@@ -488,13 +488,24 @@ public class Clinica implements Serializable {
 	public double datosEstadistica(String codigo){
 		double porciento = 0;
 		for(int i=0; i<misPacientes.size();i++){
-			for(int j=0; j<misPacientes.get(i).getMiHistorial().size();j++){
-				if(misPacientes.get(i).getMiHistorial().get(j).getEnfermedad().getCodigo().equalsIgnoreCase(codigo)){
+			int size = misPacientes.get(i).getMiHistorial().size();
+				if(misPacientes.get(i).getMiHistorial().get(size-1).getEnfermedad()!=null)
+				if(misPacientes.get(i).getMiHistorial().get(size-1).getEnfermedad().getCodigo().equalsIgnoreCase(codigo)){
 					porciento++;
-				}
+				
 			}
 		}
-		porciento = (porciento/misPacientes.size())*100;
+		//porciento = (porciento/misPacientes.size())*100;
+		return porciento;
+	}
+	public double estadisticaNoEnfermos(){
+		double porciento = 0;
+		for(int i=0; i<misPacientes.size();i++){
+			int size = misPacientes.get(i).getMiHistorial().size();
+				if(misPacientes.get(i).getMiHistorial().get(size-1).getEnfermedad()==null)
+					porciento++;
+			}
+		
 		return porciento;
 	}
 	

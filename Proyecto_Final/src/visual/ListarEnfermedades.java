@@ -18,7 +18,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
-import java.awt.Font;
+
 import javax.swing.ImageIcon;
 
 public class ListarEnfermedades extends JDialog {
