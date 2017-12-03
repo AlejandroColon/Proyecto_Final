@@ -279,13 +279,10 @@ public class RegistrarCita extends JDialog {
 						if(txtFormatCedula.getText().toString().equalsIgnoreCase("")|| txtNombre.getText().toString().equalsIgnoreCase("")||
 								txtFormatTelefono.getText().toString().equalsIgnoreCase("")||txtFormatFechaNaci.getText().toString().equalsIgnoreCase("")
 								|| txtDireccion.getText().equalsIgnoreCase("") || txtFecha.getText().equalsIgnoreCase("")||
-								cbxDoctor.getSelectedItem().toString().equalsIgnoreCase("Seleccione")
-								&& Clinica.getInstance().validarCedula(txtID.getText())){
+								cbxDoctor.getSelectedItem().toString().equalsIgnoreCase("Seleccione")){
 							JOptionPane.showMessageDialog(null, "Compruebe que no existan datos inválidos", null, JOptionPane.WARNING_MESSAGE, null);
-						}else if(Clinica.getInstance().validarCedula(txtID.getText()) == false){
-							JOptionPane.showMessageDialog(null, "Persona con la misma cedula ha sido registrado", null, JOptionPane.WARNING_MESSAGE, null);
-						}
-						else{
+						
+						}else{
 
 						// Datos de la cita
 						String id = txtID.getText();

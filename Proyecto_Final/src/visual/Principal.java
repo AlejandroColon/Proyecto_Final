@@ -38,7 +38,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 
-public class Principal extends JFrame {
+public class Principal extends JFrame{
 
 	/**
 	 * 
@@ -278,7 +278,7 @@ public class Principal extends JFrame {
 				int row = tableCitas.getSelectedRow();
 				String value = tableCitas.getModel().getValueAt(row, column).toString();
 				Cita c = Clinica.getInstance().findCitaByID(value);
-				RealizarConsulta frame = new RealizarConsulta(c.getCitado());
+				RealizarConsulta frame = new RealizarConsulta(c.getCitado(), c.getId(), p.getCedula());
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 
@@ -337,7 +337,7 @@ public class Principal extends JFrame {
 	 
 	        // Creando el Grafico
 	        JFreeChart chart = ChartFactory.createPieChart(
-	         "Ejemplo Rapido de Grafico en un ChartFrame", 
+	         "Estadística de Enfermedades Bajo Vigilancia", 
 	         data, 
 	         true, 
 	         true, 
@@ -357,24 +357,25 @@ public class Principal extends JFrame {
 		panel.add(panel_4);
 	}
 
-	private void LoadTableAdministrativo() {
+	public static void LoadTableAdministrativo() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		Cita c = null;
 
 		for (int i = 0; i < Clinica.getInstance().getMisCitas().size(); i++) {
 			c = Clinica.getInstance().getMisCitas().get(i);
-
-			fila[0] = c.getId();
+			if(c.isEstado()) {
+				fila[0] = c.getId();
 			fila[1] = c.getFecha();
 			fila[2] = c.getCitado().getNombre();
 			fila[3] = c.getDoctor().getNombre();
 			model.addRow(fila);
+			}
 		}
 
 	}
 
-	public void LoadTableDoctor(Persona p) {
+	public static void LoadTableDoctor(Persona p) {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		Cita c = null;
@@ -382,10 +383,13 @@ public class Principal extends JFrame {
 		for (int i = 0; i < Clinica.getInstance().getMisCitas().size(); i++) {
 			c = Clinica.getInstance().getMisCitas().get(i);
 			if (c.getDoctor().getCedula().equalsIgnoreCase(p.getCedula())) {
-				fila[0] = c.getId();
+				if(c.isEstado()) {
+					fila[0] = c.getId();
 				fila[1] = c.getFecha();
 				fila[2] = c.getCitado().getNombre();
 				model.addRow(fila);
+				}
+				
 			}
 		}
 	}

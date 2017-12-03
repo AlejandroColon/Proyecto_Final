@@ -330,6 +330,11 @@ public class Clinica implements Serializable {
 		}
 		return c;
 	}
+	
+	
+	public void citaRealizada(String codigo) {
+		findCitaByID(codigo).setEstado(false);
+	}
 
 	public Consulta findConsultaByCodigo(String codigo) {
 		Consulta c = null;
@@ -509,16 +514,7 @@ public class Clinica implements Serializable {
 		return porciento;
 	}
 	
-	public boolean validarCedula(String cedula) {
-		boolean c = true;
-		
-		for(Persona p : misPersonas) {
-			if(p.getCedula().equalsIgnoreCase(cedula)) {
-				c = false;
-			}
-		}
-		return c;
-	}
+	
 
 }
 
