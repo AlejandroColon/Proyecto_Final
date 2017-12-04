@@ -7,13 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
-import com.sun.javafx.geom.RoundRectangle2D;
 
 import logical.Administrativo;
 import logical.Clinica;
@@ -33,13 +31,11 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
+
 import javax.swing.JFormattedTextField;
 import java.awt.Color;
-
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JSeparator;
+
 
 public class RegistrarUsuario extends JDialog {
 
