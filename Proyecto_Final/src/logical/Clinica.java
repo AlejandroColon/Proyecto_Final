@@ -10,7 +10,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Clinica implements Serializable {
 
@@ -141,7 +145,8 @@ public class Clinica implements Serializable {
 
 		writePersona.writeInt(misPersonas.size());
 
-		for (Persona aux : misPersonas) { // aqui recorro el array de personas para copiarlas al archivo.
+		for (Persona aux : misPersonas) { // aqui recorro el array de personas
+											// para copiarlas al archivo.
 			writePersona.writeObject(aux);
 		}
 		writePersona.close();
@@ -168,7 +173,8 @@ public class Clinica implements Serializable {
 
 		writeVacuna.writeInt(misVacunas.size());
 
-		for (Vacuna aux : misVacunas) { // aqui recorro el array de personas para copiarlas al archivo.
+		for (Vacuna aux : misVacunas) { // aqui recorro el array de personas
+										// para copiarlas al archivo.
 			writeVacuna.writeObject(aux);
 		}
 		writeVacuna.close();
@@ -195,7 +201,9 @@ public class Clinica implements Serializable {
 
 		writeEnfermedad.writeInt(misEnfermedades.size());
 
-		for (Enfermedad aux : misEnfermedades) { // aqui recorro el array de personas para copiarlas al archivo.
+		for (Enfermedad aux : misEnfermedades) { // aqui recorro el array de
+													// personas para copiarlas
+													// al archivo.
 			writeEnfermedad.writeObject(aux);
 		}
 
@@ -223,7 +231,8 @@ public class Clinica implements Serializable {
 
 		writeConsulta.writeInt(misConsultas.size());
 
-		for (Consulta aux : misConsultas) { // aqui recorro el array de personas para copiarlas al archivo.
+		for (Consulta aux : misConsultas) { // aqui recorro el array de personas
+											// para copiarlas al archivo.
 			writeConsulta.writeObject(aux);
 		}
 
@@ -251,7 +260,8 @@ public class Clinica implements Serializable {
 
 		writeCita.writeInt(misCitas.size());
 
-		for (Cita aux : misCitas) { // aqui recorro el array de personas para copiarlas al archivo.
+		for (Cita aux : misCitas) { // aqui recorro el array de personas para
+									// copiarlas al archivo.
 			writeCita.writeObject(aux);
 		}
 
@@ -279,7 +289,8 @@ public class Clinica implements Serializable {
 
 		writePaciente.writeInt(misPacientes.size());
 
-		for (Paciente aux : misPacientes) { // aqui recorro el array de personas para copiarlas al archivo.
+		for (Paciente aux : misPacientes) { // aqui recorro el array de personas
+											// para copiarlas al archivo.
 			writePaciente.writeObject(aux);
 		}
 
@@ -330,8 +341,7 @@ public class Clinica implements Serializable {
 		}
 		return c;
 	}
-	
-	
+
 	public void citaRealizada(String codigo) {
 		findCitaByID(codigo).setEstado(false);
 	}
@@ -419,7 +429,8 @@ public class Clinica implements Serializable {
 	public boolean validarLogin(String user, String password) {
 		Trabajador userlog = null;
 		boolean acceder = false;
-		if (validarUsuario(user)) { // Aqui utilizo la funcion validarUsuario para comprobar si el usuario existe o
+		if (validarUsuario(user)) { // Aqui utilizo la funcion validarUsuario
+									// para comprobar si el usuario existe o
 									// se escribio bien.
 			userlog = (Trabajador) buscarTrabajador(user);
 			if (userlog.getPassword().equals(password)) {
@@ -438,83 +449,98 @@ public class Clinica implements Serializable {
 		}
 		return enf;
 	}
-	
-	public Vacuna findVacunaByCodigo (String codigo) {
+
+	public Vacuna findVacunaByCodigo(String codigo) {
 		Vacuna v = null;
-		boolean encontrado =  false;
+		boolean encontrado = false;
 		int i = 0;
-		
-		while(!encontrado && i < misVacunas.size()) {
-			if(misVacunas.get(i).getCodigo().equalsIgnoreCase(codigo)) {
+
+		while (!encontrado && i < misVacunas.size()) {
+			if (misVacunas.get(i).getCodigo().equalsIgnoreCase(codigo)) {
 				v = misVacunas.get(i);
 				encontrado = true;
 			}
 			i++;
-		}			
+		}
 		return v;
 	}
-	
-	public void addVacunasPaciente (String cedula, ArrayList<Vacuna> vacs) {
+
+	public void addVacunasPaciente(String cedula, ArrayList<Vacuna> vacs) {
 		Paciente p = findPacienteByCedula(cedula);
 		p.setMisVacunas(vacs);
 	}
-	
+
 	public void generarHistorial(String cedula) throws IOException {
-		
+
 		Paciente p = findPacienteByCedula(cedula);
 		FileWriter file = null;
 		PrintWriter linea = null;
-		
-		file = new FileWriter(p.getCedula()+".txt");
-		linea = new PrintWriter(p.getCedula()+".txt");
-		
+
+		file = new FileWriter(p.getCedula() + ".txt");
+		linea = new PrintWriter(p.getCedula() + ".txt");
+
 		linea.println("			Reporte de historial	");
 		linea.println("________________________________________________________________________________________");
-		linea.println("Cedula:		"+ p.getCedula()+"		Aseguradora:	"+ p.getAseguradora());
-		linea.println("Nombre:		"+ p.getNombre()+"		Afiliado No.:	"+p.getNumeroAfiliado());
-		linea.println("Telefono:	"+ p.getTelefono()+"		Direccion:	"+p.getDireccion());
+		linea.println("Cedula:		" + p.getCedula() + "		Aseguradora:	" + p.getAseguradora());
+		linea.println("Nombre:		" + p.getNombre() + "		Afiliado No.:	" + p.getNumeroAfiliado());
+		linea.println("Telefono:	" + p.getTelefono() + "		Direccion:	" + p.getDireccion());
 		linea.println("________________________________________________________________________________________");
-		for(Historial h : p.getMiHistorial()) {
-			linea.println("Codigo:	"+h.getCodigo()+"				Fecha:	"+h.getFecha());
-			linea.println("Sintomas:	"+h.getSintomas());
-			linea.println("Diagnostico:	"+h.getDiagnostico());
-			linea.println("Tratamiento:	"+h.getTratamiento());
-			if(h.getEnfermedad()!=null) {
-				linea.println("Enfermedad:	"+h.getEnfermedad().getNombre());
-			}else
+		for (Historial h : p.getMiHistorial()) {
+			linea.println("Codigo:	" + h.getCodigo() + "				Fecha:	" + h.getFecha());
+			linea.println("Sintomas:	" + h.getSintomas());
+			linea.println("Diagnostico:	" + h.getDiagnostico());
+			linea.println("Tratamiento:	" + h.getTratamiento());
+			if (h.getEnfermedad() != null) {
+				linea.println("Enfermedad:	" + h.getEnfermedad().getNombre());
+			} else
 				linea.println("Enfermedad:	N/A");
 			linea.println("_________________________________________________________________________________________");
 		}
-		
+
 		file.close();
 		linea.close();
 	}
-	
-	public double datosEstadistica(String codigo){
+
+	public double datosEstadistica(String codigo) {
 		double porciento = 0;
-		for(int i=0; i<misPacientes.size();i++){
+		for (int i = 0; i < misPacientes.size(); i++) {
 			int size = misPacientes.get(i).getMiHistorial().size();
-				if(misPacientes.get(i).getMiHistorial().get(size-1).getEnfermedad()!=null)
-				if(misPacientes.get(i).getMiHistorial().get(size-1).getEnfermedad().getCodigo().equalsIgnoreCase(codigo)){
+			if (misPacientes.get(i).getMiHistorial().get(size - 1).getEnfermedad() != null)
+				if (misPacientes.get(i).getMiHistorial().get(size - 1).getEnfermedad().getCodigo()
+						.equalsIgnoreCase(codigo)) {
 					porciento++;
-				
-			}
+
+				}
 		}
-		//porciento = (porciento/misPacientes.size())*100;
+		// porciento = (porciento/misPacientes.size())*100;
 		return porciento;
 	}
-	public double estadisticaNoEnfermos(){
+
+	public double estadisticaNoEnfermos() {
 		double porciento = 0;
-		for(int i=0; i<misPacientes.size();i++){
+		for (int i = 0; i < misPacientes.size(); i++) {
 			int size = misPacientes.get(i).getMiHistorial().size();
-				if(misPacientes.get(i).getMiHistorial().get(size-1).getEnfermedad()==null)
-					porciento++;
-			}
-		
+			if (misPacientes.get(i).getMiHistorial().get(size - 1).getEnfermedad() == null)
+				porciento++;
+		}
+
 		return porciento;
 	}
-	
-	
+
+	public String fechaActual() {
+		Date dNow = new Date();
+		SimpleDateFormat formatFecha = new SimpleDateFormat("dd/MM/yyyy");
+		String fecha = formatFecha.format(dNow);
+		return fecha;
+	}
+
+	public int calcularEdad(LocalDate birthday) {
+		LocalDate today = LocalDate.now();
+		// LocalDate birthday = LocalDate.of(1960, 12, 21);
+		Period p = Period.between(birthday, today);
+		return p.getYears();
+
+	}
 
 }
 
@@ -540,7 +566,10 @@ public class Clinica implements Serializable {
  * Modificacion: Alejandro Colón Fecha: 30/11/17 Anotaciones: Agregando
  * arraylist de Pacientes, metodos para leer y salvar pacientes.
  * 
- * Modificación: Yamilka Vasquez 02/12/17 Anotaciones: agregar las funciones para
- * determinar los porcentajes para las gráficas
+ * Modificación: Yamilka Vasquez 02/12/17 Anotaciones: agregar las funciones
+ * para determinar los porcentajes para las gráficas
+ * 
+ * Modificación: Yamilka Vásquez 04/12/17 Anotaciones: agregando funciones para
+ * calcular la
  * 
  */
