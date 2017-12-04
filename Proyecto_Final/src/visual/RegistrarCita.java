@@ -41,10 +41,9 @@ public class RegistrarCita extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtDireccion;
 	private JTextField txtID;
-	private JTextField txtFecha;
 	private JComboBox<String> cbxDoctor;
 	private JFormattedTextField txtFormatCedula, txtFormatFechaNaci,
-			txtFormatTelefono;
+			txtFormatTelefono, txtFecha;
 	JCheckBox chckbxM;
 	JCheckBox chckbxF;
 	private JTextField txtNombre;
@@ -244,7 +243,7 @@ public class RegistrarCita extends JDialog {
 		lblFecha.setBounds(139, 23, 46, 14);
 		panelDatosCita.add(lblFecha);
 
-		txtFecha = new JTextField();
+		txtFecha = new JFormattedTextField(maskDate);
 		txtFecha.setBounds(139, 42, 106, 20);
 		panelDatosCita.add(txtFecha);
 		txtFecha.setColumns(10);

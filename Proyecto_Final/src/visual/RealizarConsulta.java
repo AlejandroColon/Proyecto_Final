@@ -37,10 +37,12 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import javax.swing.ImageIcon;
 
 public class RealizarConsulta extends JDialog {
 
@@ -298,6 +300,8 @@ public class RealizarConsulta extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Clinica.getInstance().generarHistorial(txtCedula.getText());
+					JOptionPane.showMessageDialog(null, "Historial Clínico exportado exitosamente", "Información",
+							JOptionPane.INFORMATION_MESSAGE);
 				} catch (IOException e1) {
 				}
 			}
@@ -352,6 +356,7 @@ public class RealizarConsulta extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnRegistar = new JButton("Guardar");
+				btnRegistar.setIcon(new ImageIcon(RealizarConsulta.class.getResource("/images/checked (1).png")));
 				btnRegistar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Enfermedad enf = null;
@@ -394,8 +399,6 @@ public class RealizarConsulta extends JDialog {
 							Clinica.getInstance().addVacunasPaciente(txtCedula.getText(), vacunasAplicadas);
 							Consulta c = new Consulta(codigo, fecha, sintomas, diagnostico, tratamiento, enf,
 									Clinica.getInstance().findPacienteByCedula(txtCedula.getText()));
-							JOptionPane.showMessageDialog(null, codigoCita, "Información",
-									JOptionPane.INFORMATION_MESSAGE);
 							
 							Clinica.getInstance().citaRealizada(codigoCita); //elimina la cita
 							
@@ -426,7 +429,7 @@ public class RealizarConsulta extends JDialog {
 					}
 
 					private String fechaActual() {
-						DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+						DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 						Date date = new Date();
 						return dateFormat.format(date);
 					}
@@ -437,6 +440,7 @@ public class RealizarConsulta extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(RealizarConsulta.class.getResource("/images/cancel.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -496,7 +500,8 @@ public class RealizarConsulta extends JDialog {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
 				txtDireccion.setText(p.getDireccion());
-				txtEdad.setText(p.getFechaNacimiento());
+				LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
+				txtEdad.setText("" + Clinica.getInstance().calcularEdad(birthday));
 				txtTelefono.setText(p.getTelefono());
 				txtNumAfiliado.setText(person.getNumeroAfiliado());
 				txtNumAfiliado.setEditable(false);
@@ -511,7 +516,8 @@ public class RealizarConsulta extends JDialog {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
 				txtDireccion.setText(p.getDireccion());
-				txtEdad.setText(p.getFechaNacimiento());
+				LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
+				txtEdad.setText("" + Clinica.getInstance().calcularEdad(birthday));
 				txtTelefono.setText(p.getTelefono());
 				llenarTablaVacunas();
 			}
@@ -520,6 +526,18 @@ public class RealizarConsulta extends JDialog {
 
 		}
 
+	}
+
+	private int readMes(String fechaNacimiento) {
+		return Integer.parseInt(fechaNacimiento.substring(4, 5));
+	}
+
+	private int readDia(String fechaNacimiento) {
+		return Integer.parseInt(fechaNacimiento.substring(1, 2));
+	}
+
+	private int readAno(String fechaNacimiento) {
+		return Integer.parseInt(fechaNacimiento.substring(7, 10));
 	}
 
 	private void determinarEnfermedad(Paciente p) {

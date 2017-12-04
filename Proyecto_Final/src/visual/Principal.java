@@ -15,6 +15,10 @@ import logical.Persona;
 
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.Color;
@@ -389,14 +393,22 @@ public class Principal extends JFrame{
 			c = Clinica.getInstance().getMisCitas().get(i);
 			if (c.getDoctor().getCedula().equalsIgnoreCase(p.getCedula())) {
 				if(c.isEstado()) {
-					fila[0] = c.getId();
-				fila[1] = c.getFecha();
-				fila[2] = c.getCitado().getNombre();
-				model.addRow(fila);
+					if(c.getFecha().equalsIgnoreCase(fechaActual()))
+					{
+						fila[0] = c.getId();
+						fila[1] = c.getFecha();
+						fila[2] = c.getCitado().getNombre();
+						model.addRow(fila);
+					}
 				}
-				
 			}
 		}
+	}
+
+	private static String fechaActual() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		return dateFormat.format(date);
 	}
 }
 /*
