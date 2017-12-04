@@ -23,6 +23,8 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class RegistrarEnfermedad extends JDialog {
 
@@ -52,16 +54,19 @@ public class RegistrarEnfermedad extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarEnfermedad() {
+		setBackground(Color.WHITE);
 		setTitle("Registrar Enfermedad");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarEnfermedad.class.getResource("/images/icon.png")));
 		setBounds(100, 100, 330, 241);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(Color.WHITE);
 			panel.setBorder(new TitledBorder(null, "Enfermedad Bajo Vigilancia", TitledBorder.LEADING, TitledBorder.TOP,
 					null, null));
 			panel.setBounds(10, 11, 302, 160);
@@ -114,10 +119,13 @@ public class RegistrarEnfermedad extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.setBackground(new Color(204, 204, 204));
+				btnRegistrar.setIcon(new ImageIcon(RegistrarEnfermedad.class.getResource("/images/002-login-1.png")));
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!txtCodigo.getText().equalsIgnoreCase("") && !txtNombre.getText().equalsIgnoreCase("") && !txtDescripcion.getText().equalsIgnoreCase("")) {
@@ -153,6 +161,8 @@ public class RegistrarEnfermedad extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setBackground(new Color(204, 204, 204));
+				btnCancelar.setIcon(new ImageIcon(RegistrarEnfermedad.class.getResource("/images/back.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						txtNombre.setText("");

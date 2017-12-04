@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Font;
+import java.awt.Color;
 
 public class Login extends JDialog {
 
@@ -32,10 +33,12 @@ public class Login extends JDialog {
 	private JPasswordField passContra;
 
 	public Login() {
+		setBackground(Color.WHITE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/images/icon.png")));
 		setTitle("Acceso al usuario");
 		setBounds(100, 100, 265, 333);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -61,7 +64,7 @@ public class Login extends JDialog {
 		panel.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/user.png")));
+		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/doctor.png")));
 		panel.add(lblNewLabel, BorderLayout.CENTER);
 
 		passContra = new JPasswordField();
@@ -69,10 +72,12 @@ public class Login extends JDialog {
 		contentPanel.add(passContra);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnIniciarSesion = new JButton("Iniciar sesion");
+				btnIniciarSesion.setBackground(new Color(204, 204, 204));
 				btnIniciarSesion.setIcon(new ImageIcon(Login.class.getResource("/images/001-login.png")));
 				btnIniciarSesion.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
 				btnIniciarSesion.addActionListener(new ActionListener() {
@@ -103,6 +108,7 @@ public class Login extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setBackground(new Color(204, 204, 204));
 				btnCancelar.setIcon(new ImageIcon(Login.class.getResource("/images/003-logout-1.png")));
 				btnCancelar.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
 				btnCancelar.addActionListener(new ActionListener() {

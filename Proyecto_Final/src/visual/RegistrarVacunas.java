@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 
 
@@ -58,16 +59,19 @@ public class RegistrarVacunas extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarVacunas() {
+		setBackground(Color.WHITE);
 		setTitle("Registrar Vacuna");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarVacunas.class.getResource("/images/icon.png")));
 		setResizable(false);
 		setBounds(100, 100, 327, 241);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Vacuna", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 302, 160);
@@ -112,10 +116,13 @@ public class RegistrarVacunas extends JDialog {
 		panel.add(label_2);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.setIcon(new ImageIcon(RegistrarVacunas.class.getResource("/images/002-login-1.png")));
+				btnRegistrar.setBackground(new Color(204, 204, 204));
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!txtCodigo.getText().equalsIgnoreCase("") && !txtNombre.getText().equalsIgnoreCase("") && !txtDescripcion.getText().equalsIgnoreCase("")) {
@@ -149,6 +156,8 @@ public class RegistrarVacunas extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(RegistrarVacunas.class.getResource("/images/back.png")));
+				btnCancelar.setBackground(new Color(204, 204, 204));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						System.exit(0);

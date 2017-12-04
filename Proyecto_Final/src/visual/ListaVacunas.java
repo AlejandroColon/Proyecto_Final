@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.Font;
+import java.awt.Color;
 
 public class ListaVacunas extends JDialog {
 
@@ -54,10 +55,12 @@ public class ListaVacunas extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListaVacunas() {
+		setBackground(Color.WHITE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaVacunas.class.getResource("/images/icon.png")));
 		setTitle("Listado de Vacunas");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -83,10 +86,12 @@ public class ListaVacunas extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnAtras = new JButton("Atr\u00E1s");
+				btnAtras.setBackground(new Color(204, 204, 204));
 				btnAtras.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
 				btnAtras.setIcon(new ImageIcon(ListaVacunas.class.getResource("/images/back.png")));
 				btnAtras.addActionListener(new ActionListener() {
