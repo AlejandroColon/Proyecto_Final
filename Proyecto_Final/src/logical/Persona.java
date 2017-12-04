@@ -12,18 +12,18 @@ public abstract class Persona implements Serializable{
 	private static final long serialVersionUID = 7041660825441736841L;
 	protected String cedula;
 	protected String nombre;
-	protected int edad;
+	protected String fechaNacimiento;
 	protected String telefono;
 	protected String direccion;
 	protected String sexo;
 	
 	//************************************** CONSTRUCTOR DE LA CLASE********************************************
 	
-	public Persona(String cedula, String nombre, int edad, String telefono, String direccion, String sexo) {
+	public Persona(String cedula, String nombre, String fechaNacimiento, String telefono, String direccion, String sexo) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
-		this.edad = edad;
+		this.fechaNacimiento = fechaNacimiento;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.sexo = sexo;
@@ -44,12 +44,17 @@ public abstract class Persona implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getEdad() {
-		return edad;
+	
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
 	}
-	public void setEdad(int edad) {
-		this.edad = edad;
+
+
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
+
+
 	public String getTelefono() {
 		return telefono;
 	}

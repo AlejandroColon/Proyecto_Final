@@ -14,9 +14,9 @@ public class Doctor extends Trabajador implements Serializable{
 	private int citasXdia;
 	
 	//***********************************CONSTRUCTOR DE LA CLASE************************************
-	public Doctor(String cedula, String nombre, int edad, String telefono, String direccion,
+	public Doctor(String cedula, String nombre, String fechaNacimiento, String telefono, String direccion,
 			String sexo, String usuario, String password, String exequatur, String especialidad, int citasXdia) {
-		super(cedula, nombre, edad, telefono, direccion, sexo, usuario, password);
+		super(cedula, nombre, fechaNacimiento, telefono, direccion, sexo, usuario, password);
 		this.exequatur = exequatur;
 		this.especialidad = especialidad;
 		this.citasXdia = citasXdia;

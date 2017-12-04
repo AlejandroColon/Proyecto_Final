@@ -13,9 +13,9 @@ public abstract class Trabajador extends Persona implements Serializable{
 	protected String password;
 	
 	//********************************************CONSTRUCTOR DE LA CLASE****************************************
-	public Trabajador(String cedula, String nombre, int edad, String telefono, String direccion,
+	public Trabajador(String cedula, String nombre, String fechaNacimiento, String telefono, String direccion,
 			String sexo, String usuario, String password) {
-		super(cedula, nombre, edad, telefono, direccion, sexo);
+		super(cedula, nombre, fechaNacimiento, telefono, direccion, sexo);
 		this.usuario = usuario;
 		this.password = password;
 	}

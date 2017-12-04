@@ -310,7 +310,7 @@ public class RegistrarUsuario extends JDialog {
 									Persona aux = null;
 									String cedula = txtCedula.getText();
 									String nombre = txtNombre.getText();
-									int edad = 5;// Integer.valueOf(txtFechaNacimiento.getText());
+									String fechaNacimiento = txtFechaNacimiento.getText();
 									String telefono = txtTelefono.getText();
 									String direccion = txtDireccion.getText();
 									String sexo = "";
@@ -326,10 +326,10 @@ public class RegistrarUsuario extends JDialog {
 										String especialidad = txtEspecialidad.getText();
 										String exequatur = txtExequatur.getText();
 										int citasXdia = Integer.valueOf(spnCitasXDia.getValue().toString());
-										aux = new Doctor(cedula, nombre, edad, telefono, direccion, sexo, usuario, password,
+										aux = new Doctor(cedula, nombre, fechaNacimiento, telefono, direccion, sexo, usuario, password,
 												exequatur, especialidad, citasXdia);
 									} else
-										aux = new Administrativo(cedula, nombre, edad, telefono, direccion, sexo, usuario,
+										aux = new Administrativo(cedula, nombre, fechaNacimiento, telefono, direccion, sexo, usuario,
 												password);
 									Clinica.getInstance().addPersona(aux);
 									JOptionPane.showMessageDialog(null, "Usuario registrado", "Aviso",

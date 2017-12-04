@@ -13,9 +13,9 @@ public class Consultante extends Persona implements Serializable{
 	private static final long serialVersionUID = -926983007045176977L;
 
 	//**************************************CONSTRUCTOR DE LA CLASE**********************************************
-	public Consultante(String cedula, String nombre, int edad, String telefono, String direccion,
+	public Consultante(String cedula, String nombre, String fechaNacimiento, String telefono, String direccion,
 			String sexo) {
-		super(cedula, nombre, edad, telefono, direccion, sexo);
+		super(cedula, nombre, fechaNacimiento, telefono, direccion, sexo);
 		
 	}
 	

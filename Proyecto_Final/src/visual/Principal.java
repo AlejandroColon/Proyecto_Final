@@ -121,6 +121,11 @@ public class Principal extends JFrame{
 		mnInicio.add(mntmCambiarDeUsuario);
 
 		JMenuItem mntmCerrarSesin = new JMenuItem("Salir del Programa");
+		mntmCerrarSesin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		mntmCerrarSesin.setIcon(new ImageIcon(Principal.class.getResource("/images/exit.png")));
 		mntmCerrarSesin.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mnInicio.add(mntmCerrarSesin);
@@ -336,7 +341,7 @@ public class Principal extends JFrame{
 	        data.setValue("Python", 15);*/
 	 
 	        // Creando el Grafico
-	        JFreeChart chart = ChartFactory.createPieChart(
+	        JFreeChart chart = ChartFactory.createPieChart3D(
 	         "Estadística de Enfermedades Bajo Vigilancia", 
 	         data, 
 	         true, 
@@ -345,7 +350,7 @@ public class Principal extends JFrame{
 	 
 	        // Crear el Panel del Grafico con ChartPanel
 	        ChartPanel chartPanel = new ChartPanel(chart);
-	        chartPanel.setHorizontalAxisTrace(true);
+	        chartPanel.setHorizontalAxisTrace(false);
 	        chartPanel.setFillZoomRectangle(false);
 	        chartPanel.setEnforceFileExtensions(false);
 	        chartPanel.setMouseWheelEnabled(true);

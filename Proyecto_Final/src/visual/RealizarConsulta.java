@@ -361,14 +361,14 @@ public class RealizarConsulta extends JDialog {
 								String cedula = p.getCedula();
 								String nombre = p.getNombre();
 								String sexo = p.getSexo();
-								int edad = Integer.parseInt(txtEdad.getText());
+								String fechaNacimiento = txtEdad.getText();
 								String tipoSangre = cmbSangre.getSelectedItem().toString();
 								String telefono = p.getTelefono();
 								String direccion = p.getDireccion();
 								String numeroAfiliado = txtNumAfiliado.getText();
 								String aseguradora = cmbAseguradora.getSelectedItem().toString();
 
-								Paciente aux = new Paciente(cedula, nombre, edad, tipoSangre, telefono, direccion, sexo,
+								Paciente aux = new Paciente(cedula, nombre, fechaNacimiento, tipoSangre, telefono, direccion, sexo,
 										numeroAfiliado, aseguradora);
 								Clinica.getInstance().addPaciente(aux);
 							}
@@ -402,6 +402,7 @@ public class RealizarConsulta extends JDialog {
 							Clinica.getInstance().addConsulta(c);
 							Clinica.getInstance().salvarConsultas();
 							Clinica.getInstance().salvarPacientes();
+							Clinica.getInstance().salvarCitas();
 							
 							
 							Principal.LoadTableDoctor(Clinica.getInstance().findByCedula(cedulaDoctor));
@@ -495,7 +496,7 @@ public class RealizarConsulta extends JDialog {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
 				txtDireccion.setText(p.getDireccion());
-				txtEdad.setText("" + p.getEdad());
+				txtEdad.setText(p.getFechaNacimiento());
 				txtTelefono.setText(p.getTelefono());
 				txtNumAfiliado.setText(person.getNumeroAfiliado());
 				txtNumAfiliado.setEditable(false);
@@ -510,7 +511,7 @@ public class RealizarConsulta extends JDialog {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
 				txtDireccion.setText(p.getDireccion());
-				txtEdad.setText("" + p.getEdad());
+				txtEdad.setText(p.getFechaNacimiento());
 				txtTelefono.setText(p.getTelefono());
 				llenarTablaVacunas();
 			}

@@ -17,9 +17,9 @@ public class Paciente extends Persona implements Serializable{
 	private ArrayList<Historial> miHistorial;// Luego de subir, cambiar a clase Historial.
 
 	// **************************************CONSTRUCTOR DE LA CLASE**********************************************
-	public Paciente(String cedula, String nombre, int edad, String tipoSangre, String telefono, String direccion,
+	public Paciente(String cedula, String nombre, String fechaNacimiento, String tipoSangre, String telefono, String direccion,
 			String sexo, String numeroAfiliado, String aseguradora) {
-		super(cedula, nombre, edad, telefono, direccion, sexo);
+		super(cedula, nombre, fechaNacimiento, telefono, direccion, sexo);
 		misVacunas = new ArrayList<>();
 		miHistorial = new ArrayList<>();
 		this.numeroAfiliado = numeroAfiliado;

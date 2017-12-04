@@ -47,22 +47,11 @@ public class RegistrarCita extends JDialog {
 	JCheckBox chckbxM;
 	JCheckBox chckbxF;
 	private JTextField txtNombre;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			RegistrarCita dialog = new RegistrarCita();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
+	
+	 
+	
+	
+	
 	public RegistrarCita() {
 		setTitle("Registrar cita");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarCita.class.getResource("/images/icon.png")));
@@ -296,7 +285,7 @@ public class RegistrarCita extends JDialog {
 							String nombre = txtNombre.getText();
 							String direccion = txtDireccion.getText();
 							String telefono = txtFormatTelefono.getText();
-							int edad = 5;
+							String fechaNacimiento = txtFormatFechaNaci.getText();
 							String sexo = null;
 							if (chckbxF.isSelected()) {
 								sexo = "Femenino";
@@ -305,7 +294,7 @@ public class RegistrarCita extends JDialog {
 							}
 							
 								// Creando nuevo Consultante
-								Persona newConsultante = new Consultante(cedula, nombre, edad, telefono, direccion,
+								Persona newConsultante = new Consultante(cedula, nombre, fechaNacimiento, telefono, direccion,
 										sexo);
 								Clinica.getInstance().addPersona(newConsultante);
 								Cita newCita = new Cita(id, fecha, doctor, newConsultante);
@@ -322,7 +311,7 @@ public class RegistrarCita extends JDialog {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-
+						Principal.LoadTableAdministrativo();
 						JOptionPane.showMessageDialog(null, "Cita Registrada", "Información",
 								JOptionPane.INFORMATION_MESSAGE);
 						clean();
