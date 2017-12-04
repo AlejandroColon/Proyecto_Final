@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class RegistrarCita extends JDialog {
 
@@ -117,6 +118,7 @@ public class RegistrarCita extends JDialog {
 		 * */
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setIcon(new ImageIcon(RegistrarCita.class.getResource("/images/binoculares.png")));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cedula = txtFormatCedula.getText();
@@ -133,7 +135,7 @@ public class RegistrarCita extends JDialog {
 					chckbxM.setEnabled(true);
 				} else if (aux != null) {
 					txtDireccion.setText(aux.getDireccion());
-					txtFormatFechaNaci.setText("00/00/0000");
+					txtFormatFechaNaci.setText(aux.getFechaNacimiento());
 					txtNombre.setText(aux.getNombre());
 					txtFormatTelefono.setText(aux.getTelefono());
 					String sexo = aux.getSexo();
@@ -148,7 +150,7 @@ public class RegistrarCita extends JDialog {
 				}
 			}
 		});
-		btnBuscar.setBounds(129, 38, 91, 23);
+		btnBuscar.setBounds(129, 38, 102, 23);
 		panelDatosPersona.add(btnBuscar);
 
 		JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
@@ -200,12 +202,21 @@ public class RegistrarCita extends JDialog {
 		maskName.setValidCharacters("qwertyuiopasdfghjklzxcvbnmÒ" + "QWERTYUIOPASDFGHJKLZXCVBNM " + "¡·…ÈÕÌ⁄˙");
 		maskName.setPlaceholderCharacter(' ');
 
-		txtFormatFechaNaci = new JFormattedTextField();
+		MaskFormatter maskDate = null;
+		try {
+			maskDate = new MaskFormatter("##/##/####");
+			maskDate.setPlaceholderCharacter('_');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		txtFormatFechaNaci = new JFormattedTextField(maskDate);
 		txtFormatFechaNaci.setEditable(false);
 		txtFormatFechaNaci.setBounds(10, 135, 109, 20);
 		panelDatosPersona.add(txtFormatFechaNaci);
 		
 		txtNombre = new JTextField();
+		txtNombre.setEditable(false);
 		txtNombre.setBounds(10, 86, 109, 20);
 		panelDatosPersona.add(txtNombre);
 		txtNombre.setColumns(10);
@@ -262,6 +273,7 @@ public class RegistrarCita extends JDialog {
 				 * */
 				
 				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.setIcon(new ImageIcon(RegistrarCita.class.getResource("/images/checked (1).png")));
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -335,14 +347,15 @@ public class RegistrarCita extends JDialog {
 				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
-				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.addActionListener(new ActionListener() {
+				JButton btnAtras = new JButton("Atr\u00E1s");
+				btnAtras.setIcon(new ImageIcon(RegistrarCita.class.getResource("/images/back (1).png")));
+				btnAtras.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
-				btnCancelar.setActionCommand("Cancel");
-				buttonPane.add(btnCancelar);
+				btnAtras.setActionCommand("Cancel");
+				buttonPane.add(btnAtras);
 			}
 		}
 	}
