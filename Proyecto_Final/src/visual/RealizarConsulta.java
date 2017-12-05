@@ -366,7 +366,7 @@ public class RealizarConsulta extends JDialog {
 								String cedula = p.getCedula();
 								String nombre = p.getNombre();
 								String sexo = p.getSexo();
-								String fechaNacimiento = txtEdad.getText();
+								String fechaNacimiento = p.getFechaNacimiento();
 								String tipoSangre = cmbSangre.getSelectedItem().toString();
 								String telefono = p.getTelefono();
 								String direccion = p.getDireccion();
@@ -500,6 +500,8 @@ public class RealizarConsulta extends JDialog {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
 				txtDireccion.setText(p.getDireccion());
+				JOptionPane.showMessageDialog(null, p.getFechaNacimiento(), "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 				LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
 				txtEdad.setText("" + Clinica.getInstance().calcularEdad(birthday));
 				txtTelefono.setText(p.getTelefono());
@@ -516,6 +518,8 @@ public class RealizarConsulta extends JDialog {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
 				txtDireccion.setText(p.getDireccion());
+				JOptionPane.showMessageDialog(null, "" + readDia(p.getFechaNacimiento()), "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 				LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
 				txtEdad.setText("" + Clinica.getInstance().calcularEdad(birthday));
 				txtTelefono.setText(p.getTelefono());
@@ -529,15 +533,15 @@ public class RealizarConsulta extends JDialog {
 	}
 
 	private int readMes(String fechaNacimiento) {
-		return Integer.parseInt(fechaNacimiento.substring(4, 5));
+		return Integer.parseInt(fechaNacimiento.substring(3, 5));
 	}
 
 	private int readDia(String fechaNacimiento) {
-		return Integer.parseInt(fechaNacimiento.substring(1, 2));
+		return Integer.parseInt(fechaNacimiento.substring(0, 2));
 	}
 
 	private int readAno(String fechaNacimiento) {
-		return Integer.parseInt(fechaNacimiento.substring(7, 10));
+		return Integer.parseInt(fechaNacimiento.substring(6, 10));
 	}
 
 	private void determinarEnfermedad(Paciente p) {
