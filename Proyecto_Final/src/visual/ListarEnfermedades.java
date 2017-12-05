@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class ListarEnfermedades extends JDialog {
 
@@ -53,10 +54,12 @@ public class ListarEnfermedades extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarEnfermedades() {
+		setBackground(Color.WHITE);
 		setTitle("Listado de Enfermedades");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarEnfermedades.class.getResource("/images/icon.png")));
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -83,6 +86,7 @@ public class ListarEnfermedades extends JDialog {
 		
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

@@ -79,6 +79,7 @@ public class RealizarConsulta extends JDialog {
 	
 	
 	public RealizarConsulta(Persona p, String codigoCita, String cedulaDoctor) {
+		setBackground(Color.WHITE);
 		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RealizarConsulta.class.getResource("/images/icon.png")));
@@ -86,6 +87,7 @@ public class RealizarConsulta extends JDialog {
 		setTitle("Consulta");
 		setBounds(100, 100, 400, 572);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -95,8 +97,11 @@ public class RealizarConsulta extends JDialog {
 		contentPanel.add(informacion);
 
 		JPanel consulta = new JPanel();
+		consulta.setBackground(Color.WHITE);
 		JPanel historia = new JPanel(); // Creando los tabs
+		historia.setBackground(Color.WHITE);
 		JPanel vacunas = new JPanel();
+		vacunas.setBackground(Color.WHITE);
 		// JPanel panel_4 = new JPanel();
 		// JPanel panel_5 = new JPanel();
 
@@ -104,6 +109,7 @@ public class RealizarConsulta extends JDialog {
 		consulta.setLayout(null);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(null, "Datos de Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 354, 166);
 		consulta.add(panel);
@@ -189,6 +195,7 @@ public class RealizarConsulta extends JDialog {
 		panel.add(cmbSangre);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		panel_1.setBorder(
 				new TitledBorder(null, "Datos de Consulta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(10, 188, 354, 267);
@@ -272,6 +279,7 @@ public class RealizarConsulta extends JDialog {
 		historia.setLayout(null);
 
 		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.WHITE);
 		panel_4.setBorder(
 				new TitledBorder(null, "Historia Cl\u00EDnica", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setBounds(10, 28, 350, 404);
@@ -313,6 +321,7 @@ public class RealizarConsulta extends JDialog {
 		vacunas.setLayout(null);
 
 		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(Color.WHITE);
 		panel_6.setBorder(new TitledBorder(null, "Vacunas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_6.setBounds(10, 29, 350, 405);
 		vacunas.add(panel_6);
@@ -352,6 +361,7 @@ public class RealizarConsulta extends JDialog {
 		llenarCMBEnfermedad();
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

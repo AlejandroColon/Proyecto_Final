@@ -15,6 +15,7 @@ import logical.Vacuna;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
@@ -74,7 +75,7 @@ public class RegistrarVacunas extends JDialog {
 		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Vacuna", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 302, 160);
+		panel.setBounds(0, 0, 321, 171);
 		contentPanel.add(panel);
 		
 		JLabel label = new JLabel("C\u00F3digo:");
@@ -86,13 +87,13 @@ public class RegistrarVacunas extends JDialog {
 		txtCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(10, 35, 95, 20);
+		txtCodigo.setBounds(10, 35, 95, 28);
 		panel.add(txtCodigo);
 		txtCodigo.setText("VAC-" + (Clinica.getInstance().getMisVacunas().size() + 1));
 		
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(155, 35, 138, 20);
+		txtNombre.setBounds(155, 35, 138, 28);
 		panel.add(txtNombre);
 		
 		JLabel label_1 = new JLabel("Nombre:");
@@ -100,7 +101,7 @@ public class RegistrarVacunas extends JDialog {
 		panel.add(label_1);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 81, 283, 69);
+		panel_1.setBounds(10, 81, 299, 69);
 		panel.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		

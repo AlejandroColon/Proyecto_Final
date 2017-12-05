@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Color;
 
 public class ListaTrabajadores extends JDialog {
 
@@ -51,11 +52,13 @@ public class ListaTrabajadores extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListaTrabajadores() {
+		setBackground(Color.WHITE);
 		setTitle("Listado de usuarios");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaTrabajadores.class.getResource("/images/icon.png")));
 		setResizable(false);
 		setBounds(100, 100, 450, 393);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
@@ -75,6 +78,7 @@ public class ListaTrabajadores extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

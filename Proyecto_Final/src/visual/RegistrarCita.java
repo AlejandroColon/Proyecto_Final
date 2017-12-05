@@ -53,17 +53,20 @@ public class RegistrarCita extends JDialog {
 	
 	
 	public RegistrarCita() {
+		setBackground(Color.WHITE);
 		setTitle("Registrar cita");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarCita.class.getResource("/images/icon.png")));
 		setResizable(false);
 		setBounds(100, 100, 289, 437);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setLocationRelativeTo(null);
 
 		JPanel panelDatosPersona = new JPanel();
+		panelDatosPersona.setBackground(Color.WHITE);
 		panelDatosPersona.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
 				"Datos de la persona a consultar", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelDatosPersona.setBounds(10, 11, 262, 213);
@@ -221,6 +224,7 @@ public class RegistrarCita extends JDialog {
 		txtNombre.setColumns(10);
 
 		JPanel panelDatosCita = new JPanel();
+		panelDatosCita.setBackground(Color.WHITE);
 		panelDatosCita.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos de la cita",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelDatosCita.setBounds(10, 237, 262, 127);
@@ -260,6 +264,7 @@ public class RegistrarCita extends JDialog {
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			buttonPane.setBackground(new Color(102, 153, 255));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				/*
