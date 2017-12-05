@@ -225,11 +225,25 @@ public class Principal extends JFrame{
 		mnControl.add(mntmRegistrarVacuna);
 		
 		JMenuItem mntmModificiarEnfermedad = new JMenuItem("Modificiar Enfermedad");
+		mntmModificiarEnfermedad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarEnfermedades lEnf = new ListarEnfermedades();
+				lEnf.setVisible(true);
+				lEnf.setLocationRelativeTo(null);
+			}
+		});
 		mntmModificiarEnfermedad.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mntmModificiarEnfermedad.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
 		mnControl.add(mntmModificiarEnfermedad);
 		
 		JMenuItem mntmModificarVacuna = new JMenuItem("Modificar Vacuna");
+		mntmModificarVacuna.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaVacunas lVacuna = new ListaVacunas();
+				lVacuna.setVisible(true);
+				lVacuna.setLocationRelativeTo(null);
+			}
+		});
 		mntmModificarVacuna.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mntmModificarVacuna.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
 		mnControl.add(mntmModificarVacuna);
