@@ -348,6 +348,9 @@ public class Principal extends JFrame{
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(10, 11, 522, 276);
 		panel_3.add(panel_5);
+		
+		
+		
 
 		  DefaultPieDataset data = new DefaultPieDataset();
 		  for (Enfermedad aux : Clinica.getInstance().getMisEnfermedades()) {
@@ -379,6 +382,8 @@ public class Principal extends JFrame{
 		panel_4.setBackground(Color.CYAN);
 		panel.add(panel_4);
 	}
+	
+	
 
 	public static void LoadTableAdministrativo() {
 		model.setRowCount(0);
