@@ -16,6 +16,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class Clinica implements Serializable {
 
 	/**
@@ -541,9 +542,29 @@ public class Clinica implements Serializable {
 		return p.getYears();
 
 	}
-	
-	public void presentHistorial(String cedula) throws IOException {
-		
+
+	public float porcentajeEnf(String enfermedad) {
+		int cantEnf = 0;
+		int totalPacientes = misPacientes.size();
+		int i = 0;
+		float porciento = 0;
+
+		if (misPacientes.size() > 0) {
+			for (Paciente p : misPacientes) {
+				i = p.getMiHistorial().size();
+				if (!(i == 0)) {
+					if (p.getMiHistorial().get(i - 1).getEnfermedad() != null)
+						if (p.getMiHistorial().get(i - 1).getEnfermedad().getNombre().equalsIgnoreCase(enfermedad)) {
+							cantEnf++;
+						}
+				}
+			}
+		}
+
+		porciento = ((float)cantEnf/(float)totalPacientes)*100;
+
+		return porciento;
+
 	}
 
 }

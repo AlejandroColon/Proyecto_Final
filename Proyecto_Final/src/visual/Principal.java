@@ -45,6 +45,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import javax.swing.UIManager;
 
 public class Principal extends JFrame{
 
@@ -55,8 +56,11 @@ public class Principal extends JFrame{
 	private JPanel contentPane;
 	private JTable tableCitas;
 	private static DefaultTableModel model;
+	private static DefaultTableModel model2;
 	private static Object[] fila;
+	private static Object[]fila2;
 	JComboBox<String> cbxFiltro;
+	private JTable tableEnfermedades;
 
 	/**
 	 * Launch the application.
@@ -341,8 +345,21 @@ public class Principal extends JFrame{
 		panelFiltro.add(cbxFiltro);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.ORANGE);
+		panel_2.setBackground(UIManager.getColor("Button.background"));
 		panel.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(61, 40, 420, 253);
+		panel_2.add(scrollPane_1);
+		
+		tableEnfermedades = new JTable();
+		String[] columnNames = {"Codigo","Nombre","Porcetaje enfermos"};
+		model2 = new DefaultTableModel();
+		model2.setColumnIdentifiers(columnNames);
+		tableEnfermedades.setModel(model2);
+		loadTableEnfermedades();
+		scrollPane_1.setViewportView(tableEnfermedades);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.MAGENTA);
@@ -475,6 +492,19 @@ public class Principal extends JFrame{
 					}
 				}
 			}
+		}
+	}
+	public static void loadTableEnfermedades() {
+		model2.setRowCount(0);
+		fila2 = new Object[model2.getColumnCount()];
+		Enfermedad f = null;
+
+		for (int i = 0; i < Clinica.getInstance().getMisEnfermedades().size(); i++) {
+			f = Clinica.getInstance().getMisEnfermedades().get(i);				
+						fila2[0] = f.getCodigo();
+						fila2[1] = f.getNombre();
+						fila2[2] = Clinica.getInstance().porcentajeEnf(f.getNombre());
+						model2.addRow(fila2);			
 		}
 	}
 

@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import java.awt.Toolkit;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -57,27 +56,7 @@ public class RepHistorial extends JDialog {
 		textArea.setBounds(0, 0, 632, 294);
 		
 		leer();		
-		 // Construye un BufferedReader
-	   /* BufferedReader lectorcito;
-	    boolean eof = false;
-	    String linea = "";
-		try {
-			lectorcito = new BufferedReader(new FileReader(cedula+".txt"));
-			 while (!eof)
-		        {
-		            linea = lectorcito.readLine();
-		            if( linea != null )
-		                textArea.setText(linea);      
-		            else
-		                eof = true;
-		        }
 
-		        
-		        lectorcito.close(); 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		
 		contentPanel.add(textArea);
 		{
