@@ -343,14 +343,9 @@ public class Principal extends JFrame{
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.MAGENTA);
 		panel.add(panel_3);
-		panel_3.setLayout(null);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(10, 11, 522, 276);
-		panel_3.add(panel_5);
 		
 		
-		
+
 
 		  DefaultPieDataset data = new DefaultPieDataset();
 		  for (Enfermedad aux : Clinica.getInstance().getMisEnfermedades()) {
@@ -368,14 +363,27 @@ public class Principal extends JFrame{
 	         true, 
 	         true, 
 	         false);
+	        panel_3.setLayout(null);
+	        panel_3.setLayout(new BorderLayout(0, 0));
 	 
+	        
 	        // Crear el Panel del Grafico con ChartPanel
 	        ChartPanel chartPanel = new ChartPanel(chart);
 	        chartPanel.setHorizontalAxisTrace(false);
 	        chartPanel.setFillZoomRectangle(false);
 	        chartPanel.setEnforceFileExtensions(false);
 	        chartPanel.setMouseWheelEnabled(true);
-	        panel_5.add(chartPanel);
+	        chartPanel.setBounds(0, 0, 540, 325);
+	       panel_3.add(chartPanel);
+        
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(10, 11, 522, 311);
+		
+		
+		
+		
+		
+		
 		
 
 		JPanel panel_4 = new JPanel();
