@@ -214,6 +214,7 @@ public class RegistrarUsuario extends JDialog {
 		panel_1.add(lblCitasPorDia);
 		
 		cbxEspecialidad = new JComboBox<String>();
+		cbxEspecialidad.setEnabled(false);
 		cbxEspecialidad.setModel(new DefaultComboBoxModel<String>(new String[] {"<Seleccione>", "Cirujano General", "Ginec\u00F3logo", "Cardi\u00F3logo", "Neur\u00F3logo", "Ur\u00F3logo", "Pediatra", "Dermat\u00F3logo", "Oftalm\u00F3logo"}));
 		cbxEspecialidad.setBounds(10, 91, 164, 20);
 		panel_1.add(cbxEspecialidad);
@@ -264,7 +265,7 @@ public class RegistrarUsuario extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnMedico.setSelected(true);
 				rdbtnAdm.setSelected(false);
-				cbxEspecialidad.setEditable(true);
+				cbxEspecialidad.setEnabled(true);
 				txtExequatur.setEditable(true);
 				spnCitasXDia.setEnabled(true);
 			}
@@ -278,7 +279,7 @@ public class RegistrarUsuario extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnMedico.setSelected(false);
 				rdbtnAdm.setSelected(true);
-				cbxEspecialidad.setEditable(false);
+				cbxEspecialidad.setEnabled(false);
 				txtExequatur.setEditable(false);
 				spnCitasXDia.setEnabled(false);
 			}
@@ -299,7 +300,7 @@ public class RegistrarUsuario extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 
 						if (txtCedula.getText().equalsIgnoreCase("") || txtDireccion.getText().equalsIgnoreCase("")
-								|| (cbxEspecialidad.isEditable() && cbxEspecialidad.getSelectedItem().toString().equalsIgnoreCase(""))
+								|| (cbxEspecialidad.isEditable() && !cbxEspecialidad.getSelectedItem().toString().equalsIgnoreCase("<Seleccione>"))
 								|| (txtExequatur.isEditable() && txtExequatur.getText().equalsIgnoreCase(""))
 								|| txtFechaNacimiento.getText().equalsIgnoreCase("")
 								|| txtNombre.getText().equalsIgnoreCase("")
@@ -334,7 +335,7 @@ public class RegistrarUsuario extends JDialog {
 									if (rdbtnMedico.isSelected()) {
 										String especialidad = cbxEspecialidad.getSelectedItem().toString();
 										String exequatur = txtExequatur.getText();
-										int citasXdia = Integer.valueOf(spnCitasXDia.getValue().toString());
+										int citasXdia = Integer.parseInt(spnCitasXDia.getValue().toString());
 										aux = new Doctor(cedula, nombre, fechaNacimiento, telefono, direccion, sexo, usuario, password,
 												exequatur, especialidad, citasXdia);
 									} else
@@ -376,6 +377,11 @@ public class RegistrarUsuario extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Atras");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setIcon(new ImageIcon(RegistrarUsuario.class.getResource("/images/back.png")));
 				cancelButton.setBackground(new Color(204, 204, 204));
 				cancelButton.setActionCommand("Cancel");
