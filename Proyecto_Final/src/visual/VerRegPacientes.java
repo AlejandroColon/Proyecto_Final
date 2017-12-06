@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -36,15 +36,6 @@ public class VerRegPacientes extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			VerRegPacientes dialog = new VerRegPacientes();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
@@ -85,17 +76,17 @@ public class VerRegPacientes extends JDialog {
 				btnVerPaciente.addActionListener(new ActionListener() {
 				
 					public void actionPerformed(ActionEvent e) {
-						try {
-							int column = 0;
+						
+						int column = 0;
 						int row = table.getSelectedRow();
 						String value = table.getModel().getValueAt(row, column).toString();
+						JOptionPane.showMessageDialog(null, value, "Advertencia",
+								JOptionPane.WARNING_MESSAGE);
 						DatosPacientes aux = new DatosPacientes(value);
 						aux.setVisible(true);
 						aux.setLocationRelativeTo(null);
 						
-						} catch (Exception e2) {
-						}
-						
+					
 					}
 				
 				});

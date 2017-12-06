@@ -57,7 +57,8 @@ public class DatosPacientes extends JDialog {
 		
 		//cargando los datos
 		Paciente p = Clinica.getInstance().findPacienteByCedula(cedula);
-		txtCedula.setText(cedula);
+		
+		txtCedula.setText(p.getCedula());
 		txtNombre.setText(p.getNombre());
 		LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
 		txtEdad.setText(""+Clinica.getInstance().calcularEdad(birthday));
