@@ -121,7 +121,7 @@ public class RegistrarVacunas extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
-				btnRegistrar.setIcon(new ImageIcon(RegistrarVacunas.class.getResource("/images/002-login-1.png")));
+				btnRegistrar.setIcon(new ImageIcon(RegistrarVacunas.class.getResource("/images/checked (1).png")));
 				btnRegistrar.setBackground(new Color(204, 204, 204));
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -139,8 +139,8 @@ public class RegistrarVacunas extends JDialog {
 									"Vacuna", JOptionPane.INFORMATION_MESSAGE);
 							clear();
 						} else {
-							JOptionPane.showMessageDialog(null, "No pueden haber campos vacios", "ERROR",
-									JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "No puede dejar campos vacios", "Aviso",
+									JOptionPane.WARNING_MESSAGE);
 						}
 					}
 
@@ -156,7 +156,7 @@ public class RegistrarVacunas extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.setIcon(new ImageIcon(RegistrarVacunas.class.getResource("/images/back.png")));
+				btnCancelar.setIcon(new ImageIcon(RegistrarVacunas.class.getResource("/images/cancel.png")));
 				btnCancelar.setBackground(new Color(204, 204, 204));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

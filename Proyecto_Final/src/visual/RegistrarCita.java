@@ -260,7 +260,7 @@ public class RegistrarCita extends JDialog {
 
 		cbxDoctor = new JComboBox<String>();
 		cbxDoctor.setModel(new DefaultComboBoxModel<String>(new String[] { "<Seleccione>" }));
-		cbxDoctor.setBounds(10, 90, 252, 20);
+		cbxDoctor.setBounds(10, 90, 235, 20);
 		panelDatosCita.add(cbxDoctor);
 		llenarCMB();
 		{
@@ -279,6 +279,7 @@ public class RegistrarCita extends JDialog {
 				 * */
 				
 				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.setBackground(new Color(204, 204, 204));
 				btnRegistrar.setIcon(new ImageIcon(RegistrarCita.class.getResource("/images/checked (1).png")));
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -287,7 +288,7 @@ public class RegistrarCita extends JDialog {
 								txtFormatTelefono.getText().toString().equalsIgnoreCase("")||txtFormatFechaNaci.getText().toString().equalsIgnoreCase("")
 								|| txtDireccion.getText().equalsIgnoreCase("") || txtFecha.getText().equalsIgnoreCase("")||
 								cbxDoctor.getSelectedItem().toString().equalsIgnoreCase("Seleccione")){
-							JOptionPane.showMessageDialog(null, "Compruebe que no existan datos inválidos", null, JOptionPane.WARNING_MESSAGE, null);
+							JOptionPane.showMessageDialog(null, "No puede dejar campos vacios", "Aviso", JOptionPane.WARNING_MESSAGE, null);
 						
 						}else{
 
@@ -333,8 +334,9 @@ public class RegistrarCita extends JDialog {
 						JOptionPane.showMessageDialog(null, "Cita Registrada", "Información",
 								JOptionPane.INFORMATION_MESSAGE);
 						clean();
-					}
 						dispose();
+					}
+						
 					}
 
 					private Doctor buscarDoctor() {
@@ -355,6 +357,7 @@ public class RegistrarCita extends JDialog {
 			}
 			{
 				JButton btnAtras = new JButton("Atr\u00E1s");
+				btnAtras.setBackground(new Color(204, 204, 204));
 				btnAtras.setIcon(new ImageIcon(RegistrarCita.class.getResource("/images/back (1).png")));
 				btnAtras.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

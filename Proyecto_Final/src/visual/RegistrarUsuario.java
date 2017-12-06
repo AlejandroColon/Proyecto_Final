@@ -293,7 +293,7 @@ public class RegistrarUsuario extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
-				okButton.setIcon(new ImageIcon(RegistrarUsuario.class.getResource("/images/002-login-1.png")));
+				okButton.setIcon(new ImageIcon(RegistrarUsuario.class.getResource("/images/checked (1).png")));
 				okButton.setBackground(new Color(204, 204, 204));
 				
 				okButton.addActionListener(new ActionListener() {
@@ -382,7 +382,7 @@ public class RegistrarUsuario extends JDialog {
 						dispose();
 					}
 				});
-				cancelButton.setIcon(new ImageIcon(RegistrarUsuario.class.getResource("/images/back.png")));
+				cancelButton.setIcon(new ImageIcon(RegistrarUsuario.class.getResource("/images/cancel.png")));
 				cancelButton.setBackground(new Color(204, 204, 204));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);

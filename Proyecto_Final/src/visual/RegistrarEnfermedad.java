@@ -125,7 +125,7 @@ public class RegistrarEnfermedad extends JDialog {
 			{
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.setBackground(new Color(204, 204, 204));
-				btnRegistrar.setIcon(new ImageIcon(RegistrarEnfermedad.class.getResource("/images/002-login-1.png")));
+				btnRegistrar.setIcon(new ImageIcon(RegistrarEnfermedad.class.getResource("/images/checked (1).png")));
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!txtCodigo.getText().equalsIgnoreCase("") && !txtNombre.getText().equalsIgnoreCase("") && !txtDescripcion.getText().equalsIgnoreCase("")) {
@@ -142,8 +142,8 @@ public class RegistrarEnfermedad extends JDialog {
 									"Enfermedad Bajo Vigilancia", JOptionPane.INFORMATION_MESSAGE);
 							clear();
 						} else {
-							JOptionPane.showMessageDialog(null, "No pueden haber campos vacios", "ERROR",
-									JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "No puede dejar campos vacios", "Aviso",
+									JOptionPane.WARNING_MESSAGE);
 						}
 
 					}
@@ -162,7 +162,7 @@ public class RegistrarEnfermedad extends JDialog {
 			{
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.setBackground(new Color(204, 204, 204));
-				btnCancelar.setIcon(new ImageIcon(RegistrarEnfermedad.class.getResource("/images/back.png")));
+				btnCancelar.setIcon(new ImageIcon(RegistrarEnfermedad.class.getResource("/images/cancel.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						txtNombre.setText("");
