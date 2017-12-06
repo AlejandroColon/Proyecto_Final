@@ -11,7 +11,9 @@ import logical.Administrativo;
 import logical.Cita;
 import logical.Clinica;
 import logical.Enfermedad;
+import logical.Paciente;
 import logical.Persona;
+import logical.Vacuna;
 
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -29,6 +31,8 @@ import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.JButton;
@@ -352,9 +356,7 @@ public class Principal extends JFrame{
 			  data.setValue(aux.getNombre(), Clinica.getInstance().datosEstadistica(aux.getCodigo()));
 		}
 		  data.setValue("No enfermos", Clinica.getInstance().estadisticaNoEnfermos());
-	        /*data.setValue("C", 40);
-	        data.setValue("Java", 45);
-	        data.setValue("Python", 15);*/
+	       
 	 
 	        // Creando el Grafico
 	        JFreeChart chart = ChartFactory.createPieChart3D(
@@ -379,19 +381,63 @@ public class Principal extends JFrame{
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(10, 11, 522, 311);
 		
-		
-		
-		
-		
-		
-		
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.CYAN);
 		panel.add(panel_4);
+		
+		 
+		crearGraficaBarras(panel_4);
+		
 	}
 	
 	
+
+	private void crearGraficaBarras(JPanel panel_4) {
+
+		         
+	      final DefaultCategoryDataset dataset = new DefaultCategoryDataset( );         
+	     
+	      llenarDataset(dataset);
+	      
+	      JFreeChart barChart = ChartFactory.createBarChart3D(
+	         "Control de Vacunas",             
+	         "Vacuna",             
+	         "Cantidad",             
+	         dataset,            
+	         PlotOrientation.VERTICAL,             
+	         true, true, false);
+	      panel_4.setLayout(new BorderLayout(0, 0));
+	      
+	      ChartPanel chartPanel2 = new ChartPanel(barChart);
+	        chartPanel2.setHorizontalAxisTrace(false);
+	        chartPanel2.setFillZoomRectangle(false);
+	        chartPanel2.setEnforceFileExtensions(false);
+	        chartPanel2.setMouseWheelEnabled(false);
+	        chartPanel2.setEnabled(false);
+	        chartPanel2.setBounds(0, 0, 540, 325);
+	       panel_4.add(chartPanel2);
+		
+	}
+
+	public static void llenarDataset(DefaultCategoryDataset dataset) {
+		int cant = 0;
+		for(Vacuna aux : Clinica.getInstance().getMisVacunas()) {
+			String vac = aux.getNombre();
+			cant = 0;
+			for(Paciente p : Clinica.getInstance().getMisPacientes()) {
+				for(Vacuna vacuna : p.getMisVacunas()) {
+					if(vacuna.getCodigo().equalsIgnoreCase(aux.getCodigo()))
+						cant++;
+				}
+			}
+			
+			dataset.addValue( cant , "Vacunados" , vac); 
+			dataset.addValue( Clinica.getInstance().getMisPacientes().size() , "Total" , vac);
+		}
+		
+		 
+	}
 
 	public static void LoadTableAdministrativo() {
 		model.setRowCount(0);
