@@ -90,6 +90,7 @@ public class RegistrarCita extends JDialog {
 		panelDatosPersona.add(lblSexo);
 
 		chckbxM = new JCheckBox("M");
+		chckbxM.setBackground(Color.WHITE);
 		chckbxM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				chckbxM.setSelected(true);
@@ -100,6 +101,7 @@ public class RegistrarCita extends JDialog {
 		chckbxM.setBounds(139, 85, 46, 23);
 		panelDatosPersona.add(chckbxM);
 		chckbxF = new JCheckBox("F");
+		chckbxF.setBackground(Color.WHITE);
 		chckbxF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				chckbxM.setSelected(false);
@@ -258,7 +260,7 @@ public class RegistrarCita extends JDialog {
 
 		cbxDoctor = new JComboBox<String>();
 		cbxDoctor.setModel(new DefaultComboBoxModel<String>(new String[] { "<Seleccione>" }));
-		cbxDoctor.setBounds(10, 90, 106, 20);
+		cbxDoctor.setBounds(10, 90, 252, 20);
 		panelDatosCita.add(cbxDoctor);
 		llenarCMB();
 		{
@@ -332,6 +334,7 @@ public class RegistrarCita extends JDialog {
 								JOptionPane.INFORMATION_MESSAGE);
 						clean();
 					}
+						dispose();
 					}
 
 					private Doctor buscarDoctor() {

@@ -35,6 +35,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class RegistrarUsuario extends JDialog {
@@ -46,7 +48,6 @@ public class RegistrarUsuario extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtDireccion;
 	private JTextField txtExequatur;
-	private JTextField txtEspecialidad;
 	private JSpinner spnCitasXDia;
 	private JPasswordField passConfContra;
 	private JPasswordField passContra;
@@ -59,6 +60,7 @@ public class RegistrarUsuario extends JDialog {
 	private JFormattedTextField txtNombre;
 	private JRadioButton rdbtnAdm;
 	private JFormattedTextField txtCedula;
+	private JComboBox<String> cbxEspecialidad;
 
 	public RegistrarUsuario() {
 		getContentPane().setBackground(Color.WHITE);
@@ -200,12 +202,6 @@ public class RegistrarUsuario extends JDialog {
 		lblEspecialidad.setBounds(10, 77, 92, 14);
 		panel_1.add(lblEspecialidad);
 
-		txtEspecialidad = new JTextField();
-		txtEspecialidad.setEditable(false);
-		txtEspecialidad.setBounds(10, 93, 164, 20);
-		panel_1.add(txtEspecialidad);
-		txtEspecialidad.setColumns(10);
-
 		spnCitasXDia = new JSpinner();
 		spnCitasXDia.setBackground(Color.WHITE);
 		spnCitasXDia.setEnabled(false);
@@ -216,6 +212,11 @@ public class RegistrarUsuario extends JDialog {
 		JLabel lblCitasPorDia = new JLabel("Citas por dia:");
 		lblCitasPorDia.setBounds(10, 123, 100, 14);
 		panel_1.add(lblCitasPorDia);
+		
+		cbxEspecialidad = new JComboBox<String>();
+		cbxEspecialidad.setModel(new DefaultComboBoxModel<String>(new String[] {"<Seleccione>", "Cirujano General", "Ginec\u00F3logo", "Cardi\u00F3logo", "Neur\u00F3logo", "Ur\u00F3logo", "Pediatra", "Dermat\u00F3logo", "Oftalm\u00F3logo"}));
+		cbxEspecialidad.setBounds(10, 91, 164, 20);
+		panel_1.add(cbxEspecialidad);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
@@ -263,7 +264,7 @@ public class RegistrarUsuario extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnMedico.setSelected(true);
 				rdbtnAdm.setSelected(false);
-				txtEspecialidad.setEditable(true);
+				cbxEspecialidad.setEditable(true);
 				txtExequatur.setEditable(true);
 				spnCitasXDia.setEnabled(true);
 			}
@@ -277,7 +278,7 @@ public class RegistrarUsuario extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnMedico.setSelected(false);
 				rdbtnAdm.setSelected(true);
-				txtEspecialidad.setEditable(false);
+				cbxEspecialidad.setEditable(false);
 				txtExequatur.setEditable(false);
 				spnCitasXDia.setEnabled(false);
 			}
@@ -298,7 +299,7 @@ public class RegistrarUsuario extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 
 						if (txtCedula.getText().equalsIgnoreCase("") || txtDireccion.getText().equalsIgnoreCase("")
-								|| (txtEspecialidad.isEditable() && txtEspecialidad.getText().equalsIgnoreCase(""))
+								|| (cbxEspecialidad.isEditable() && cbxEspecialidad.getSelectedItem().toString().equalsIgnoreCase(""))
 								|| (txtExequatur.isEditable() && txtExequatur.getText().equalsIgnoreCase(""))
 								|| txtFechaNacimiento.getText().equalsIgnoreCase("")
 								|| txtNombre.getText().equalsIgnoreCase("")
@@ -331,7 +332,7 @@ public class RegistrarUsuario extends JDialog {
 									String usuario = txtUsuario.getText();
 									String password = String.valueOf(passContra.getPassword());
 									if (rdbtnMedico.isSelected()) {
-										String especialidad = txtEspecialidad.getText();
+										String especialidad = cbxEspecialidad.getSelectedItem().toString();
 										String exequatur = txtExequatur.getText();
 										int citasXdia = Integer.valueOf(spnCitasXDia.getValue().toString());
 										aux = new Doctor(cedula, nombre, fechaNacimiento, telefono, direccion, sexo, usuario, password,
@@ -386,7 +387,7 @@ public class RegistrarUsuario extends JDialog {
 	private void clean() {
 		txtCedula.setText("");
 		txtDireccion.setText("");
-		txtEspecialidad.setText("");
+		cbxEspecialidad.setSelectedIndex(0);;
 		txtExequatur.setText("");
 		txtFechaNacimiento.setText("");
 		txtNombre.setText("");
@@ -395,7 +396,7 @@ public class RegistrarUsuario extends JDialog {
 		spnCitasXDia.setValue(1);
 		rdbtnAdm.setSelected(false);
 		rdbtnMedico.setSelected(false);
-		txtEspecialidad.setEnabled(false);
+		cbxEspecialidad.setEnabled(false);
 		txtExequatur.setEnabled(false);
 		spnCitasXDia.setEnabled(false);
 		chckbxF.setSelected(false);
@@ -413,4 +414,7 @@ public class RegistrarUsuario extends JDialog {
  * 
  * Modificaciones: Oscar Rodriguez Fecha: 19/11/2017 Anotaciones: Agregar
  * funciones para guardar en archivo
+ * 
+ * Modificaciones: Yamilka Vásquez fecha: 6/12/17 Anotaciones: Cambiando el txtEspecialidad por
+ * Especialidad
  */
