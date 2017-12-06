@@ -303,7 +303,7 @@ public class RealizarConsulta extends JDialog {
 		tableHsitoriaClinica.setModel(model);
 		scrollPane.setViewportView(tableHsitoriaClinica);
 
-		JButton btnVerHistoriaClnica = new JButton("Ver Historia Cl\u00EDnica");
+		JButton btnVerHistoriaClnica = new JButton("Exportar Historia Cl\u00EDnica");
 		btnVerHistoriaClnica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -312,10 +312,13 @@ public class RealizarConsulta extends JDialog {
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (IOException e1) {
 				}
+				RepHistorial repo = new RepHistorial(txtCedula.getText());
+				repo.setVisible(true);
+				repo.setLocationRelativeTo(null);
 			}
 		});
 		btnVerHistoriaClnica.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnVerHistoriaClnica.setBounds(219, 372, 121, 23);
+		btnVerHistoriaClnica.setBounds(201, 372, 139, 23);
 		panel_4.add(btnVerHistoriaClnica);
 		informacion.addTab("Control de Vacunas", vacunas);
 		vacunas.setLayout(null);

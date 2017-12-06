@@ -541,6 +541,10 @@ public class Clinica implements Serializable {
 		return p.getYears();
 
 	}
+	
+	public void presentHistorial(String cedula) throws IOException {
+		
+	}
 
 }
 
