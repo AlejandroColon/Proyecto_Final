@@ -57,7 +57,7 @@ public class RegistrarUsuario extends JDialog {
 	private JFormattedTextField txtFechaNacimiento;
 	private JFormattedTextField txtTelefono;
 	private JRadioButton rdbtnMedico;
-	private JFormattedTextField txtNombre;
+	private JTextField txtNombre;
 	private JRadioButton rdbtnAdm;
 	private JFormattedTextField txtCedula;
 	private JComboBox<String> cbxEspecialidad;
@@ -164,7 +164,7 @@ public class RegistrarUsuario extends JDialog {
 				"qwertyuiopasdfghjklzxcvbnÒm" + "           QWERTYUIOPASDFGHJKLZXCVBN—M " + "¡·…ÈÕÌ⁄˙");
 		maskName.setPlaceholderCharacter(' ');
 
-		txtNombre = new JFormattedTextField(maskName);
+		txtNombre = new JTextField();
 		txtNombre.setBounds(212, 37, 164, 20);
 		panel.add(txtNombre);
 
@@ -266,6 +266,7 @@ public class RegistrarUsuario extends JDialog {
 				rdbtnMedico.setSelected(true);
 				rdbtnAdm.setSelected(false);
 				cbxEspecialidad.setEnabled(true);
+				
 				txtExequatur.setEditable(true);
 				spnCitasXDia.setEnabled(true);
 			}
@@ -280,6 +281,7 @@ public class RegistrarUsuario extends JDialog {
 				rdbtnMedico.setSelected(false);
 				rdbtnAdm.setSelected(true);
 				cbxEspecialidad.setEnabled(false);
+				txtExequatur.setEnabled(true);
 				txtExequatur.setEditable(false);
 				spnCitasXDia.setEnabled(false);
 			}
@@ -403,7 +405,7 @@ public class RegistrarUsuario extends JDialog {
 		rdbtnAdm.setSelected(false);
 		rdbtnMedico.setSelected(false);
 		cbxEspecialidad.setEnabled(false);
-		txtExequatur.setEnabled(false);
+		txtExequatur.setEditable(false);
 		spnCitasXDia.setEnabled(false);
 		chckbxF.setSelected(false);
 		chckbxM.setSelected(false);

@@ -11,8 +11,8 @@ import javax.swing.JTextArea;
 import java.awt.Toolkit;
 import java.io.FileReader;
 import java.util.Scanner;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class RepHistorial extends JDialog {
 
@@ -25,25 +25,10 @@ public class RepHistorial extends JDialog {
 	private JTextArea textArea;
 	private String storeAllString = "";
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			RepHistorial dialog = new RepHistorial(cedula);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
+	
+	
 	@SuppressWarnings("static-access")
 	public RepHistorial(String cedula) {
-		
 		this.cedula = cedula;
 		setTitle("Reporte de historial");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RepHistorial.class.getResource("/images/icon.png")));
@@ -62,23 +47,15 @@ public class RepHistorial extends JDialog {
 		contentPanel.add(textArea);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnAtras = new JButton("Atr\u00E1s");
+				btnAtras.setBackground(new Color(240,240,240));
+				btnAtras.setIcon(new ImageIcon(RepHistorial.class.getResource("/images/back.png")));
+				btnAtras.setActionCommand("Cancel");
+				buttonPane.add(btnAtras);
 			}
 		}
 	}

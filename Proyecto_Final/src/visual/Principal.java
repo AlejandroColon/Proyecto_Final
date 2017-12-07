@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import logical.Administrativo;
 import logical.Cita;
 import logical.Clinica;
+import logical.Doctor;
 import logical.Enfermedad;
 import logical.Paciente;
 import logical.Persona;
@@ -45,7 +46,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
-import javax.swing.UIManager;
 
 public class Principal extends JFrame{
 
@@ -61,6 +61,8 @@ public class Principal extends JFrame{
 	private static Object[]fila2;
 	JComboBox<String> cbxFiltro;
 	private JTable tableEnfermedades;
+	public static JPanel panel_4;
+	public static JPanel panel_3;
 
 	/**
 	 * Launch the application.
@@ -82,13 +84,13 @@ public class Principal extends JFrame{
 				}
 				
 				/*
-				  Persona p = new Doctor("050-0022526-4","Dr. Maunel Perez",10,"809-","casa","m","doctor","123"
-				  ,"abc","Cirujano",3); 
+				  Persona p = new Doctor("050-0022526-4","Dr. Maunel Perez","25/11/1980","809-589-9858","Padre las casas, No 1","M","doctor","123"
+				  ,"DC859588","Cirujano General",3); 
 				  Clinica.getInstance().addPersona(p); 
-				  Persona p2 = new  Administrativo("402-8566965-3","Lic. Manuela Pereza",15,
-				  "829","la casa de manuel","F","secre","123");
+				  Persona p2 = new  Administrativo("402-8566965-3","Lic. Manuela Pereza","12/05/1990",
+				  "829-987-1782","Calle , Esq 4 No2 (La loteria)","F","secre","123");
 				  Clinica.getInstance().addPersona(p2);
-				*/
+			*/
 				
 				Login log = new Login();
 				log.setVisible(true);
@@ -145,7 +147,11 @@ public class Principal extends JFrame{
 		JMenu mnAdministrativo = new JMenu("Administrativo");
 		mnAdministrativo.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
 		mnAdministrativo.setIcon(new ImageIcon(Principal.class.getResource("/images/nurse.png")));
-		menuBar.add(mnAdministrativo);
+		
+		if(p instanceof Administrativo) {
+			menuBar.add(mnAdministrativo);
+		}
+		
 
 		JMenuItem mntmRegistrarEmpleado = new JMenuItem("Registrar Empleado");
 		mntmRegistrarEmpleado.setIcon(new ImageIcon(Principal.class.getResource("/images/worker.png")));
@@ -163,7 +169,7 @@ public class Principal extends JFrame{
 		JMenuItem mntmModificarEmpleado = new JMenuItem("Modificar Empleado");
 		mntmModificarEmpleado.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mntmModificarEmpleado.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
-		mnAdministrativo.add(mntmModificarEmpleado);
+		//mnAdministrativo.add(mntmModificarEmpleado);
 		
 		JMenuItem mntmListaDeEmpleados = new JMenuItem("Lista de Empleados");
 		mntmListaDeEmpleados.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
@@ -181,7 +187,11 @@ public class Principal extends JFrame{
 		JMenu mnCitas = new JMenu("Citas");
 		mnCitas.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
 		mnCitas.setIcon(new ImageIcon(Principal.class.getResource("/images/stethoscope.png")));
+		
+		if(p instanceof Administrativo) {
 		menuBar.add(mnCitas);
+		}
+		
 
 		JMenuItem mntmRegistrarCita = new JMenuItem("Registrar Cita");
 		mntmRegistrarCita.setIcon(new ImageIcon(Principal.class.getResource("/images/note.png")));
@@ -232,7 +242,7 @@ public class Principal extends JFrame{
 		});
 		mnControl.add(mntmRegistrarVacuna);
 		
-		JMenuItem mntmModificiarEnfermedad = new JMenuItem("Modificiar Enfermedad");
+		JMenuItem mntmModificiarEnfermedad = new JMenuItem("Ver Enfermedades");
 		mntmModificiarEnfermedad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarEnfermedades lEnf = new ListarEnfermedades();
@@ -244,7 +254,7 @@ public class Principal extends JFrame{
 		mntmModificiarEnfermedad.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
 		mnControl.add(mntmModificiarEnfermedad);
 		
-		JMenuItem mntmModificarVacuna = new JMenuItem("Modificar Vacuna");
+		JMenuItem mntmModificarVacuna = new JMenuItem("Ver Vacunas");
 		mntmModificarVacuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListaVacunas lVacuna = new ListaVacunas();
@@ -257,9 +267,17 @@ public class Principal extends JFrame{
 		mnControl.add(mntmModificarVacuna);
 		
 		JMenu mnPacientes = new JMenu("Pacientes");
-		menuBar.add(mnPacientes);
+		mnPacientes.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
+		mnPacientes.setIcon(new ImageIcon(Principal.class.getResource("/images/002-paciente-1.png")));
+		
+		if(p instanceof Doctor) {
+			menuBar.add(mnPacientes);
+		}
+		
 		
 		JMenuItem mntmVerPacientes = new JMenuItem("Ver pacientes");
+		mntmVerPacientes.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+		mntmVerPacientes.setIcon(new ImageIcon(Principal.class.getResource("/images/001-lista.png")));
 		mntmVerPacientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VerRegPacientes aux = new VerRegPacientes();
@@ -283,6 +301,7 @@ public class Principal extends JFrame{
 		panel_1.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelCitas = new JPanel();
+		panelCitas.setBackground(Color.WHITE);
 		panelCitas.setBorder(new TitledBorder(null, "Citas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.add(panelCitas, BorderLayout.CENTER);
 		panelCitas.setLayout(null);
@@ -338,6 +357,7 @@ public class Principal extends JFrame{
 		}
 
 		JPanel panelFiltro = new JPanel();
+		panelFiltro.setBackground(Color.WHITE);
 		panelFiltro.setBounds(20, 23, 512, 38);
 		panelCitas.add(panelFiltro);
 		panelFiltro.setLayout(null);
@@ -358,12 +378,13 @@ public class Principal extends JFrame{
 		panelFiltro.add(cbxFiltro);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(UIManager.getColor("Button.background"));
+		panel_2.setBorder(new TitledBorder(null, "Porcentaje Por Enfermedad", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBackground(Color.WHITE);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(61, 40, 420, 253);
+		scrollPane_1.setBounds(95, 62, 437, 222);
 		panel_2.add(scrollPane_1);
 		
 		tableEnfermedades = new JTable();
@@ -374,14 +395,30 @@ public class Principal extends JFrame{
 		loadTableEnfermedades();
 		scrollPane_1.setViewportView(tableEnfermedades);
 
-		JPanel panel_3 = new JPanel();
+		panel_3 = new JPanel();
 		panel_3.setBackground(Color.MAGENTA);
 		panel.add(panel_3);
 		
 		
+		
 
+		 
+        
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(10, 11, 522, 311);
+		
 
-		  DefaultPieDataset data = new DefaultPieDataset();
+		panel_4 = new JPanel();
+		panel_4.setBackground(Color.CYAN);
+		panel.add(panel_4);
+		
+		crearGraficaEnfermedades();
+			 crearGraficaBarras();
+			
+	}
+	
+	public static void crearGraficaEnfermedades() {
+		 DefaultPieDataset data = new DefaultPieDataset();
 		  for (Enfermedad aux : Clinica.getInstance().getMisEnfermedades()) {
 			  data.setValue(aux.getNombre(), Clinica.getInstance().datosEstadistica(aux.getCodigo()));
 		}
@@ -407,22 +444,9 @@ public class Principal extends JFrame{
 	        chartPanel.setMouseWheelEnabled(true);
 	        chartPanel.setBounds(0, 0, 540, 325);
 	       panel_3.add(chartPanel);
-        
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(10, 11, 522, 311);
-		
-
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(Color.CYAN);
-		panel.add(panel_4);
-		
-		
-			 crearGraficaBarras(panel_4);
-			
 	}
 	
-
-	private static void crearGraficaBarras(JPanel panel_4) {
+	public static void crearGraficaBarras() {
 
 		         
 	      final DefaultCategoryDataset dataset = new DefaultCategoryDataset( );         

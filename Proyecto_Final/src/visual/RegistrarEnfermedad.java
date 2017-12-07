@@ -37,22 +37,8 @@ public class RegistrarEnfermedad extends JDialog {
 	private JTextField txtNombre;
 	JTextArea txtDescripcion;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			RegistrarEnfermedad dialog = new RegistrarEnfermedad();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
+	
+	
 	public RegistrarEnfermedad() {
 		setBackground(Color.WHITE);
 		setTitle("Registrar Enfermedad");

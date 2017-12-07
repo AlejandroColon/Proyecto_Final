@@ -42,22 +42,7 @@ public class RegistrarVacunas extends JDialog {
 	private JTextField txtNombre;
 	JTextArea txtDescripcion;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			RegistrarVacunas dialog = new RegistrarVacunas();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public RegistrarVacunas() {
 		setBackground(Color.WHITE);
 		setTitle("Registrar Vacuna");
@@ -160,7 +145,7 @@ public class RegistrarVacunas extends JDialog {
 				btnCancelar.setBackground(new Color(204, 204, 204));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						System.exit(0);
+						dispose();
 					}
 				});
 				btnCancelar.setActionCommand("Cancel");

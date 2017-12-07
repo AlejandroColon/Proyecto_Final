@@ -213,6 +213,7 @@ public class RealizarConsulta extends JDialog {
 		panel_1.add(lblCdigo);
 
 		chckbxAgregarAHistoria = new JCheckBox("Agregar a Historia Cl\u00EDnica");
+		chckbxAgregarAHistoria.setBackground(new Color(255, 255, 255));
 		chckbxAgregarAHistoria.setBounds(144, 17, 178, 23);
 		panel_1.add(chckbxAgregarAHistoria);
 
@@ -242,6 +243,7 @@ public class RealizarConsulta extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if (cmbEnfermedad.getSelectedIndex() != 0) {
 					chckbxAgregarAHistoria.setSelected(true);
+					txtDiagnostico.setText(cmbEnfermedad.getSelectedItem().toString());
 				}
 			}
 		});
@@ -422,7 +424,10 @@ public class RealizarConsulta extends JDialog {
 							
 							
 							Principal.LoadTableDoctor(Clinica.getInstance().findByCedula(cedulaDoctor));
-
+							Principal.loadTableEnfermedades();
+							Principal.crearGraficaBarras();
+							Principal.crearGraficaEnfermedades();
+							
 							JOptionPane.showMessageDialog(null, "Consulta realizada exitosamente", "Información",
 									JOptionPane.INFORMATION_MESSAGE);
 
@@ -513,8 +518,6 @@ public class RealizarConsulta extends JDialog {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
 				txtDireccion.setText(p.getDireccion());
-				JOptionPane.showMessageDialog(null, p.getFechaNacimiento(), "ERROR",
-						JOptionPane.ERROR_MESSAGE);
 				LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
 				txtEdad.setText("" + Clinica.getInstance().calcularEdad(birthday));
 				txtTelefono.setText(p.getTelefono());
@@ -530,9 +533,7 @@ public class RealizarConsulta extends JDialog {
 			} else {
 				txtCedula.setText(p.getCedula());
 				txtNombre.setText(p.getNombre());
-				txtDireccion.setText(p.getDireccion());
-				JOptionPane.showMessageDialog(null, "" + readDia(p.getFechaNacimiento()), "ERROR",
-						JOptionPane.ERROR_MESSAGE);
+				txtDireccion.setText(p.getDireccion());				
 				LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
 				txtEdad.setText("" + Clinica.getInstance().calcularEdad(birthday));
 				txtTelefono.setText(p.getTelefono());
@@ -723,6 +724,7 @@ public class RealizarConsulta extends JDialog {
 			model2.addRow(fila2);
 		}
 	}
+	
 	private String determCodigoEnfermedad() {
 		String codigo = "";
 		int size = cmbEnfermedad.getSelectedItem().toString().length();

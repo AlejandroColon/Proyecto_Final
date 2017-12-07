@@ -47,6 +47,8 @@ public class DatosPacientes extends JDialog {
 	 * Create the dialog.
 	 */
 	public DatosPacientes(String cedula) {
+		setTitle("Datos de Paciente");
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DatosPacientes.class.getResource("/images/icon.png")));
 		setBounds(100, 100, 375, 256);
 		getContentPane().setLayout(new BorderLayout());
@@ -161,6 +163,7 @@ public class DatosPacientes extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnVerHistorial = new JButton("Ver Historial");
+				btnVerHistorial.setBackground(new Color(204, 204, 204));
 				btnVerHistorial.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
@@ -170,8 +173,10 @@ public class DatosPacientes extends JDialog {
 						} catch (IOException e1) {
 						}
 						RepHistorial repo = new RepHistorial(p.getCedula());
+						repo.dispose();
 						repo.setVisible(true);
 						repo.setLocationRelativeTo(null);
+						dispose();
 					}
 				});
 				btnVerHistorial.setIcon(new ImageIcon(DatosPacientes.class.getResource("/images/magnifying-glass.png")));
@@ -181,6 +186,12 @@ public class DatosPacientes extends JDialog {
 			}
 			{
 				JButton btnAtras = new JButton("Atr\u00E1s");
+				btnAtras.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
+				btnAtras.setBackground(new Color(204, 204, 204));
 				btnAtras.setIcon(new ImageIcon(DatosPacientes.class.getResource("/images/back.png")));
 				btnAtras.setActionCommand("Cancel");
 				buttonPane.add(btnAtras);

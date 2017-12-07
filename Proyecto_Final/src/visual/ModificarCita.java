@@ -15,6 +15,8 @@ import logical.Clinica;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -78,10 +80,12 @@ public class ModificarCita extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				Cita c = Clinica.getInstance().findCitaByID(txtCita.getText());
 				
-				if(c == null) {
-					
+				if(c == null || c.isEstado() == false) {
+					JOptionPane.showMessageDialog(null, "Cita No Existente",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 				}else {
 					txtNombre.setText(c.getCitado().getNombre());
+					txtFecha.setText(c.getFecha());
 				}
 			}
 		});
@@ -93,15 +97,48 @@ public class ModificarCita extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton btnEliminar = new JButton("Eliminar");
+			btnEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					Cita c = Clinica.getInstance().findCitaByID(txtCita.getText());
+					
+					c.setEstado(false);
+					
+					Principal.LoadTableAdministrativo();
+					
+					JOptionPane.showMessageDialog(null, "Cita Eliminada Exitosamente",
+							"Información", JOptionPane.INFORMATION_MESSAGE);
+					
+				}
+			});
 			buttonPane.add(btnEliminar);
 			{
 				JButton btnModificar = new JButton("Modificar");
+				btnModificar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						Cita c = Clinica.getInstance().findCitaByID(txtCita.getText());
+						
+						c.setFecha(txtFecha.getText());
+						
+						Principal.LoadTableAdministrativo();
+						
+						JOptionPane.showMessageDialog(null, "Cita Modificada Exitosamente",
+								"Información", JOptionPane.INFORMATION_MESSAGE);
+						
+					}
+				});
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);
 			}
 			{
 				JButton btnAtras = new JButton("Atras");
+				btnAtras.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				btnAtras.setActionCommand("Cancel");
 				buttonPane.add(btnAtras);
 			}

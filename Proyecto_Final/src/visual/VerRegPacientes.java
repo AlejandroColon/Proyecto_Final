@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -41,9 +40,11 @@ public class VerRegPacientes extends JDialog {
 	 * Create the dialog.
 	 */
 	public VerRegPacientes() {
+		setTitle("Lista Pacientes");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VerRegPacientes.class.getResource("/images/icon.png")));
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -73,6 +74,7 @@ public class VerRegPacientes extends JDialog {
 			{
 				JButton btnVerPaciente = new JButton("Ver paciente");
 				btnVerPaciente.setIcon(new ImageIcon(VerRegPacientes.class.getResource("/images/magnifying-glass.png")));
+				btnVerPaciente.setBackground(new Color(204, 204, 204));
 				btnVerPaciente.addActionListener(new ActionListener() {
 				
 					public void actionPerformed(ActionEvent e) {
@@ -80,11 +82,11 @@ public class VerRegPacientes extends JDialog {
 						int column = 0;
 						int row = table.getSelectedRow();
 						String value = table.getModel().getValueAt(row, column).toString();
-						JOptionPane.showMessageDialog(null,  value , "Advertencia",
-								JOptionPane.WARNING_MESSAGE);
+						
 						DatosPacientes aux = new DatosPacientes(value);
 						aux.setVisible(true);
 						aux.setLocationRelativeTo(null);
+						dispose();
 						
 					
 					}
@@ -97,6 +99,7 @@ public class VerRegPacientes extends JDialog {
 			{
 				JButton btnAtrás = new JButton("Atr\u00E1s");
 				btnAtrás.setIcon(new ImageIcon(VerRegPacientes.class.getResource("/images/back.png")));
+				btnAtrás.setBackground(new Color(204, 204, 204));
 				btnAtrás.setActionCommand("Cancel");
 				buttonPane.add(btnAtrás);
 			}
