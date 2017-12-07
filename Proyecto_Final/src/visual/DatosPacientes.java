@@ -55,18 +55,7 @@ public class DatosPacientes extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		//cargando los datos
-		Paciente p = Clinica.getInstance().findPacienteByCedula(cedula);
 		
-		txtCedula.setText(p.getCedula());
-		txtNombre.setText(p.getNombre());
-		LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
-		txtEdad.setText(""+Clinica.getInstance().calcularEdad(birthday));
-		txtDireccion.setText(p.getDireccion());
-		txtNumeroAfiliado.setText(p.getNumeroAfiliado());
-		txtTelefono.setText(p.getTelefono());
-		txtTipoSangre.setText(p.getTipoSangre());
-		txtAseguradora.setText(p.getAseguradora());
 		
 		
 		JLabel lblCedula = new JLabel("C\u00E9dula:");
@@ -148,6 +137,23 @@ public class DatosPacientes extends JDialog {
 		txtAseguradora.setBounds(189, 142, 143, 20);
 		contentPanel.add(txtAseguradora);
 		txtAseguradora.setColumns(10);
+		
+		//cargando los datos
+				Paciente p = Clinica.getInstance().findPacienteByCedula(cedula);
+				if(p==null) {
+					JOptionPane.showMessageDialog(null, "Historial Clínico exportado exitosamente", "Información",
+							JOptionPane.INFORMATION_MESSAGE);
+
+				}
+				txtCedula.setText("123");
+				txtNombre.setText(p.getNombre());
+				LocalDate birthday = LocalDate.of(readAno(p.getFechaNacimiento()), readMes(p.getFechaNacimiento()), readDia(p.getFechaNacimiento()));
+				txtEdad.setText(""+Clinica.getInstance().calcularEdad(birthday));
+				txtDireccion.setText(p.getDireccion());
+				txtNumeroAfiliado.setText(p.getNumeroAfiliado());
+				txtTelefono.setText(p.getTelefono());
+				txtTipoSangre.setText(p.getTipoSangre());
+				txtAseguradora.setText(p.getAseguradora());
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(new Color(102, 153, 255));
@@ -158,12 +164,12 @@ public class DatosPacientes extends JDialog {
 				btnVerHistorial.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							Clinica.getInstance().generarHistorial(txtCedula.getText());
+							Clinica.getInstance().generarHistorial(p.getCedula());
 							JOptionPane.showMessageDialog(null, "Historial Clínico exportado exitosamente", "Información",
 									JOptionPane.INFORMATION_MESSAGE);
 						} catch (IOException e1) {
 						}
-						RepHistorial repo = new RepHistorial(txtCedula.getText());
+						RepHistorial repo = new RepHistorial(p.getCedula());
 						repo.setVisible(true);
 						repo.setLocationRelativeTo(null);
 					}

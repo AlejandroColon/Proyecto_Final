@@ -416,14 +416,13 @@ public class Principal extends JFrame{
 		panel_4.setBackground(Color.CYAN);
 		panel.add(panel_4);
 		
-		 
-		crearGraficaBarras(panel_4);
 		
+			 crearGraficaBarras(panel_4);
+			
 	}
 	
-	
 
-	private void crearGraficaBarras(JPanel panel_4) {
+	private static void crearGraficaBarras(JPanel panel_4) {
 
 		         
 	      final DefaultCategoryDataset dataset = new DefaultCategoryDataset( );         

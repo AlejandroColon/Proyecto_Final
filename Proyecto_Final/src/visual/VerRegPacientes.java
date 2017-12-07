@@ -80,7 +80,7 @@ public class VerRegPacientes extends JDialog {
 						int column = 0;
 						int row = table.getSelectedRow();
 						String value = table.getModel().getValueAt(row, column).toString();
-						JOptionPane.showMessageDialog(null, value, "Advertencia",
+						JOptionPane.showMessageDialog(null,  value , "Advertencia",
 								JOptionPane.WARNING_MESSAGE);
 						DatosPacientes aux = new DatosPacientes(value);
 						aux.setVisible(true);

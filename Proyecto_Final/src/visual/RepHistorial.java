@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import java.awt.Toolkit;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -42,7 +41,9 @@ public class RepHistorial extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	@SuppressWarnings("static-access")
 	public RepHistorial(String cedula) {
+		
 		this.cedula = cedula;
 		setTitle("Reporte de historial");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RepHistorial.class.getResource("/images/icon.png")));
@@ -84,7 +85,7 @@ public class RepHistorial extends JDialog {
 	
 	public void leer(){
         try{    
-          FileReader read = new FileReader(cedula+".txt");
+          FileReader read = new FileReader(cedula + ".txt");
           Scanner scan = new Scanner(read);
              while(scan.hasNextLine()){
               String temp=scan.nextLine()+"\n";
