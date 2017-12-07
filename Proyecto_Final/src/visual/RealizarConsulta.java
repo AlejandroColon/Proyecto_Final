@@ -241,10 +241,14 @@ public class RealizarConsulta extends JDialog {
 		cmbEnfermedad = new JComboBox<String>();
 		cmbEnfermedad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				/*
 				if (cmbEnfermedad.getSelectedIndex() != 0) {
 					chckbxAgregarAHistoria.setSelected(true);
 					txtDiagnostico.setText(cmbEnfermedad.getSelectedItem().toString());
+					
 				}
+				*/
 			}
 		});
 		cmbEnfermedad.setModel(new DefaultComboBoxModel<String>(new String[] { "<Ninguna>" }));

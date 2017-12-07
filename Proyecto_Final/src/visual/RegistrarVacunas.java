@@ -120,6 +120,9 @@ public class RegistrarVacunas extends JDialog {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
+							
+							Principal.crearGraficaBarras();
+							
 							JOptionPane.showMessageDialog(null, " Vacuna agregada existosamente",
 									"Vacuna", JOptionPane.INFORMATION_MESSAGE);
 							clear();

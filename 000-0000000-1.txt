@@ -1,0 +1,12 @@
+			Reporte de historial	
+________________________________________________________________________________________
+Cedula:		000-0000000-1		Aseguradora:	ARS Palic Salud
+Nombre:		Jose Alonso		Afiliado No.:	784523
+Telefono:	(809) 569-8596		Direccion:	Calle 5, No2 (Los jardines)
+________________________________________________________________________________________
+Codigo:	HIST-1				Fecha:	07/12/2017
+Sintomas:	Dolor de cabeza
+Diagnostico:	Migraña
+Tratamiento:	Winasord
+Enfermedad:	N/A
+_________________________________________________________________________________________
