@@ -191,7 +191,6 @@ public class Principal extends JFrame{
 		if(p instanceof Administrativo) {
 		menuBar.add(mnCitas);
 		}
-		
 
 		JMenuItem mntmRegistrarCita = new JMenuItem("Registrar Cita");
 		mntmRegistrarCita.setIcon(new ImageIcon(Principal.class.getResource("/images/note.png")));
@@ -207,6 +206,13 @@ public class Principal extends JFrame{
 		mnCitas.add(mntmRegistrarCita);
 
 		JMenuItem mntmModificarCita = new JMenuItem("Modificar Cita");
+		mntmModificarCita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModificarCita mCita = new ModificarCita();
+				mCita.setVisible(true);
+				mCita.setLocationRelativeTo(null);
+			}
+		});
 		mntmModificarCita.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
 		mntmModificarCita.setIcon(new ImageIcon(Principal.class.getResource("/images/003-edit.png")));
 		mnCitas.add(mntmModificarCita);

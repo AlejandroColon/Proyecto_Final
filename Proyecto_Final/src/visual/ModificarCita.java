@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ModificarCita extends JDialog {
 
@@ -33,16 +34,19 @@ public class ModificarCita extends JDialog {
 
 	
 	public ModificarCita() {
+		setBackground(Color.WHITE);
 		setTitle("Modificar Cita");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificarCita.class.getResource("/images/icon.png")));
 		setResizable(false);
 		setBounds(100, 100, 307, 198);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(null, "Datos de Cita", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 281, 114);
 		contentPanel.add(panel);
@@ -63,7 +67,7 @@ public class ModificarCita extends JDialog {
 		panel.add(txtNombre);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(10, 65, 46, 14);
+		lblNombre.setBounds(10, 65, 73, 14);
 		panel.add(lblNombre);
 		
 		txtFecha = new JTextField();
@@ -76,6 +80,7 @@ public class ModificarCita extends JDialog {
 		panel.add(lblFecha);
 		
 		JButton btnBuscarCita = new JButton("Buscar Cita");
+		btnBuscarCita.setBackground(new Color(204, 204, 204));
 		btnBuscarCita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Cita c = Clinica.getInstance().findCitaByID(txtCita.getText());
@@ -93,10 +98,12 @@ public class ModificarCita extends JDialog {
 		panel.add(btnBuscarCita);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(102, 153, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton btnEliminar = new JButton("Eliminar");
+			btnEliminar.setBackground(new Color(204, 204, 204));
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -114,6 +121,7 @@ public class ModificarCita extends JDialog {
 			buttonPane.add(btnEliminar);
 			{
 				JButton btnModificar = new JButton("Modificar");
+				btnModificar.setBackground(new Color(204, 204, 204));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -134,6 +142,7 @@ public class ModificarCita extends JDialog {
 			}
 			{
 				JButton btnAtras = new JButton("Atras");
+				btnAtras.setBackground(new Color(204, 204, 204));
 				btnAtras.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

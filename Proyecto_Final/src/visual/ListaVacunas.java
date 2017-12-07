@@ -38,22 +38,6 @@ public class ListaVacunas extends JDialog {
 	private static Object[] fila;
 	private static DefaultTableModel model;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			ListaVacunas dialog = new ListaVacunas();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public ListaVacunas() {
 		setBackground(Color.WHITE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaVacunas.class.getResource("/images/icon.png")));

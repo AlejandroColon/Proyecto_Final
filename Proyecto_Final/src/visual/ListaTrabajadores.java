@@ -8,7 +8,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import logical.Clinica;
 import logical.Doctor;
 import logical.Persona;
@@ -23,6 +22,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListaTrabajadores extends JDialog {
 
@@ -34,23 +35,10 @@ public class ListaTrabajadores extends JDialog {
 	private static JTable table;
 	private static Object[] fila;
 	private static DefaultTableModel model;
+	private JButton btnModificar;
+	private int row;
+	private Persona empleado= null;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			ListaTrabajadores dialog = new ListaTrabajadores();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public ListaTrabajadores() {
 		setBackground(Color.WHITE);
 		setTitle("Listado de usuarios");
@@ -67,6 +55,17 @@ public class ListaTrabajadores extends JDialog {
 			contentPanel.add(scrollPane, BorderLayout.CENTER);
 			{
 				table = new JTable();
+				table.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if(table.getSelectedRow()>=0) {
+							btnModificar.setEnabled(true);
+							row = table.getSelectedRow();
+							String cedula = table.getModel().getValueAt(row, 0).toString();
+							empleado = Clinica.getInstance().findByCedula(cedula);
+						}
+					}
+				});
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				String[] columnNames = {"Cédula", "Nombre","Posición","Usuario"};
 				model = new DefaultTableModel();
@@ -84,12 +83,27 @@ public class ListaTrabajadores extends JDialog {
 			{
 				JButton okButton = new JButton("Atr\u00E1s");
 				okButton.setFont(new Font("Trebuchet MS", Font.BOLD, 11));
+				okButton.setBackground(new Color(204, 204, 204));
 				okButton.setIcon(new ImageIcon(ListaTrabajadores.class.getResource("/images/back.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
+				{
+					btnModificar = new JButton("Modificar");
+					btnModificar.setIcon(new ImageIcon(ListaTrabajadores.class.getResource("/images/servicio-de-reparaciones.png")));
+					btnModificar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							ModificarEmpleado mEmpleado = new ModificarEmpleado(empleado);
+							mEmpleado.setVisible(true);
+							mEmpleado.setLocationRelativeTo(null);
+						}
+					});
+					btnModificar.setEnabled(false);
+					btnModificar.setBackground(new Color(204, 204, 204));
+					buttonPane.add(btnModificar);
+				}
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

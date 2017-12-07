@@ -37,22 +37,6 @@ public class ListarEnfermedades extends JDialog {
 	private static Object[] fila;
 	private static DefaultTableModel model;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			ListarEnfermedades dialog = new ListarEnfermedades();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public ListarEnfermedades() {
 		setBackground(Color.WHITE);
 		setTitle("Listado de Enfermedades");
