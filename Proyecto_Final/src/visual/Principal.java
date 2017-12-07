@@ -380,8 +380,53 @@ public class Principal extends JFrame{
 		panelFiltro.add(lblFiltrarCitas);
 
 		cbxFiltro = new JComboBox<String>();
+		cbxFiltro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(cbxFiltro.getSelectedIndex()==0) {
+					LoadTableAdministrativo();
+				}else {
+					int size = cbxFiltro.getSelectedItem().toString().length(); 
+					String cedula = (cbxFiltro.getSelectedItem().toString()).substring(size - 14, size - 1);
+					
+					loadTablaFiltrada(cedula);
+				}
+				
+			}
+
+			private void loadTablaFiltrada(String cedula) {
+				model.setRowCount(0);
+				fila = new Object[model.getColumnCount()];
+				Cita c = null;
+
+				for (int i = 0; i < Clinica.getInstance().getMisCitas().size(); i++) {
+					c = Clinica.getInstance().getMisCitas().get(i);
+					if(c.isEstado()) {
+						if(c.getDoctor().getCedula().equalsIgnoreCase(cedula)) {
+							fila[0] = c.getId();
+							fila[1] = c.getFecha();
+							fila[2] = c.getCitado().getNombre();
+							fila[3] = c.getDoctor().getNombre();
+							model.addRow(fila);
+						}
+					}
+				}
+			}
+		});
 		cbxFiltro.setBounds(96, 8, 125, 19);
 		panelFiltro.add(cbxFiltro);
+		
+		if(p instanceof Administrativo) {
+			cbxFiltro.removeAllItems();
+			cbxFiltro.addItem(new String("<Seleccione>"));
+			for(Persona aux : Clinica.getInstance().getMisPersonas()) {
+				if(aux instanceof Doctor) {
+					cbxFiltro.addItem(new String(aux.getNombre() + " (" + aux.getCedula() + ")"));
+				}
+			}
+			cbxFiltro.setSelectedIndex(0);
+		}
+		
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Porcentaje Por Enfermedad", TitledBorder.LEADING, TitledBorder.TOP, null, null));

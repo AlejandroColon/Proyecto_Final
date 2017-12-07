@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class ModificarCita extends JDialog {
 
@@ -62,6 +63,7 @@ public class ModificarCita extends JDialog {
 		panel.add(lblNewLabel);
 		
 		txtNombre = new JTextField();
+		txtNombre.setEditable(false);
 		txtNombre.setColumns(10);
 		txtNombre.setBounds(10, 83, 124, 20);
 		panel.add(txtNombre);
@@ -71,6 +73,7 @@ public class ModificarCita extends JDialog {
 		panel.add(lblNombre);
 		
 		txtFecha = new JTextField();
+		txtFecha.setEditable(false);
 		txtFecha.setColumns(10);
 		txtFecha.setBounds(144, 83, 124, 20);
 		panel.add(txtFecha);
@@ -88,9 +91,13 @@ public class ModificarCita extends JDialog {
 				if(c == null || c.isEstado() == false) {
 					JOptionPane.showMessageDialog(null, "Cita No Existente",
 							"ERROR", JOptionPane.ERROR_MESSAGE);
+					txtNombre.setText("");
+					txtFecha.setText("");
+					txtFecha.setEditable(true);
 				}else {
 					txtNombre.setText(c.getCitado().getNombre());
 					txtFecha.setText(c.getFecha());
+					txtFecha.setEditable(true);
 				}
 			}
 		});
@@ -103,6 +110,7 @@ public class ModificarCita extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton btnEliminar = new JButton("Eliminar");
+			btnEliminar.setIcon(new ImageIcon(ModificarCita.class.getResource("/images/cancel.png")));
 			btnEliminar.setBackground(new Color(204, 204, 204));
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -116,11 +124,13 @@ public class ModificarCita extends JDialog {
 					JOptionPane.showMessageDialog(null, "Cita Eliminada Exitosamente",
 							"Información", JOptionPane.INFORMATION_MESSAGE);
 					
+					dispose();
 				}
 			});
 			buttonPane.add(btnEliminar);
 			{
 				JButton btnModificar = new JButton("Modificar");
+				btnModificar.setIcon(new ImageIcon(ModificarCita.class.getResource("/images/ajustes.png")));
 				btnModificar.setBackground(new Color(204, 204, 204));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -134,6 +144,7 @@ public class ModificarCita extends JDialog {
 						JOptionPane.showMessageDialog(null, "Cita Modificada Exitosamente",
 								"Información", JOptionPane.INFORMATION_MESSAGE);
 						
+						dispose();
 					}
 				});
 				btnModificar.setActionCommand("OK");
@@ -142,6 +153,7 @@ public class ModificarCita extends JDialog {
 			}
 			{
 				JButton btnAtras = new JButton("Atras");
+				btnAtras.setIcon(new ImageIcon(ModificarCita.class.getResource("/images/back.png")));
 				btnAtras.setBackground(new Color(204, 204, 204));
 				btnAtras.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
